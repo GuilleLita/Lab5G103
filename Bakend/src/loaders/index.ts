@@ -9,6 +9,12 @@ export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
   Logger.info('✌️ DB loaded and connected!');
 
+
+  const buildingSchema = {
+    name: 'buildingSchema',
+    schema: '../persistence/schemas/buildingSchema',
+  };
+
   const userSchema = {
     // compare with the approach followed in repos and services
     name: 'userSchema',
