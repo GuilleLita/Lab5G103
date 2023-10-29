@@ -35,6 +35,8 @@ const Home = (props) => {
                 numOfFloors: 3,
                 floors: floorsArray,
                 elevatorFloors: floorsArray
+
+                
             })
 
         })
