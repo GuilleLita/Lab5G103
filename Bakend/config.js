@@ -55,6 +55,10 @@ export default {
     user: {
       name: "UserRepo",
       path: "../repos/userRepo"
+    },
+    building: {
+      name: "BuildingRepo",
+      path: "../repos/buildingRepo"
     }
   },
 
@@ -62,6 +66,10 @@ export default {
     role: {
       name: "RoleService",
       path: "../services/roleService"
+    },
+    building: {
+      name: "BuildingService",
+      path: "../services/buildingService"
     }
   },
 };

@@ -67,6 +67,8 @@ export class Building extends AggregateRoot<BuildingProps> {
       { argument: props.height, argumentName: 'height' },
       { argument: props.width, argumentName: 'width' },
       { argument: props.numOfFloors, argumentName: 'numOfFloors'},
+      { argument: props.floors, argumentName: 'floors'},
+      { argument: props.elevatorFloors, argumentName: 'elevatorFloors'}
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);

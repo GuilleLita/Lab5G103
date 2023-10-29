@@ -13,7 +13,34 @@ const Home = (props) => {
 
     const onButtonClick = () => {
 
-        if (loggedIn) {
+        var floorsArray = ["a","b"];
+
+
+        fetch("http://localhost:4000/api/building/create", {
+
+            method: "POST",
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+              },
+
+            body: JSON.stringify({
+                buildingId: "1",
+                buildingName: "test",
+                description: "testdesc",
+                height: 1,
+                width: 2,
+                numOfFloors: 3,
+                floors: floorsArray,
+                elevatorFloors: floorsArray
+            })
+
+        })
+
+
+        /*if (loggedIn) {
 
             localStorage.removeItem("user")
 
@@ -23,7 +50,7 @@ const Home = (props) => {
 
             navigate("/login")
 
-        }
+        }*/
 
     }
 
@@ -52,7 +79,7 @@ const Home = (props) => {
 
                 onClick={onButtonClick}
 
-                value={loggedIn ? "Log out" : "Log in"} />
+                value="Crear Edificio TEST" />
 
             {(loggedIn ? <div>
 

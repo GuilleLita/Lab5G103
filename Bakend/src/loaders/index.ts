@@ -4,6 +4,7 @@ import mongooseLoader from './mongoose';
 import Logger from './logger';
 
 import config from '../../config';
+import BuildingController from '../controllers/buildingController';
 
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
@@ -47,21 +48,34 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   }
 
+  const buildingRepo = {
+    name: config.repos.building.name,
+    path: config.repos.building.path
+  }
+
+  const buildingService = {
+    name: config.services.building.name,
+    path: config.services.building.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
-      roleSchema
+      roleSchema,
+      buildingSchema
     ],
     controllers: [
       roleController
     ],
     repos: [
       roleRepo,
-      userRepo
+      userRepo,
+      buildingRepo
     ],
     services: [
-      roleService
+      roleService,
+      buildingService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

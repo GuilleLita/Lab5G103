@@ -43,9 +43,16 @@ export class BuildingMap extends Mapper<Building> {
     return null;
   }
 
-  public static toPersistence (user: Building): any {
+  public static toPersistence (building: Building): any {
     const a = {
-
+      buildingId: building.id.toString(),
+	    buildingName: building.name,
+	    description:  building.description,
+	    height: building.height,
+	    width:  building.width,
+	    numOfFloors: building.numOfFloors,
+	    floors: building.floors,
+	    elevatorFloors : building.elevatorFloors
     }
     return a;
   }

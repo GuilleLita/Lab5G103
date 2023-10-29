@@ -7,12 +7,13 @@ import { randomBytes } from 'crypto';
 
 //import MailerService from './mailer.ts.bak';
 
-import IBuildingService from '../services/IServices/IBuildingService';
+import IBuildingService from './IServices/IBuildingService';
 import { BuildingMap } from "../mappers/BuildingMap";
 import { IBuildingDTO } from '../dto/IBuildingDTO';
 
 import IUserRepo from './IRepos/IUserRepo';
 import IRoleRepo from './IRepos/IRoleRepo';
+import IBuildingRepo from './IRepos/IBuildingRepo';
 
 import { Building } from '../domain/building';
 
@@ -24,7 +25,7 @@ import { Result } from "../core/logic/Result";
 @Service()
 export default class BuildingService implements IBuildingService{
   constructor(
-      //@Inject(config.repos.user.name) private userRepo : IUserRepo,
+      @Inject(config.repos.building.name) private buildingRepo : IBuildingRepo,
       //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
@@ -43,7 +44,9 @@ export default class BuildingService implements IBuildingService{
             elevatorFloors: buildingDTO.elevatorFloors
           });
 
+        
         const buildingResult = buildingOrError.getValue();
+        await this.buildingRepo.save(buildingResult);
         const buildingDTOResult = BuildingMap.toDTO( buildingResult ) as IBuildingDTO;
         return Result.ok<{buildingDTO: IBuildingDTO}>( {buildingDTO: buildingDTOResult} )
   }
