@@ -39,3 +39,5 @@ public
 *.sublime-workspace
 sftp-config.json
 Frontend/node_modules
+Backend/node_modules
+
