@@ -61,6 +61,8 @@ export class Building extends AggregateRoot<BuildingProps> {
 
   public static create (props: BuildingProps, id?: UniqueEntityID): Result<Building> {
 
+    
+
     const guardedProps = [
       { argument: props.buildingName, argumentName: 'buildingName' },
       { argument: props.description, argumentName: 'description' },

@@ -44,6 +44,10 @@ export default class BuildingService implements IBuildingService{
             elevatorFloors: buildingDTO.elevatorFloors
           });
 
+          if (buildingOrError.isFailure) {
+            throw Result.fail<IBuildingDTO>(buildingOrError.errorValue());
+          }
+
         
         const buildingResult = buildingOrError.getValue();
         await this.buildingRepo.save(buildingResult);

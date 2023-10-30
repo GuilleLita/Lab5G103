@@ -59,6 +59,10 @@ export default {
     building: {
       name: "BuildingRepo",
       path: "../repos/buildingRepo"
+    },
+    floor: {
+      name: "FloorRepo",
+      path: "../repos/floorRepo"
     }
   },
 
@@ -70,6 +74,10 @@ export default {
     building: {
       name: "BuildingService",
       path: "../services/buildingService"
+    },
+    floor: {
+      name: "FloorService",
+      path: "../services/floorService"
     }
   },
 };

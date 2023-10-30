@@ -36,11 +36,13 @@ const Home = (props) => {
                 floors: floorsArray,
                 elevatorFloors: floorsArray
 
+
                 
             })
 
         })
 
+        
 
         /*if (loggedIn) {
 
@@ -54,6 +56,36 @@ const Home = (props) => {
 
         }*/
 
+    }
+
+    const onButtonClickFloor = () => {
+
+        var floorsArray = ["a","b"];
+
+
+        fetch("http://localhost:4000/api/floor/create", {
+
+            method: "POST",
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+              },
+
+            body: JSON.stringify({
+                floorId: "1",
+                floorName: "test",
+                description: "testdesc",
+                height: 1,
+                width: 2,
+                rooms: floorsArray,
+                grid: [[1,2],[3,4]]
+
+
+            })
+
+        })
     }
 
 
@@ -88,6 +120,22 @@ const Home = (props) => {
                 Your email address is {email}
 
             </div> : <div/>)}
+
+        </div>
+
+        <div className={"buttonContainer"}>
+
+            <input
+
+                className={"inputButton"}
+
+                type="button"
+
+                onClick={onButtonClickFloor}
+
+                value="Crear Piso TEST" />
+
+        
 
         </div>
 

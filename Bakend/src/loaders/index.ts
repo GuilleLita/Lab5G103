@@ -5,6 +5,7 @@ import Logger from './logger';
 
 import config from '../../config';
 import BuildingController from '../controllers/buildingController';
+import { flatMap, floor } from 'lodash';
 
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
@@ -26,6 +27,11 @@ export default async ({ expressApp }) => {
     // compare with the approach followed in repos and services
     name: 'roleSchema',
     schema: '../persistence/schemas/roleSchema',
+  };
+
+  const floorSchema = {
+    name: 'floorSchema',
+    schema: '../persistence/schemas/floorSchema',
   };
 
   const roleController = {
@@ -58,12 +64,23 @@ export default async ({ expressApp }) => {
     path: config.services.building.path
   }
 
+  const floorService = {
+    name: config.services.floor.name,
+    path: config.services.floor.path
+  }
+
+  const floorRepo = {
+    name: config.repos.floor.name,
+    path: config.repos.floor.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
       roleSchema,
-      buildingSchema
+      buildingSchema,
+      floorSchema
     ],
     controllers: [
       roleController
@@ -71,11 +88,13 @@ export default async ({ expressApp }) => {
     repos: [
       roleRepo,
       userRepo,
-      buildingRepo
+      buildingRepo,
+      floorRepo
     ],
     services: [
       roleService,
-      buildingService
+      buildingService,
+      floorService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
