@@ -5,6 +5,7 @@ import Logger from './logger';
 
 import config from '../../config';
 import BuildingController from '../controllers/buildingController';
+
 import { flatMap, floor } from 'lodash';
 
 export default async ({ expressApp }) => {
@@ -16,7 +17,10 @@ export default async ({ expressApp }) => {
     name: 'buildingSchema',
     schema: '../persistence/schemas/buildingSchema',
   };
-
+  const hallwaySchema = {
+    name: 'hallwaySchema',
+    schema: '../persistence/schemas/hallwaySchema',
+  };
   const userSchema = {
     // compare with the approach followed in repos and services
     name: 'userSchema',
@@ -33,6 +37,16 @@ export default async ({ expressApp }) => {
     name: 'floorSchema',
     schema: '../persistence/schemas/floorSchema',
   };
+
+  const hallwayService = {
+    name: config.services.hallway.name,
+    path: config.services.hallway.path
+  }
+
+  const hallwayRepo = {
+    name: config.repos.hallway.name,
+    path: config.repos.hallway.path
+  }
 
   const roleController = {
     name: config.controllers.role.name,
@@ -80,7 +94,8 @@ export default async ({ expressApp }) => {
       userSchema,
       roleSchema,
       buildingSchema,
-      floorSchema
+      floorSchema,
+      hallwaySchema
     ],
     controllers: [
       roleController
@@ -89,12 +104,14 @@ export default async ({ expressApp }) => {
       roleRepo,
       userRepo,
       buildingRepo,
-      floorRepo
+      floorRepo,
+      hallwayRepo
     ],
     services: [
       roleService,
       buildingService,
-      floorService
+      floorService,
+      hallwayRepo
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
