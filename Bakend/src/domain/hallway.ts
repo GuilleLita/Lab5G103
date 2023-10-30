@@ -19,10 +19,6 @@ export class Hallway extends AggregateRoot<HallwayProps> {
     return this._id;
   }
 
-  get hallwayId (): HallwayId {
-    return new HallwayId(this.hallwayId.toValue());
-  }
-
   get buildingsId (): string[] {
     return this.props.buildingsId;
   }
@@ -31,10 +27,6 @@ export class Hallway extends AggregateRoot<HallwayProps> {
     return this.props.floorId;
   }
 
-
-  set hallwayId ( value: HallwayId) {
-    this.props.hallwayId = value;
-  }
   private constructor (props: HallwayProps, id?: UniqueEntityID) {
     super(props, id);
   }
