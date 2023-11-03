@@ -24,7 +24,7 @@ export default {
   /**
    * Your secret sauce
    */
-  jwtSecret: process.env.JWT_SECRET || "my sakdfho2390asjod$%jl)!sdjas0i secret",
+  jwtSecret: process.env.JWT_SECRET || "the bv98165uebfbai3biabil sauce fun",
 
   /**
    * Used by winston logger
@@ -71,6 +71,10 @@ export default {
     room: {
       name: "RoomRepo",
       path: "../repos/roomRepo"
+    },
+    elevator: {
+      name: "ElevatorRepo",
+      path: "../repos/elevatorRepo"
     }
   },
 
@@ -94,6 +98,10 @@ export default {
     room: {
       name: "RoomService",
       path: "../services/roomService"
+    },
+    elevator: {
+      name: "ElevatorService",
+      path: "../services/elevatorService"
     }
   },
 };

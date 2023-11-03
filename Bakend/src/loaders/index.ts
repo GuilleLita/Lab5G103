@@ -7,6 +7,7 @@ import config from '../../config';
 import BuildingController from '../controllers/buildingController';
 
 import { flatMap, floor } from 'lodash';
+import e from 'express';
 
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
@@ -45,6 +46,11 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/roomSchema',
   };
 
+  const elevatorSchema = {
+    name: 'elevatorSchema',
+    schema: '../persistence/schemas/elevatorSchema',
+  };
+
   const hallwayService = {
     name: config.services.hallway.name,
     path: config.services.hallway.path
@@ -53,6 +59,16 @@ export default async ({ expressApp }) => {
   const hallwayRepo = {
     name: config.repos.hallway.name,
     path: config.repos.hallway.path
+  }
+
+  const elevatorService = {
+    name: config.services.elevator.name,
+    path: config.services.elevator.path
+  }
+
+  const elevatorRepo = {
+    name: config.repos.elevator.name,
+    path: config.repos.elevator.path
   }
 
   const roomRepo = {
@@ -113,7 +129,8 @@ export default async ({ expressApp }) => {
       buildingSchema,
       floorSchema,
       hallwaySchema,
-      roomSchema
+      roomSchema,
+      elevatorSchema
     ],
     controllers: [
       roleController
@@ -124,14 +141,16 @@ export default async ({ expressApp }) => {
       buildingRepo,
       floorRepo,
       hallwayRepo,
-      roomRepo
+      roomRepo,
+      elevatorRepo
     ],
     services: [
       roleService,
       buildingService,
       floorService,
       hallwayService,
-      roomService
+      roomService,
+      elevatorService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

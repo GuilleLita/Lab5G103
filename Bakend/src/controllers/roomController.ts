@@ -11,7 +11,7 @@ import { Result } from "../core/logic/Result";
 @Service()
 export default class RoomController implements IRoomController /* TODO: extends ../core/infra/BaseController */ {
   constructor(
-      @Inject(config.services.Room.name) private roomServiceInstance : IRoomService
+      @Inject(config.services.room.name) private roomServiceInstance : IRoomService
   ) {}
 
 
