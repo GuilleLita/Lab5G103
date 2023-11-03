@@ -11,14 +11,11 @@ import IBuildingService from './IServices/IBuildingService';
 import { BuildingMap } from "../mappers/BuildingMap";
 import { IBuildingDTO } from '../dto/IBuildingDTO';
 
-import IUserRepo from './IRepos/IUserRepo';
-import IRoleRepo from './IRepos/IRoleRepo';
 import IBuildingRepo from './IRepos/IBuildingRepo';
 
 import { Building } from '../domain/building';
 
 
-import { Role } from '../domain/role';
 
 import { Result } from "../core/logic/Result";
 
@@ -26,7 +23,7 @@ import { Result } from "../core/logic/Result";
 export default class BuildingService implements IBuildingService{
   constructor(
       @Inject(config.repos.building.name) private buildingRepo : IBuildingRepo,
-      //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
+      //@Inject(config.repos.Building.name) private BuildingRepo : IBuildingRepo,
       @Inject('logger') private logger,
   ) {}
 
@@ -54,6 +51,34 @@ export default class BuildingService implements IBuildingService{
         const buildingDTOResult = BuildingMap.toDTO( buildingResult ) as IBuildingDTO;
         return Result.ok<{buildingDTO: IBuildingDTO}>( {buildingDTO: buildingDTOResult} )
   }
+
+  public async updateBuilding(buildingDTO: IBuildingDTO): Promise<Result<{ buildingDTO: IBuildingDTO; }>>  {
+    try {
+      const Building = await this.buildingRepo.findByName(buildingDTO.buildingName);
+
+      if (Building === null) {
+        return Result.fail<{buildingDTO: IBuildingDTO}>("Building not found");
+      }
+      else {
+        Building.name = buildingDTO.buildingName;
+        Building.description = buildingDTO.description;
+        Building.height = buildingDTO.height;
+        Building.width = buildingDTO.width;
+        Building.numOfFloors = buildingDTO.numOfFloors;
+        Building.floors = buildingDTO.floors;
+        Building.elevatorFloors = buildingDTO.elevatorFloors;
+        
+        await this.buildingRepo.save(Building);
+
+        const BuildingDTOResult = BuildingMap.toDTO( Building ) as IBuildingDTO;
+        return Result.ok<{buildingDTO: IBuildingDTO}>( {buildingDTO: BuildingDTOResult} )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
 
   /*public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {
     try {
@@ -88,20 +113,20 @@ export default class BuildingService implements IBuildingService{
 
       const password = await UserPassword.create({ value: hashedPassword, hashed: true}).getValue();
       const email = await UserEmail.create( userDTO.email ).getValue();
-      let role: Role;
+      let Building: Building;
 
-      const roleOrError = await this.getRole(userDTO.role);
-      if (roleOrError.isFailure) {
-        return Result.fail<{userDTO: IUserDTO; token: string}>(roleOrError.error);
+      const BuildingOrError = await this.getBuilding(userDTO.Building);
+      if (BuildingOrError.isFailure) {
+        return Result.fail<{userDTO: IUserDTO; token: string}>(BuildingOrError.error);
       } else {
-        role = roleOrError.getValue();
+        Building = BuildingOrError.getValue();
       }
 
       const userOrError = await User.create({
         firstName: userDTO.firstName,
         lastName: userDTO.lastName,
         email: email,
-        role: role,
+        Building: Building,
         password: password,
       });
 

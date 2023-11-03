@@ -44,6 +44,10 @@ export default {
     role: {
       name: "RoleController",
       path: "../controllers/roleController"
+    },
+    building: {
+      name: "BuildingController",
+      path: "../controllers/buildingController"
     }
   },
 

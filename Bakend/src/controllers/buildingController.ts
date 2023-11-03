@@ -31,19 +31,19 @@ export default class BuildingController implements IBuildingController /* TODO: 
     }
   };
 
-  /*public async updateRole(req: Request, res: Response, next: NextFunction) {
+  public async updateBuilding(req: Request, res: Response, next: NextFunction) {
     try {
-      const roleOrError = await this.roleServiceInstance.updateRole(req.body as IRoleDTO) as Result<IRoleDTO>;
+      const BuldingOrError = await this.buildingServiceInstance.updateBuilding(req.body as IBuildingDTO) as Result<{buildingDTO: IBuildingDTO}>;
 
-      if (roleOrError.isFailure) {
+      if (BuldingOrError.isFailure) {
         return res.status(404).send();
       }
 
-      const roleDTO = roleOrError.getValue();
-      return res.status(201).json( roleDTO );
+      const buldingDTO = BuldingOrError.getValue();
+      return res.status(201).json( buldingDTO );
     }
     catch (e) {
       return next(e);
     }
-  };*/
+  };
 }

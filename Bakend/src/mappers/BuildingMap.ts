@@ -7,8 +7,6 @@ import {IBuildingDTO} from "../dto/IBuildingDTO";
 import { Building } from "../domain/building";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
-import { UserEmail } from "../domain/userEmail";
-import { UserPassword } from "../domain/userPassword";
 
 import RoleRepo from "../repos/roleRepo";
 
@@ -28,19 +26,25 @@ export class BuildingMap extends Mapper<Building> {
   }
 
   public static async toDomain (raw: any): Promise<Building> {
-    //const userEmailOrError = UserEmail.create(raw.email);
-    //const userPasswordOrError = UserPassword.create({value: raw.password, hashed: true});
+    //const buildingEmailOrError = buildingEmail.create(raw.email);
+    //const buildingPasswordOrError = buildingPassword.create({value: raw.password, hashed: true});
     //const repo = Container.get(RoleRepo);
     //const role = await repo.findByDomainId(raw.role);
 
-    //const userOrError = Building.create({
+    const buildingOrError = Building.create({
+      buildingId: raw.buildingId,
+      buildingName: raw.buildingName,
+      description:  raw.description,
+      height: raw.height,
+      width:  raw.width,
+      numOfFloors: raw.numOfFloors,
+      floors: raw.floors,
+      elevatorFloors : raw.elevatorFloors
+    }, new UniqueEntityID(raw.buildingId))
 
-    //}, new UniqueEntityID(raw.domainId))
-
-    //userOrError.isFailure ? console.log(userOrError.error) : '';
+    buildingOrError.isFailure ? console.log(buildingOrError.error) : '';
     
-    //return userOrError.isSuccess ? userOrError.getValue() : null;
-    return null;
+    return buildingOrError.isSuccess ? buildingOrError.getValue() : null;
   }
 
   public static toPersistence (building: Building): any {

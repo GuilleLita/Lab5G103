@@ -8,13 +8,16 @@ import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
 
-var building_controller = require('../../controllers/buildingController');
+
+import IBuildingController from '../../controllers/IControllers/IBuildingController'; 
+
+import config from "../../../config";
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/building', route);
-
+    const ctrl = Container.get(config.controllers.building.name) as IBuildingController;
   route.post(
     '/create',
     celebrate({
@@ -28,7 +31,7 @@ export default (app: Router) => {
 	floors: string[];
 	elevatorFloors : string[];*/
       body: Joi.object({
-        buildingId: Joi.string().required(),
+        //buildingId: Joi.string().required(),
         buildingName: Joi.string().required(),
         description: Joi.string().required(),
         height: Joi.number().required(),
@@ -60,5 +63,20 @@ export default (app: Router) => {
       }
     },
   );
+
+  route.put('/update',
+    celebrate({
+      body: Joi.object({
+        buildingName: Joi.string().required(),
+        description: Joi.string().required(),
+        height: Joi.number().required(),
+        width: Joi.number().required(),
+        numOfFloors: Joi.number().required(),
+        floors: Joi.array().required(),
+        elevatorFloors: Joi.array().required(),
+      }),
+    }),
+    (req, res, next) => ctrl.updateBuilding(req, res, next) );
+
 
 };

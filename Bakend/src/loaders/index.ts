@@ -101,6 +101,11 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   }
 
+  const buildingController = {
+    name: config.controllers.building.name,
+    path: config.controllers.building.path
+  }
+
   const buildingRepo = {
     name: config.repos.building.name,
     path: config.repos.building.path
@@ -133,7 +138,8 @@ export default async ({ expressApp }) => {
       elevatorSchema
     ],
     controllers: [
-      roleController
+      roleController,
+      buildingController
     ],
     repos: [
       roleRepo,

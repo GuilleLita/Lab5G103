@@ -7,6 +7,7 @@ import { Guard } from "../core/logic/Guard";
 
 
 import {IBuildingDTO} from "../dto/IBuildingDTO";
+import { BuildingId } from "./buildingId";
 
 interface BuildingProps {
   buildingId: string;
@@ -24,8 +25,8 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this._id;
   }
 
-  get roleId (): RoleId {
-    return new RoleId(this.roleId.toValue());
+  get buildingId (): BuildingId {
+    return BuildingId.caller(this.id);
   }
 
   get name (): string {
@@ -55,6 +56,31 @@ export class Building extends AggregateRoot<BuildingProps> {
   set name ( value: string) {
     this.props.buildingName = value;
   }
+
+  set description ( value: string) {
+    this.props.description = value;
+  }
+
+  set height ( value: number) {
+    this.props.height = value;
+  }
+
+  set width ( value: number) {
+    this.props.width = value;
+  }
+
+  set numOfFloors ( value: number) {
+    this.props.numOfFloors = value;
+  }
+
+  set floors ( value: string[]) {
+    this.props.floors = value;
+  }
+
+  set elevatorFloors ( value: string[]) {
+    this.props.elevatorFloors = value;
+  }
+
   private constructor (props: BuildingProps, id?: UniqueEntityID) {
     super(props, id);
   }

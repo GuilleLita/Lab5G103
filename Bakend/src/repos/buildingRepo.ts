@@ -13,7 +13,7 @@ export default class BuildingRepo implements IBuildingRepo {
   private models: any;
 
   constructor(
-    @Inject('buildingSchema') private BuildingSchema : Model<IBuildingPersistence & Document>,
+    @Inject('buildingSchema') private buildingSchema : Model<IBuildingPersistence & Document>,
     @Inject('logger') private logger
   ) { }
 
@@ -28,43 +28,59 @@ export default class BuildingRepo implements IBuildingRepo {
     const idX = buildingId instanceof BuildingId ? (<BuildingId>buildingId).id.toValue() : BuildingId;
 
     const query = { domainId: idX}; 
-    const BuildingDocument = await this.BuildingSchema.findOne( query );
+    const BuildingDocument = await this.buildingSchema.findOne( query );
 
     return !!BuildingDocument === true;
   }
 
   public async save (building: Building): Promise<Building> {
-    const query = { domainId: building.id.toString() }; 
+    const query = { buildingId: building.id.toString() }; 
 
-    const BuildingDocument = await this.BuildingSchema.findOne( query );
+    const BuildingDocument = await this.buildingSchema.findOne( query );
 
     try {
       if (BuildingDocument === null ) {
         const rawBuilding: any = BuildingMap.toPersistence(building);
 
-        const BuildingCreated = await this.BuildingSchema.create(rawBuilding);
+        const BuildingCreated = await this.buildingSchema.create(rawBuilding);
 
         return BuildingMap.toDomain(BuildingCreated);
-      }/*else {
-        BuildingDocument.firstName = building.firstName;
-        BuildingDocument.lastName = building.lastName;
+      }else {
+        BuildingDocument.buildingName = building.name;
+	      BuildingDocument.description = building.description;
+        BuildingDocument.height = building.height;
+        BuildingDocument.width= building.width;
+        BuildingDocument.numOfFloors= building.numOfFloors;
+	      BuildingDocument.floors= building.floors;
+	      BuildingDocument.elevatorFloors= building.elevatorFloors;
         await BuildingDocument.save();
 
         return building;
-      }*/
+      }
     } catch (err) {
       throw err;
     }
   }
 
 
+  public async findByName (name:  string): Promise<Building> {
+    const query = { buildingName: name.toString() };
+    const buildingRecord = await this.buildingSchema.findOne( query );
 
-  public async findById (buildingId: BuildingId | string): Promise<Building> {
+    if( buildingRecord != null) {
+      return BuildingMap.toDomain(buildingRecord);
+    }
+    else
+      return null;
+  }
 
-    const idX = buildingId instanceof BuildingId ? (<BuildingId>buildingId).id.toValue() : BuildingId;
 
-    const query = { domainId: idX }; 
-    const BuildingRecord = await this.BuildingSchema.findOne( query );
+  public async findByDomainId (buildingId: BuildingId | string): Promise<Building> {
+
+    const idX = buildingId instanceof BuildingId ? (<BuildingId>buildingId).id.toValue() : buildingId;
+
+    const query = { buildingId: idX }; 
+    const BuildingRecord = await this.buildingSchema.findOne( query );
 
     if( BuildingRecord != null) {
       return BuildingMap.toDomain(BuildingRecord);
