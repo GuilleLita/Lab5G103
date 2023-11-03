@@ -1,19 +1,19 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { Container } from 'typedi';
 
-import AuthService from '../../services/hallwayService';
-import { IHallwayDTO } from '../../dto/IHallwayDTO';
+import AuthService from '../../services/roomService';
+import { IRoomDTO } from '../../dto/IRoomDTO';
 
 import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
 
-var hallway_controller = require('../../controllers/hallwayController');
+var room_controller = require('../../controllers/roomController');
 
 const route = Router();
 
 export default (app: Router) => {
-    app.use('/hallway', route);
+    app.use('/room', route);
 
   route.post(
     '/create',
@@ -28,10 +28,10 @@ export default (app: Router) => {
 	floors: string[];
 	elevatorFloors : string[];*/
       body: Joi.object({
-        hallwayId: Joi.string().required(),
-        buildingsId: Joi.array().required(),
-        floorId: Joi.array().required(),
-        position: Joi.array().required()     
+        roomId: Joi.string().required(),
+        buildingsId: Joi.string().required(),
+        floorId: Joi.string().required(),
+        position: Joi.array().required(),     
       }),
     }),
     async (req: Request, res: Response, next: NextFunction) => {
@@ -40,16 +40,16 @@ export default (app: Router) => {
 
       try {
         const authServiceInstance = Container.get(AuthService);
-        const hallwayOrError = await authServiceInstance.CreateHallway(req.body as IHallwayDTO);
+        const roomOrError = await authServiceInstance.CreateRoom(req.body as IRoomDTO);
 
-        if (hallwayOrError.isFailure) {
-          logger.debug(hallwayOrError.errorValue())
-          return res.status(401).send(hallwayOrError.errorValue());
+        if (roomOrError.isFailure) {
+          logger.debug(roomOrError.errorValue())
+          return res.status(401).send(roomOrError.errorValue());
         }
     
-        const hallwaygDTO = hallwayOrError.getValue();
+        const roomgDTO = roomOrError.getValue();
 
-        return res.status(201).json({message: "success", hallwaygDTO });
+        return res.status(201).json({message: "success", roomgDTO });
       } catch (e) {
         //logger.error('🔥 error: %o', e);
         return next(e);

@@ -5,6 +5,7 @@ import role from './routes/roleRoute';
 import building from './routes/buildingRoute';
 import floor from './routes/floorRoute';
 import hallway from './routes/hallwayRoute';
+import room from './routes/roomRoute';
 
 
 export default () => {
@@ -16,6 +17,7 @@ export default () => {
 	building(app);
 	floor(app);
 	hallway(app);
+	room(app);
 
 	
 	return app

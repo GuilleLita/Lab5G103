@@ -44,14 +44,14 @@ export default (app: Router) => {
 
       try {
         const authServiceInstance = Container.get(AuthService);
-        const userOrError = await authServiceInstance.CreateFloor(req.body as IFloorDTO);
+        const floorOrError = await authServiceInstance.CreateFloor(req.body as IFloorDTO);
 
-        if (userOrError.isFailure) {
-          logger.debug(userOrError.errorValue())
-          return res.status(401).send(userOrError.errorValue());
+        if (floorOrError.isFailure) {
+          logger.debug(floorOrError.errorValue())
+          return res.status(401).send(floorOrError.errorValue());
         }
     
-        const floorDTO = userOrError.getValue();
+        const floorDTO = floorOrError.getValue();
 
         return res.status(201).json({message: "success", floorDTO });
       } catch (e) {

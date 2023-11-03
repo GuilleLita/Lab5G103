@@ -44,14 +44,14 @@ export default (app: Router) => {
 
       try {
         const authServiceInstance = Container.get(AuthService);
-        const userOrError = await authServiceInstance.CreateBuilding(req.body as IBuildingDTO);
+        const buildingOrError = await authServiceInstance.CreateBuilding(req.body as IBuildingDTO);
 
-        if (userOrError.isFailure) {
-          logger.debug(userOrError.errorValue())
-          return res.status(401).send(userOrError.errorValue());
+        if (buildingOrError.isFailure) {
+          logger.debug(buildingOrError.errorValue())
+          return res.status(401).send(buildingOrError.errorValue());
         }
     
-        const buildingDTO = userOrError.getValue();
+        const buildingDTO = buildingOrError.getValue();
 
         return res.status(201).json({message: "success", buildingDTO });
       } catch (e) {
