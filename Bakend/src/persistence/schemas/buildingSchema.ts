@@ -1,4 +1,4 @@
-import { IBuildingPersistence } from '../../dataschema/IBuildingPersistance';
+import { IBuildingPersistence } from '../../dataschema/IBuildingPersistence';
 import mongoose from 'mongoose';
 
 const BuildingSchema = new mongoose.Schema(

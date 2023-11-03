@@ -67,6 +67,10 @@ export default {
     hallway: {
       name: "HallwayRepo",
       path: "../repos/hallwayRepo"
+    },
+    room: {
+      name: "RoomRepo",
+      path: "../repos/roomRepo"
     }
   },
 
@@ -86,6 +90,10 @@ export default {
     hallway: {
       name: "HallwayService",
       path: "../services/hallwayService"
+    },
+    room: {
+      name: "RoomService",
+      path: "../services/roomService"
     }
   },
 };

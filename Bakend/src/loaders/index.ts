@@ -17,10 +17,12 @@ export default async ({ expressApp }) => {
     name: 'buildingSchema',
     schema: '../persistence/schemas/buildingSchema',
   };
+
   const hallwaySchema = {
     name: 'hallwaySchema',
     schema: '../persistence/schemas/hallwaySchema',
   };
+
   const userSchema = {
     // compare with the approach followed in repos and services
     name: 'userSchema',
@@ -38,6 +40,11 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/floorSchema',
   };
 
+  const roomSchema = {
+    name: 'roomSchema',
+    schema: '../persistence/schemas/roomSchema',
+  };
+
   const hallwayService = {
     name: config.services.hallway.name,
     path: config.services.hallway.path
@@ -46,6 +53,16 @@ export default async ({ expressApp }) => {
   const hallwayRepo = {
     name: config.repos.hallway.name,
     path: config.repos.hallway.path
+  }
+
+  const roomRepo = {
+    name: config.repos.room.name,
+    path: config.repos.room.path
+  }
+
+  const roomService = {
+    name: config.services.room.name,
+    path: config.services.room.path
   }
 
   const roleController = {
@@ -95,7 +112,8 @@ export default async ({ expressApp }) => {
       roleSchema,
       buildingSchema,
       floorSchema,
-      hallwaySchema
+      hallwaySchema,
+      roomSchema
     ],
     controllers: [
       roleController
@@ -105,13 +123,15 @@ export default async ({ expressApp }) => {
       userRepo,
       buildingRepo,
       floorRepo,
-      hallwayRepo
+      hallwayRepo,
+      roomRepo
     ],
     services: [
       roleService,
       buildingService,
       floorService,
-      hallwayRepo
+      hallwayService,
+      roomService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
