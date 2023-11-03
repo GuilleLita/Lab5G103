@@ -37,6 +37,7 @@ export default class HallwayService implements IHallwayService{
             hallwayId: hallwayDTO.hallwayId,
             buildingsId: hallwayDTO.buildingsId,
             floorId: hallwayDTO.floorId,
+            position: hallwayDTO.position
           });
 
           if (hallwayOrError.isFailure) {

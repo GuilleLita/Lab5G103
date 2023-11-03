@@ -11,7 +11,8 @@ import {IHallwayDTO} from "../dto/IHallwayDTO";
 interface HallwayProps {
     hallwayId: string;
     buildingsId: string[];
-    floorId: string;
+    floorId: string[];
+    position: number[];
 }
 
 export class Hallway extends AggregateRoot<HallwayProps> {
@@ -23,8 +24,12 @@ export class Hallway extends AggregateRoot<HallwayProps> {
     return this.props.buildingsId;
   }
 
-  get floorId() : string{
+  get floorId() : string[]{
     return this.props.floorId;
+  }
+
+  get position() : number[]{
+    return this.props.position;
   }
 
   private constructor (props: HallwayProps, id?: UniqueEntityID) {
@@ -37,6 +42,7 @@ export class Hallway extends AggregateRoot<HallwayProps> {
       { argument: props.hallwayId, argumentName: 'hallwayId' },
       { argument: props.buildingsId, argumentName: 'buildingsId' },
       { argument: props.floorId, argumentName: 'floorId' },
+      { argument: props.position, argumentName: 'position' }
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);

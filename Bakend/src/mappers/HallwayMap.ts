@@ -14,6 +14,7 @@ export class HallwayMap extends Mapper<Hallway> {
         hallwayId: hallway.id.toString(),
 	    buildingsId: hallway.buildingsId,
 	    floorId:  hallway.floorId,
+      position: hallway.position
     } as IHallwayDTO
   }
 
@@ -38,6 +39,7 @@ export class HallwayMap extends Mapper<Hallway> {
         hallwayId: hallway.id.toString(),
 	    buildingsId: hallway.buildingsId,
 	    floorId:  hallway.floorId,
+      position: hallway.position
     }
     return a;
   }
