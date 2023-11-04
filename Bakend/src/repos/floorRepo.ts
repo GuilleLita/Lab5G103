@@ -13,7 +13,7 @@ export default class FloorRepo implements IFloorRepo {
   private models: any;
 
   constructor(
-    @Inject('floorSchema') private FloorSchema : Model<IFloorPersistence & Document>,
+    @Inject('floorSchema') private floorSchema : Model<IFloorPersistence & Document>,
     @Inject('logger') private logger
   ) { }
 
@@ -27,31 +27,37 @@ export default class FloorRepo implements IFloorRepo {
 
     const idX = floorId instanceof FloorId ? (<FloorId>floorId).id.toValue() : FloorId;
 
-    const query = { domainId: idX}; 
-    const FloorDocument = await this.FloorSchema.findOne( query );
+    const query = { floorId: idX}; 
+    const FloorDocument = await this.floorSchema.findOne( query );
 
     return !!FloorDocument === true;
   }
 
   public async save (floor: Floor): Promise<Floor> {
-    const query = { domainId: floor.id.toString() }; 
+    const query = { floorId: floor.id.toString() }; 
 
-    const FloorDocument = await this.FloorSchema.findOne( query );
+    const FloorDocument = await this.floorSchema.findOne( query );
 
     try {
       if (FloorDocument === null ) {
         const rawFloor: any = FloorMap.toPersistence(floor);
 
-        const FloorCreated = await this.FloorSchema.create(rawFloor);
+        const FloorCreated = await this.floorSchema.create(rawFloor);
 
         return FloorMap.toDomain(FloorCreated);
-      }/*else {
-        FloorDocument.firstName = Floor.firstName;
-        FloorDocument.lastName = Floor.lastName;
+      }else {
+        FloorDocument.floorName = floor.name;
+        FloorDocument.description = floor.description;
+        FloorDocument.buildingCode = floor.buildingCode;
+        FloorDocument.height = floor.height;
+        FloorDocument.width= floor.width;
+        FloorDocument.rooms= floor.rooms;
+        FloorDocument.grid= floor.grid;
+
         await FloorDocument.save();
 
-        return Floor;
-      }*/
+        return floor;
+      }
     } catch (err) {
       throw err;
     }
@@ -64,10 +70,21 @@ export default class FloorRepo implements IFloorRepo {
     const idX = floorId instanceof FloorId ? (<FloorId>floorId).id.toValue() : FloorId;
 
     const query = { domainId: idX }; 
-    const FloorRecord = await this.FloorSchema.findOne( query );
+    const FloorRecord = await this.floorSchema.findOne( query );
 
     if( FloorRecord != null) {
       return FloorMap.toDomain(FloorRecord);
+    }
+    else
+      return null;
+  }
+
+  public async findByName (floorName: string): Promise<Floor> {
+    const query = { floorName: floorName };
+    const floorRecord = await this.floorSchema.findOne( query );
+
+    if( floorRecord != null) {
+      return FloorMap.toDomain(floorRecord);
     }
     else
       return null;

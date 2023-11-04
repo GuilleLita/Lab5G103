@@ -40,7 +40,7 @@ export class BuildingMap extends Mapper<Building> {
       numOfFloors: raw.numOfFloors,
       floors: raw.floors,
       elevatorFloors : raw.elevatorFloors
-    }, new UniqueEntityID(raw.buildingId))
+    })
 
     buildingOrError.isFailure ? console.log(buildingOrError.error) : '';
     

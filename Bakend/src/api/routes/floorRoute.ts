@@ -7,37 +7,29 @@ import { IFloorDTO } from '../../dto/IFloorDTO';
 import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
+import config from "../../../config";
 
+import IFloorController from '../../controllers/IControllers/IFloorController';
 var floor_controller = require('../../controllers/floorController');
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/floor', route);
-
+    const ctrl = Container.get(config.controllers.floor.name) as IFloorController;
   route.post(
     '/create',
-    /*celebrate({
-
-        /*floorId: string;
-	floorName: string;
-	description: string;
-	height: number;
-	width: number;
-	numOfFloors: number;
-	floors: string[];
-	elevatorFloors : string[];
+    celebrate({
       body: Joi.object({
-        floorId: Joi.string().required(),
         floorName: Joi.string().required(),
         description: Joi.string().required(),
+        buildingCode: Joi.string().required(),
         height: Joi.number().required(),
         width: Joi.number().required(),
-        numOfFloors: Joi.number().required(),
-        floors: Joi.array().required(),
-        elevatorFloors: Joi.array().required(),
+        rooms: Joi.array().required(),
+        grid: Joi.array().required(),
       }),
-    }),*/
+    }),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger = Container.get('logger') as winston.Logger;
       logger.debug('Calling Sign-Up endpoint with body: %o', req.body )
@@ -60,5 +52,22 @@ export default (app: Router) => {
       }
     },
   );
+
+  route.put(
+    '/update',
+    celebrate({
+      body: Joi.object({
+        floorName: Joi.string().required(),
+        description: Joi.string().required(),
+        buildingCode: Joi.string().required(),
+        height: Joi.number().required(),
+        width: Joi.number().required(),
+        rooms: Joi.array().required(),
+        grid: Joi.array().required(),
+      }),
+    }),
+    (req, res, next) => ctrl.updateFloor(req, res, next) );
+
+
 
 };
