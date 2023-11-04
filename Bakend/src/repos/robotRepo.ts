@@ -63,17 +63,6 @@ export default class RobotRepo implements IRobotRepo {
   }
 
 
-  public async findByName (name:  string): Promise<Robot> {
-    const query = { robotName: name.toString() };
-    const robotRecord = await this.robotSchema.findOne( query );
-
-    if( robotRecord != null) {
-      return RobotMap.toDomain(robotRecord);
-    }
-    else
-      return null;
-  }
-
 
   public async findByDomainId (robotId: RobotId | string): Promise<Robot> {
 
@@ -88,4 +77,19 @@ export default class RobotRepo implements IRobotRepo {
     else
       return null;
   }
+
+  public async getAll (): Promise<Robot[]> {
+    const RobotRecord = await this.robotSchema.find();
+    const RobotArray : Robot[] = [];
+    if( RobotRecord != null) {
+      for(var i=0; i< RobotRecord.length; i++){
+      RobotArray.push( await RobotMap.toDomain(RobotRecord[i]));
+      }
+
+      return RobotArray;
+    }
+    else
+      return null;
+  }
+
 }

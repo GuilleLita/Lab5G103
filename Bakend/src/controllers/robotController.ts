@@ -47,4 +47,20 @@ export default class RobotController implements IRobotController /* TODO: extend
     }
   };
 
+  public async getAllRobots(req: Request, res: Response, next: NextFunction) {
+    try {
+      const robotOrError = await this.robotServiceInstance.getAllRobots() as Result<{robotDTO: IRobotDTO[]}>;
+
+      if (robotOrError.isFailure) {
+        return res.status(404).send();
+      }
+
+      const robotDTO = robotOrError.getValue();
+      return res.status(200).json( robotDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+
 }

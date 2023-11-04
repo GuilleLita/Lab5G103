@@ -4,5 +4,5 @@ import { IRobotDTO } from "../../dto/IRobotDTO";
 export default interface IRobotService  {
   CreateRobot(robotDTO: IRobotDTO): Promise<Result<{robotDTO: IRobotDTO}>>;
   updateRobot(robotDTO: IRobotDTO): Promise<Result<{robotDTO: IRobotDTO}>>;
-  
+  getAllRobots(): Promise<Result<{robotDTO: IRobotDTO[]}>>;
   }

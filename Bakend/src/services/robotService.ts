@@ -54,7 +54,7 @@ export default class RobotService implements IRobotService{
 
   public async updateRobot(robotDTO: IRobotDTO): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
     try {
-      const Robot = await this.robotRepo.findByName(robotDTO.robotId);
+      const Robot = await this.robotRepo.findByDomainId(robotDTO.robotId);
       if (Robot === null) {
         return Result.fail<{robotDTO: IRobotDTO}>("Robot not found");
       }
@@ -77,7 +77,21 @@ export default class RobotService implements IRobotService{
     }
   }
 
+  public async getAllRobots(): Promise<Result<{ robotDTO: IRobotDTO[]; }>>  {
+    try {
+      const Robots = await this.robotRepo.getAll();
 
+      if (Robots === null) {
+        return Result.fail<{robotDTO: IRobotDTO[]}>("Robots not found");
+      }
+      else {
+        const RobotsDTOResult = Robots.map( Robot => RobotMap.toDTO( Robot ) as IRobotDTO );
+        return Result.ok<{robotDTO: IRobotDTO[]}>( {robotDTO: RobotsDTOResult} )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
 
 
 
