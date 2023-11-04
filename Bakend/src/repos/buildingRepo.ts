@@ -107,7 +107,7 @@ export default class BuildingRepo implements IBuildingRepo {
     const query = { numOfFloors: { $gte: min, $lte: max } }; 
     const BuildingRecord = await this.buildingSchema.find( query );
     const BuildingArray : Building[] = [];
-    if( BuildingRecord != null) {
+    if( BuildingRecord.length > 0) {
       for(var i=0; i< BuildingRecord.length; i++){
       BuildingArray.push( await BuildingMap.toDomain(BuildingRecord[i]));
       }
