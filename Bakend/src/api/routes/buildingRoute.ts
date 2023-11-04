@@ -82,5 +82,13 @@ export default (app: Router) => {
       ctrl.getAllBuildings(req, res, next);
     });
 
+    route.get('/getbyminmax',
+    celebrate({
+      body: Joi.object({
+        min: Joi.number().required(),
+        max: Joi.number().required(),
+      }),
+    }), (req, res, next) => ctrl.getBuildingsByMinMax(req, res, next) );
+
 
 };

@@ -94,6 +94,21 @@ export default class BuildingService implements IBuildingService{
     }
   }
 
+  public async getBuildingsByMinMax(min: number, max: number): Promise<Result<{ buildingDTO: IBuildingDTO[]; }>>  {
+    try {
+      const Buildings = await this.buildingRepo.getBuildingsByMinMax(min, max);
+
+      if (Buildings === null) {
+        return Result.fail<{buildingDTO: IBuildingDTO[]}>("Building not found");
+      }
+      else {
+        const BuildingsDTOResult = Buildings.map( Building => BuildingMap.toDTO( Building ) as IBuildingDTO );
+        return Result.ok<{buildingDTO: IBuildingDTO[]}>( {buildingDTO: BuildingsDTOResult} )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
 
 
   /*public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {

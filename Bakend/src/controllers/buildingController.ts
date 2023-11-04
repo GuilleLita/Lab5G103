@@ -62,4 +62,20 @@ export default class BuildingController implements IBuildingController /* TODO: 
       return next(e);
     }
   };
+
+  public async getBuildingsByMinMax(req: Request, res: Response, next: NextFunction) {
+    try {
+      const buldingOrError = await this.buildingServiceInstance.getBuildingsByMinMax(req.body.min, req.body.max) as Result<{buildingDTO: IBuildingDTO[]}>;
+
+      if (buldingOrError.isFailure) {
+        return res.status(404).send();
+      }
+
+      const buldingDTO = buldingOrError.getValue();
+      return res.status(201).json( buldingDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  }
 }

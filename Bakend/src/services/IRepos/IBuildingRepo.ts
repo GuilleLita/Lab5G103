@@ -8,4 +8,5 @@ export default interface IBuildingRepo extends Repo<Building> {
 	findByDomainId (id: string): Promise<Building>;
 	findByName (name:  string): Promise<Building>
 	getAll(): Promise<Building[]>;
+	getBuildingsByMinMax(min: number, max: number): Promise<Building[]>;
 }
