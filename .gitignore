@@ -10,6 +10,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependency directories
+# node_modules/
 node_modules/
 jspm_packages/
 
@@ -39,6 +40,6 @@ public
 *.sublime-project
 *.sublime-workspace
 sftp-config.json
-Frontend/node_modules
-Backend/node_modules
 
+
+Bakend/node_modules/

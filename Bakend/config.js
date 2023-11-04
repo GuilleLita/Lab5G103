@@ -48,7 +48,12 @@ export default {
     building: {
       name: "BuildingController",
       path: "../controllers/buildingController"
+    },
+    robot: {
+      name: "RobotController",
+      path: "../controllers/robotController"
     }
+
   },
 
   repos: {
