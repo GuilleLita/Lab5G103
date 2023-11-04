@@ -14,7 +14,7 @@ export class BuildingMap extends Mapper<Building> {
 
   public static toDTO( building: Building): IBuildingDTO {
     return {
-      buildingId: building.id.toString(),
+      buildingCode: building.buildingCode,
 	    buildingName: building.name,
 	    description:  building.description,
 	    height: building.height,
@@ -32,7 +32,7 @@ export class BuildingMap extends Mapper<Building> {
     //const role = await repo.findByDomainId(raw.role);
 
     const buildingOrError = Building.create({
-      buildingId: raw.buildingId,
+      buildingCode: raw.buildingCode,
       buildingName: raw.buildingName,
       description:  raw.description,
       height: raw.height,
@@ -49,7 +49,7 @@ export class BuildingMap extends Mapper<Building> {
 
   public static toPersistence (building: Building): any {
     const a = {
-      buildingId: building.id.toString(),
+      buildingCode: building.buildingCode,
 	    buildingName: building.name,
 	    description:  building.description,
 	    height: building.height,

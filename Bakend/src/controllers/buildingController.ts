@@ -33,14 +33,14 @@ export default class BuildingController implements IBuildingController /* TODO: 
 
   public async updateBuilding(req: Request, res: Response, next: NextFunction) {
     try {
-      const BuldingOrError = await this.buildingServiceInstance.updateBuilding(req.body as IBuildingDTO) as Result<{buildingDTO: IBuildingDTO}>;
+      const buildingOrError = await this.buildingServiceInstance.updateBuilding(req.body as IBuildingDTO) as Result<{buildingDTO: IBuildingDTO}>;
 
-      if (BuldingOrError.isFailure) {
+      if (buildingOrError.isFailure) {
         return res.status(404).send();
       }
 
-      const buldingDTO = BuldingOrError.getValue();
-      return res.status(201).json( buldingDTO );
+      const buildingDTO = buildingOrError.getValue();
+      return res.status(201).json( buildingDTO );
     }
     catch (e) {
       return next(e);
@@ -49,14 +49,14 @@ export default class BuildingController implements IBuildingController /* TODO: 
 
   public async getAllBuildings(req: Request, res: Response, next: NextFunction) {
     try {
-      const buldingOrError = await this.buildingServiceInstance.getAllBuildings() as Result<{buildingDTO: IBuildingDTO[]}>;
+      const buildingOrError = await this.buildingServiceInstance.getAllBuildings() as Result<{buildingDTO: IBuildingDTO[]}>;
 
-      if (buldingOrError.isFailure) {
+      if (buildingOrError.isFailure) {
         return res.status(404).send();
       }
 
-      const buldingDTO = buldingOrError.getValue();
-      return res.status(201).json( buldingDTO );
+      const buildingDTO = buildingOrError.getValue();
+      return res.status(201).json( buildingDTO );
     }
     catch (e) {
       return next(e);
@@ -65,14 +65,14 @@ export default class BuildingController implements IBuildingController /* TODO: 
 
   public async getBuildingsByMinMax(req: Request, res: Response, next: NextFunction) {
     try {
-      const buldingOrError = await this.buildingServiceInstance.getBuildingsByMinMax(req.body.min, req.body.max) as Result<{buildingDTO: IBuildingDTO[]}>;
+      const buildingOrError = await this.buildingServiceInstance.getBuildingsByMinMax(req.body.min, req.body.max) as Result<{buildingDTO: IBuildingDTO[]}>;
 
-      if (buldingOrError.isFailure) {
-        return res.status(404).send();
+      if (buildingOrError.isFailure) {
+        return res.status(401).send(buildingOrError.errorValue());
       }
 
-      const buldingDTO = buldingOrError.getValue();
-      return res.status(201).json( buldingDTO );
+      const buildingDTO = buildingOrError.getValue();
+      return res.status(201).json( buildingDTO );
     }
     catch (e) {
       return next(e);

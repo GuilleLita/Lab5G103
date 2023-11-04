@@ -10,7 +10,7 @@ import {IBuildingDTO} from "../dto/IBuildingDTO";
 import { BuildingId } from "./buildingId";
 
 interface BuildingProps {
-  buildingId: string;
+  buildingCode: string;
 	buildingName: string;
 	description: string;
 	height: number;
@@ -21,12 +21,9 @@ interface BuildingProps {
 }
 
 export class Building extends AggregateRoot<BuildingProps> {
-  get id (): UniqueEntityID {
-    return this._id;
-  }
 
-  get buildingId (): BuildingId {
-    return BuildingId.caller(this.id);
+  get buildingCode (): String {
+    return this.props.buildingCode;
   }
 
   get name (): string {

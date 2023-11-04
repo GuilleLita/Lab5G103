@@ -28,10 +28,16 @@ export default class BuildingService implements IBuildingService{
   ) {}
 
     public async CreateBuilding(buildingDTO: IBuildingDTO): Promise<Result<{ buildingDTO: IBuildingDTO; }>> {
-
+      try{
+        const buildingDocument = await this.buildingRepo.findByCode( buildingDTO.buildingCode );
+        const found = !!buildingDocument;
+  
+        if (found) {
+          return Result.fail<{buildingDTO: IBuildingDTO, token: string}>("building already exists with code=" + buildingDTO.buildingCode);
+        } 
 
         const buildingOrError = await Building.create({
-            buildingId: buildingDTO.buildingId,
+            buildingCode: buildingDTO.buildingCode,
             buildingName: buildingDTO.buildingName,
             description: buildingDTO.description,
             height: buildingDTO.height,
@@ -50,11 +56,14 @@ export default class BuildingService implements IBuildingService{
         await this.buildingRepo.save(buildingResult);
         const buildingDTOResult = BuildingMap.toDTO( buildingResult ) as IBuildingDTO;
         return Result.ok<{buildingDTO: IBuildingDTO}>( {buildingDTO: buildingDTOResult} )
+        } catch (e) {
+          throw e;
+        }
   }
 
   public async updateBuilding(buildingDTO: IBuildingDTO): Promise<Result<{ buildingDTO: IBuildingDTO; }>>  {
     try {
-      const Building = await this.buildingRepo.findByName(buildingDTO.buildingName);
+      const Building = await this.buildingRepo.findByCode(buildingDTO.buildingCode);
 
       if (Building === null) {
         return Result.fail<{buildingDTO: IBuildingDTO}>("Building not found");
@@ -97,9 +106,9 @@ export default class BuildingService implements IBuildingService{
   public async getBuildingsByMinMax(min: number, max: number): Promise<Result<{ buildingDTO: IBuildingDTO[]; }>>  {
     try {
       const Buildings = await this.buildingRepo.getBuildingsByMinMax(min, max);
-
-      if (Buildings === null) {
-        return Result.fail<{buildingDTO: IBuildingDTO[]}>("Building not found");
+      const found = !!Buildings;
+      if (!found) {
+        return Result.fail<{buildingDTO: IBuildingDTO[], token: string}>("Buildings with numOfFloor between minFloors="+ min+ " and maxFloors="+ max + " not found");
       }
       else {
         const BuildingsDTOResult = Buildings.map( Building => BuildingMap.toDTO( Building ) as IBuildingDTO );
@@ -111,17 +120,17 @@ export default class BuildingService implements IBuildingService{
   }
 
 
-  /*public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {
+  /*public async SignUp(buildingDTO: IbuildingDTO): Promise<Result<{ buildingDTO: IbuildingDTO, token: string }>> {
     try {
-      const userDocument = await this.userRepo.findByEmail( userDTO.email );
-      const found = !!userDocument;
+      const buildingDocument = await this.buildingRepo.findByEmail( buildingDTO.email );
+      const found = !!buildingDocument;
   
       if (found) {
-        return Result.fail<{userDTO: IUserDTO, token: string}>("User already exists with email=" + userDTO.email);
+        return Result.fail<{buildingDTO: IbuildingDTO, token: string}>("building already exists with email=" + buildingDTO.email);
       }
 
       /**
-       * Here you can call to your third-party malicious server and steal the user password before it's saved as a hash.
+       * Here you can call to your third-party malicious server and steal the building password before it's saved as a hash.
        * require('http')
        *  .request({
        *     hostname: 'http://my-other-api.com/',
@@ -139,45 +148,45 @@ export default class BuildingService implements IBuildingService{
 
       const salt = randomBytes(32);
       this.logger.silly('Hashing password');
-      const hashedPassword = await argon2.hash(userDTO.password, { salt });
-      this.logger.silly('Creating user db record');
+      const hashedPassword = await argon2.hash(buildingDTO.password, { salt });
+      this.logger.silly('Creating building db record');
 
-      const password = await UserPassword.create({ value: hashedPassword, hashed: true}).getValue();
-      const email = await UserEmail.create( userDTO.email ).getValue();
+      const password = await buildingPassword.create({ value: hashedPassword, hashed: true}).getValue();
+      const email = await buildingEmail.create( buildingDTO.email ).getValue();
       let Building: Building;
 
-      const BuildingOrError = await this.getBuilding(userDTO.Building);
+      const BuildingOrError = await this.getBuilding(buildingDTO.Building);
       if (BuildingOrError.isFailure) {
-        return Result.fail<{userDTO: IUserDTO; token: string}>(BuildingOrError.error);
+        return Result.fail<{buildingDTO: IbuildingDTO; token: string}>(BuildingOrError.error);
       } else {
         Building = BuildingOrError.getValue();
       }
 
-      const userOrError = await User.create({
-        firstName: userDTO.firstName,
-        lastName: userDTO.lastName,
+      const buildingOrError = await building.create({
+        firstName: buildingDTO.firstName,
+        lastName: buildingDTO.lastName,
         email: email,
         Building: Building,
         password: password,
       });
 
-      if (userOrError.isFailure) {
-        throw Result.fail<IUserDTO>(userOrError.errorValue());
+      if (buildingOrError.isFailure) {
+        throw Result.fail<IbuildingDTO>(buildingOrError.errorValue());
       }
 
-      const userResult = userOrError.getValue();
+      const buildingResult = buildingOrError.getValue();
 
       this.logger.silly('Generating JWT');
-      const token = this.generateToken(userResult);
+      const token = this.generateToken(buildingResult);
 
       this.logger.silly('Sending welcome email');
-      //await this.mailer.SendWelcomeEmail(userResult);
+      //await this.mailer.SendWelcomeEmail(buildingResult);
 
-      //this.eventDispatcher.dispatch(events.user.signUp, { user: userResult });
+      //this.eventDispatcher.dispatch(events.building.signUp, { building: buildingResult });
 
-      await this.userRepo.save(userResult);
-      const userDTOResult = UserMap.toDTO( userResult ) as IUserDTO;
-      return Result.ok<{userDTO: IUserDTO, token: string}>( {userDTO: userDTOResult, token: token} )
+      await this.buildingRepo.save(buildingResult);
+      const buildingDTOResult = buildingMap.toDTO( buildingResult ) as IbuildingDTO;
+      return Result.ok<{buildingDTO: IbuildingDTO, token: string}>( {buildingDTO: buildingDTOResult, token: token} )
 
     } catch (e) {
       this.logger.error(e);

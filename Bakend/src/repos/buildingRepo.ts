@@ -34,7 +34,7 @@ export default class BuildingRepo implements IBuildingRepo {
   }
 
   public async save (building: Building): Promise<Building> {
-    const query = { buildingId: building.id.toString() }; 
+    const query = { buildingCode: building.buildingCode }; 
 
     const BuildingDocument = await this.buildingSchema.findOne( query );
 
@@ -75,11 +75,11 @@ export default class BuildingRepo implements IBuildingRepo {
   }
 
 
-  public async findByDomainId (buildingId: BuildingId | string): Promise<Building> {
+  public async findByCode (buildingCode:  string): Promise<Building> {
 
-    const idX = buildingId instanceof BuildingId ? (<BuildingId>buildingId).id.toValue() : buildingId;
+    const idX = buildingCode;
 
-    const query = { buildingId: idX }; 
+    const query = { buildingCode: idX }; 
     const BuildingRecord = await this.buildingSchema.findOne( query );
 
     if( BuildingRecord != null) {
@@ -107,7 +107,7 @@ export default class BuildingRepo implements IBuildingRepo {
     const query = { numOfFloors: { $gte: min, $lte: max } }; 
     const BuildingRecord = await this.buildingSchema.find( query );
     const BuildingArray : Building[] = [];
-    if( BuildingRecord != null) {
+    if( BuildingRecord.length > 0) {
       for(var i=0; i< BuildingRecord.length; i++){
       BuildingArray.push( await BuildingMap.toDomain(BuildingRecord[i]));
       }
