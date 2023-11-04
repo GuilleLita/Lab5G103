@@ -146,6 +146,11 @@ export default async ({ expressApp }) => {
     path: config.repos.floor.path
   }
 
+  const floorController = {
+    name: config.controllers.floor.name,
+    path: config.controllers.floor.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -161,7 +166,8 @@ export default async ({ expressApp }) => {
     controllers: [
       roleController,
       buildingController,
-      robotController
+      robotController,
+      floorController
     ],
     repos: [
       roleRepo,

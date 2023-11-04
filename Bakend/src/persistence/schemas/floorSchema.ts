@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 
 const FloorSchema = new mongoose.Schema(
   {
-	floorId: {type: String, unique: true, required: true},
+	  floorId: {type: String, unique: true, required: true},
     floorName: {type: String},
+    buildingCode: {type: String},
     description: {type: String},
     height: {type: Number},
     width: {type: Number},

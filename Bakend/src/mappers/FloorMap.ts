@@ -14,9 +14,10 @@ export class FloorMap extends Mapper<Floor> {
 
   public static toDTO( Floor: Floor): IFloorDTO {
     return {
-      floorId: Floor.id.toString(),
+      //floorId: Floor.id.toString(),
         floorName: Floor.name,
         description:  Floor.description,
+        buildingCode: Floor.buildingCode,
         height: Floor.height,
         width:  Floor.width,
         rooms: Floor.rooms,
@@ -26,30 +27,30 @@ export class FloorMap extends Mapper<Floor> {
   }
 
   public static async toDomain (raw: any): Promise<Floor> {
-    //const userEmailOrError = UserEmail.create(raw.email);
-    //const userPasswordOrError = UserPassword.create({value: raw.password, hashed: true});
-    //const repo = Container.get(RoleRepo);
-    //const role = await repo.findByDomainId(raw.role);
 
-    //const userOrError = Floor.create({
-
-    //}, new UniqueEntityID(raw.domainId))
-
-    //userOrError.isFailure ? console.log(userOrError.error) : '';
-    
-    //return userOrError.isSuccess ? userOrError.getValue() : null;
-    return null;
+    const floorOrError = Floor.create({
+      floorName: raw.floorName,
+      description:  raw.description,
+      buildingCode: raw.buildingCode,
+      height: raw.height,
+      width:  raw.width,
+      rooms: raw.rooms,
+      grid: raw.grid
+      }, new UniqueEntityID(raw.floorId))
+    floorOrError.isFailure ? console.log(floorOrError.error) : '';
+    return floorOrError.isSuccess ? floorOrError.getValue() : null;
   }
 
-  public static toPersistence (Floor: Floor): any {
+  public static toPersistence (floor: Floor): any {
     const a = {
-        floorId: Floor.id.toString(),
-        floorName: Floor.name,
-        description:  Floor.description,
-        height: Floor.height,
-        width:  Floor.width,
-        rooms: Floor.rooms,
-        grid: Floor.grid
+        floorId: floor.id.toString(),
+        floorName: floor.name,
+        description:  floor.description,
+        buildingCode: floor.buildingCode,
+        height: floor.height,
+        width:  floor.width,
+        rooms: floor.rooms,
+        grid: floor.grid
     }
     return a;
   }

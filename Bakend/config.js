@@ -52,7 +52,11 @@ export default {
     robot: {
       name: "RobotController",
       path: "../controllers/robotController"
-    }
+    },
+    floor: {
+      name: "FloorController",
+      path: "../controllers/floorController"
+    },
 
   },
 
