@@ -6,6 +6,7 @@ import building from './routes/buildingRoute';
 import floor from './routes/floorRoute';
 import hallway from './routes/hallwayRoute';
 import room from './routes/roomRoute';
+import robot from './routes/robotRoute';
 
 
 export default () => {
@@ -18,6 +19,7 @@ export default () => {
 	floor(app);
 	hallway(app);
 	room(app);
+	robot(app);
 
 	
 	return app
