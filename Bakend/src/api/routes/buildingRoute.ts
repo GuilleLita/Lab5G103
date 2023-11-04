@@ -31,7 +31,7 @@ export default (app: Router) => {
 	floors: string[];
 	elevatorFloors : string[];*/
       body: Joi.object({
-        //buildingId: Joi.string().required(),
+        buildingCode: Joi.string().required(),
         buildingName: Joi.string().required(),
         description: Joi.string().required(),
         height: Joi.number().required(),
@@ -67,6 +67,7 @@ export default (app: Router) => {
   route.put('/update',
     celebrate({
       body: Joi.object({
+        buildingCode: Joi.string().required(),
         buildingName: Joi.string().required(),
         description: Joi.string().required(),
         height: Joi.number().required(),

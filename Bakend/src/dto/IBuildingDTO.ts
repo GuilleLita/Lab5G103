@@ -1,5 +1,5 @@
 export interface IBuildingDTO {
-	buildingId: string;
+	buildingCode: string;
 	buildingName: string;
 	description: string;
 	height: number;

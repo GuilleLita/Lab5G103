@@ -34,7 +34,7 @@ export default class BuildingRepo implements IBuildingRepo {
   }
 
   public async save (building: Building): Promise<Building> {
-    const query = { buildingId: building.id.toString() }; 
+    const query = { buildingCode: building.buildingCode }; 
 
     const BuildingDocument = await this.buildingSchema.findOne( query );
 
@@ -75,11 +75,11 @@ export default class BuildingRepo implements IBuildingRepo {
   }
 
 
-  public async findByDomainId (buildingId: BuildingId | string): Promise<Building> {
+  public async findByCode (buildingCode:  string): Promise<Building> {
 
-    const idX = buildingId instanceof BuildingId ? (<BuildingId>buildingId).id.toValue() : buildingId;
+    const idX = buildingCode;
 
-    const query = { buildingId: idX }; 
+    const query = { buildingCode: idX }; 
     const BuildingRecord = await this.buildingSchema.findOne( query );
 
     if( BuildingRecord != null) {
