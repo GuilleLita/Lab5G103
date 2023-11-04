@@ -78,5 +78,9 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateBuilding(req, res, next) );
 
+    route.get('/getall', function(req, res, next) {
+      ctrl.getAllBuildings(req, res, next);
+    });
+
 
 };

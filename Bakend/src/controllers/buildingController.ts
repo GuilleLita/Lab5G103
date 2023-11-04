@@ -46,4 +46,20 @@ export default class BuildingController implements IBuildingController /* TODO: 
       return next(e);
     }
   };
+
+  public async getAllBuildings(req: Request, res: Response, next: NextFunction) {
+    try {
+      const buldingOrError = await this.buildingServiceInstance.getAllBuildings() as Result<{buildingDTO: IBuildingDTO[]}>;
+
+      if (buldingOrError.isFailure) {
+        return res.status(404).send();
+      }
+
+      const buldingDTO = buldingOrError.getValue();
+      return res.status(201).json( buldingDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
 }

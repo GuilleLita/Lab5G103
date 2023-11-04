@@ -7,5 +7,5 @@ export default interface IBuildingRepo extends Repo<Building> {
 	//findByEmail (email: UserEmail | string): Promise<User>;
 	findByDomainId (id: string): Promise<Building>;
 	findByName (name:  string): Promise<Building>
-
+	getAll(): Promise<Building[]>;
 }
