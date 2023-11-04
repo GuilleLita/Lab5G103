@@ -93,6 +93,21 @@ export default class RobotService implements IRobotService{
     }
   }
 
+  public async getRobotsByTask(task: string): Promise<Result<{ robotDTO: IRobotDTO[]; }>>  {
+    try {
+      const Robots = await this.robotRepo.getRobotsByTask(task);
+      const found = !!Robots;
+      if (!found) {
+        return Result.fail<{robotDTO: IRobotDTO[], token: string}>("Robots with task="+ task + " not found");
+      }
+      else {
+        const RobotsDTOResult = Robots.map( Robot => RobotMap.toDTO( Robot ) as IRobotDTO );
+        return Result.ok<{robotDTO: IRobotDTO[]}>( {robotDTO: RobotsDTOResult} )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
 
 
   /*public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {

@@ -82,4 +82,12 @@ export default (app: Router) => {
       ctrl.getAllRobots(req, res, next);
     });
 
+    route.get('/getbytask',
+    celebrate({
+      body: Joi.object({
+        task: Joi.number().required(),
+      }),
+    }), (req, res, next) => ctrl.getRobotsByTask(req, res, next) );
+
+
 };

@@ -92,4 +92,19 @@ export default class RobotRepo implements IRobotRepo {
       return null;
   }
 
+  public async getRobotsByTask(task:string): Promise<Robot[]> {
+    const query = { taskspermited: { $in: [task] } }; 
+    const RobotRecord = await this.robotSchema.find( query );
+    const RobotArray : Robot[] = [];
+    if( RobotRecord.length > 0) {
+      for(var i=0; i< RobotRecord.length; i++){
+      RobotArray.push( await RobotMap.toDomain(RobotRecord[i]));
+      }
+
+      return RobotArray;
+    }
+    else
+      return null;
+  }
+
 }
