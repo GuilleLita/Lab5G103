@@ -160,8 +160,7 @@ export default async ({ expressApp }) => {
     ],
     controllers: [
       roleController,
-      buildingController,
-      robotController
+      buildingController
     ],
     repos: [
       roleRepo,

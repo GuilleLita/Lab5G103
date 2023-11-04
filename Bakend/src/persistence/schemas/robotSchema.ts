@@ -6,11 +6,11 @@ const RobotSchema = new mongoose.Schema(
     robotId: {type: String, unique: true, required: true},
 	  robotType: {type: String},
 	  mark: {type: String},
-    model: {type: Number},
-    taskspermited: {type: Number},
-    currentlytask: {type: Number},
+    model: {type: String},
+    taskspermited: [String],
+    currentlytask: {type: String},
 	  destinationPosition: [String],
-	  status: [String]
+	  status: {type: String}
   },
   {
     timestamps: true
