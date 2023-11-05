@@ -1,7 +1,6 @@
 export interface IRobotDTO {
 	robotId: string;
 	robotType: string;
-	taskspermited: string[];
     currentlytask: string;
 	currentlyPosition: string[];
     destinationPosition: string[];

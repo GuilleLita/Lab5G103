@@ -5,4 +5,5 @@ export default interface IFloorController  {
   updateFloor(req: Request, res: Response, next: NextFunction);
   getFloorsByBuilding(req: Request, res: Response, next: NextFunction);
   getFloorsWithHallwaysByBuilding(req: Request, res: Response, next: NextFunction);
+  getFloorsWithElevatorByBuilding(req: Request, res: Response, next: NextFunction);
 }

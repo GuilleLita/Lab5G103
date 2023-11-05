@@ -14,7 +14,7 @@ import { IFloorDTO } from '../dto/IFloorDTO';
 
 import IFloorRepo from './IRepos/IFloorRepo';
 import IHallwayRepo from './IRepos/IHallwayRepo';
-
+import IElevatorRepo from './IRepos/IElevatorRepo';
 import { Floor } from '../domain/floor';
 
 
@@ -25,6 +25,7 @@ export default class FloorService implements IFloorService{
   constructor(
       @Inject(config.repos.floor.name) private floorRepo : IFloorRepo,
       @Inject(config.repos.hallway.name) private hallwayRepo : IHallwayRepo,
+      @Inject(config.repos.elevator.name) private elevatorRepo : IElevatorRepo,
       //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
@@ -127,6 +128,32 @@ export default class FloorService implements IFloorService{
     } catch (e) {
       throw e;
     }
+  }
+
+  public async  getFloorsWithElevatorByBuilding(code: string): Promise<Result<{ floorDTO: IFloorDTO[]; }>> {
+    try {
+
+      const Floors = await this.floorRepo.findByBuildingCode(code);
+      const found = !!Floors === true;
+
+      if (!found) {
+        return Result.fail<{floorDTO: IFloorDTO[]}>("floor not found with buildingCode=" + code);
+      }
+
+      const FloorDTOResult = Floors.map( Floor => FloorMap.toDTO( Floor ) as IFloorDTO);
+      const FloorsWithElevator: IFloorDTO[] = [];
+      for (let i = 0; i < FloorDTOResult.length; i++) {
+        const Elevator = await this.elevatorRepo.existsInFloor(FloorDTOResult[i].floorName);
+        if(Elevator){
+          FloorsWithElevator.push(FloorDTOResult[i]);
+        }
+      }
+
+      return Result.ok<{floorDTO: IFloorDTO[]}>( {floorDTO: FloorsWithElevator} )
+    } catch (e) {
+      throw e;
+    }
+      
   }
 
 }

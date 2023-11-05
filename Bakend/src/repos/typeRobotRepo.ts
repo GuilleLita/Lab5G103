@@ -48,6 +48,7 @@ export default class TypeRobotRepo implements ITypeRobotRepo {
       } else {
         typerobotDocument.mark = typerobot.mark;
         typerobotDocument.model = typerobot.model;
+        typerobotDocument.taskspermited = typerobot.taskspermited;
         await typerobotDocument.save();
 
         return typerobot;

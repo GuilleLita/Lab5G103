@@ -11,7 +11,7 @@ export class RoomMap extends Mapper<Room> {
 
   public static toDTO( room: Room): IRoomDTO {
     return {
-        roomId: room.id.toString(),
+      roomId: room.roomId,
 	    buildingsId: room.buildingsId,
 	    floorId:  room.floorId,
       position: room.position
@@ -36,7 +36,7 @@ export class RoomMap extends Mapper<Room> {
 
   public static toPersistence (room: Room): any {
     const a = {
-        RoomId: room.id.toString(),
+        roomId: room.roomId,
 	    buildingsId: room.buildingsId,
 	    floorId:  room.floorId,
       position: room.position

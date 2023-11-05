@@ -5,7 +5,8 @@ const TypeRobotSchema = new mongoose.Schema(
   {
     robotType: { type: String, unique: true },
     mark: { type: String },
-    model: { type: String}
+    model: { type: String},
+    taskspermited: { type: [String] }
   },
   {
     timestamps: true

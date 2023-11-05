@@ -8,7 +8,6 @@ const RobotSchema = new mongoose.Schema(
                 default: 'typerobot'},
 	  mark: {type: String},
     model: {type: String},
-    taskspermited: [String],
     currentlytask: {type: String},
     currentlyPosition: [String],
 	  destinationPosition: [String],

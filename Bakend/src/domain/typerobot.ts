@@ -9,6 +9,7 @@ interface TypeRobotProps {
     robotType: string;
     mark: string;
     model: string;
+    taskspermited: string[];
 }
 
 export class TypeRobot extends AggregateRoot<TypeRobotProps> {
@@ -25,6 +26,10 @@ export class TypeRobot extends AggregateRoot<TypeRobotProps> {
     return this.props.model;
   }
 
+  get taskspermited(): string[] {
+    return this.props.taskspermited;
+  }
+
   set robotType ( value: string) {
     this.props.robotType = value;
   }
@@ -37,6 +42,10 @@ export class TypeRobot extends AggregateRoot<TypeRobotProps> {
     this.props.model = value;
   }
 
+  set taskspermited ( value: string[]) {  
+    this.props.taskspermited = value;
+  }
+
   private constructor (props: TypeRobotProps, id?: UniqueEntityID) {
     super(props, id);
   }
@@ -45,11 +54,12 @@ export class TypeRobot extends AggregateRoot<TypeRobotProps> {
     const type = typerobotDTO.robotType;
     const mark = typerobotDTO.mark;
     const model = typerobotDTO.model;
+    const taskspermited = typerobotDTO.taskspermited;
 
     if (!!type === false || type.length === 0) {
       return Result.fail<TypeRobot>('Must provide a type name')
     } else {
-      const role = new TypeRobot({ robotType: type, mark: mark, model: model }, id);
+      const role = new TypeRobot({ robotType: type, mark: mark, model: model, taskspermited: taskspermited }, id);
       return Result.ok<TypeRobot>( role )
     }
   }

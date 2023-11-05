@@ -1,7 +1,6 @@
 export interface IRobotPersistence {
 	robotId: string;
 	robotType: string;
-	taskspermited: string[];
     currentlytask: string;
 	currentlyPosition: string[];
     destinationPosition: string[];

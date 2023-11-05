@@ -20,6 +20,9 @@ export class Room extends AggregateRoot<RoomProps> {
     return this._id;
   }
 
+  get roomId (): string {
+    return this.props.roomId;
+  }
   get buildingsId (): string {
     return this.props.buildingsId;
   }

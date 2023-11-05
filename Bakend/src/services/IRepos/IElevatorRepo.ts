@@ -7,4 +7,5 @@ export default interface IElevatorRepo extends Repo<Elevator> {
 	//findByEmail (email: UserEmail | string): Promise<User>;
 	findById (id: string): Promise<Elevator>;
 	findByBuildingCode (code: string): Promise<Elevator[]>;
+	existsInFloor (name:  string): Promise<boolean>;
 }

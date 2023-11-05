@@ -18,7 +18,8 @@ export default (app: Router) => {
       body: Joi.object({
         robotType: Joi.string().required(),
         mark: Joi.string().required(),
-        model: Joi.string().required()
+        model: Joi.string().required(),
+        taskspermited: Joi.array().required(),
       })
     }),
     (req, res, next) => ctrl.createTypeRobot(req, res, next) );
@@ -28,7 +29,8 @@ export default (app: Router) => {
       body: Joi.object({
         robotType: Joi.string().required(),
         mark: Joi.string().required(),
-        model: Joi.string().required()
+        model: Joi.string().required(),
+        taskspermited: Joi.array().required(),
       }),
     }),
     (req, res, next) => ctrl.updateTypeRobot(req, res, next) );

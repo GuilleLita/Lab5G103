@@ -16,7 +16,6 @@ export class RobotMap extends Mapper<Robot> {
     return {
       robotId: robot.id.toString(),
 	    robotType: robot.robotType,
-	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
       currentlyPosition: robot.currentlyPosition,
 	    destinationPosition: robot.destinationPosition,
@@ -25,14 +24,10 @@ export class RobotMap extends Mapper<Robot> {
   }
 
   public static async toDomain (raw: any): Promise<Robot> {
-    const repo = Container.get(TypeRobotRepo);
-    const typerobot = await repo.findByrobotType(raw.robotType);
-    //NO SE SI ES ESO O typerobot
 
     const robotOrError = Robot.create({
       robotId: raw.robotId,
-      robotType: typerobot.robotType,
-      taskspermited: raw.taskspermited,
+      robotType: raw.robotType,
       currentlytask: raw.currentlytask,
       currentlyPosition: raw.currentlyPosition,
       destinationPosition: raw.destinationPosition,
@@ -50,7 +45,6 @@ export class RobotMap extends Mapper<Robot> {
     const a = {
       robotId: robot.id.toString(),
 	    robotType: robot.robotType,
-	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
       currentlyPosition: robot.currentlyPosition,
 	    destinationPosition: robot.destinationPosition,

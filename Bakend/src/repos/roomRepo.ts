@@ -34,7 +34,7 @@ export default class RoomRepo implements IRoomRepo {
   }
 
   public async save (room: Room): Promise<Room> {
-    const query = { domainId: room.id.toString() }; 
+    const query = { roomId: room.id.toString() }; 
 
     const RoomDocument = await this.RoomSchema.findOne( query );
 
@@ -61,9 +61,9 @@ export default class RoomRepo implements IRoomRepo {
 
   public async findById (roomId: RoomId | string): Promise<Room> {
 
-    const idX = roomId instanceof RoomId ? (<RoomId>roomId).id.toValue() : RoomId;
+    const idX = roomId instanceof RoomId ? (<RoomId>roomId).id.toValue() : roomId;
 
-    const query = { domainId: idX }; 
+    const query = { roomId: idX }; 
     const RoomRecord = await this.RoomSchema.findOne( query );
 
     if( RoomRecord != null) {

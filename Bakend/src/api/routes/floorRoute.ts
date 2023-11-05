@@ -80,4 +80,10 @@ export default (app: Router) => {
         buildingCode: Joi.string().required(),
       }),
     }), (req, res, next) => ctrl.getFloorsWithHallwaysByBuilding(req, res, next) );
+
+    route.get("/getbybuildingwithelevator",celebrate({
+      body: Joi.object({
+        buildingCode: Joi.string().required(),
+      }),
+    }), (req, res, next) => ctrl.getFloorsWithElevatorByBuilding(req, res, next) );
 };

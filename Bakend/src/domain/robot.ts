@@ -11,7 +11,6 @@ import { RobotId } from "./robotId";
 interface RobotProps {
 	robotId: string;
 	robotType: string;
-	taskspermited: string[];
   currentlytask: string;
   currentlyPosition: string[];
   destinationPosition: string[];
@@ -27,9 +26,7 @@ export class Robot extends AggregateRoot<RobotProps> {
   get robotType (): string {
     return this.props.robotType;
   }
-  get taskpermited() : string[]{
-    return this.props.taskspermited;
-  }
+
   get currentlytask() : string{
     return this.props.currentlytask;
   }
@@ -47,10 +44,6 @@ export class Robot extends AggregateRoot<RobotProps> {
     this.props.robotType = value;
   }
 
-
-  set taskpermited ( value: string[]) {
-    this.props.taskspermited = value;
-  }
 
   set currentlytask ( value: string) {
     this.props.currentlytask = value;
@@ -78,7 +71,6 @@ export class Robot extends AggregateRoot<RobotProps> {
 
     const guardedProps = [
       { argument: props.robotType, argumentName: 'robotType' },
-      { argument: props.taskspermited, argumentName: 'taskspermited' },
       { argument: props.currentlytask, argumentName: 'currentlytask'},
       { argument: props.currentlyPosition, argumentName: 'currentlyPosition'},
       { argument: props.destinationPosition, argumentName: 'destinationPosition'},

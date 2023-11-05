@@ -14,6 +14,7 @@ export default class ElevatorRepo implements IElevatorRepo {
 
   constructor(
     @Inject('elevatorSchema') private elevatorSchema : Model<IElevatorPersistence & Document>,
+    @Inject('floorSchema') private floorSchema : Model<IElevatorPersistence & Document>,
     @Inject('logger') private logger
   ) { }
 
@@ -90,4 +91,16 @@ export default class ElevatorRepo implements IElevatorRepo {
       else
         return null;
     }
+
+    public async existsInFloor(name: string): Promise<boolean> {
+      const query = { floorId: name };
+      console.log(query);
+      const floorRecord =await this.elevatorSchema.findOne( query );
+
+      if( floorRecord != null) {
+        return true;
+      }
+      else
+        return false;
+  }
 }

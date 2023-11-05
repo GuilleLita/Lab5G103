@@ -21,19 +21,9 @@ export default (app: Router) => {
   route.post(
     '/create',
     celebrate({
-
-        /*buildingId: string;
-	buildingName: string;
-	description: string;
-	height: number;
-	width: number;
-	numOfFloors: number;
-	floors: string[];
-	elevatorFloors : string[];*/
       body: Joi.object({
         //buildingId: Joi.string().required(),
         robotType: Joi.string().required(),
-        taskspermited: Joi.array().required(),
         currentlytask: Joi.string().required(),
         currentlyPosition: Joi.array().required(),
         destinationPosition: Joi.array().required(),
@@ -42,7 +32,6 @@ export default (app: Router) => {
     }),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger = Container.get('logger') as winston.Logger;
-      logger.debug('Calling Sign-Up endpoint with body: %o', req.body )
 
       try {
         const authServiceInstance = Container.get(AuthService);

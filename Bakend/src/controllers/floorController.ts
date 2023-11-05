@@ -78,19 +78,20 @@ export default class FloorController implements IFloorController /* TODO: extend
       return next(e);
     }
   }
-  /*public async updateRole(req: Request, res: Response, next: NextFunction) {
+  
+  public async getFloorsWithElevatorByBuilding(req: Request, res: Response, next: NextFunction) {
     try {
-      const roleOrError = await this.roleServiceInstance.updateRole(req.body as IRoleDTO) as Result<IRoleDTO>;
+      const floorOrError = await this.floorServiceInstance.getFloorsWithElevatorByBuilding(req.body.buildingCode) as Result<{floorDTO: IFloorDTO[]}>;
 
-      if (roleOrError.isFailure) {
-        return res.status(404).send();
+      if (floorOrError.isFailure) {
+        return res.status(402).send(floorOrError.errorValue());
       }
 
-      const roleDTO = roleOrError.getValue();
-      return res.status(201).json( roleDTO );
+      const floorDTO = floorOrError.getValue();
+      return res.status(201).json( floorDTO );
     }
     catch (e) {
       return next(e);
     }
-  };*/
+  }
 }

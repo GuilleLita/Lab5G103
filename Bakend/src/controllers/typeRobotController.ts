@@ -35,7 +35,7 @@ export default class TypeRobotController implements ITypeRobotController /* TODO
       const typerobotOrError = await this.typerobotServiceInstance.updateTypeRobot(req.body as ITypeRobotDTO) as Result<ITypeRobotDTO>;
 
       if (typerobotOrError.isFailure) {
-        return res.status(404).send();
+        return res.status(402).send(typerobotOrError.errorValue());
       }
 
       const typerobotDTO = typerobotOrError.getValue();

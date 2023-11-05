@@ -14,7 +14,8 @@ export class TypeRobotMap extends Mapper<TypeRobot> {
     return {
       robotType: typerobot.robotType,
       mark: typerobot.mark,
-      model: typerobot.model
+      model: typerobot.model,
+      taskspermited: typerobot.taskspermited
     } as ITypeRobotDTO;
   }
 
@@ -33,7 +34,8 @@ export class TypeRobotMap extends Mapper<TypeRobot> {
     return {
       robotType: typerobot.robotType,
       mark: typerobot.mark,
-      model: typerobot.model
+      model: typerobot.model,
+      taskspermited: typerobot.taskspermited
     }
   }
 }

@@ -14,6 +14,7 @@ export default class RobotRepo implements IRobotRepo {
 
   constructor(
     @Inject('robotSchema') private robotSchema : Model<IRobotPersistence & Document>,
+    @Inject('typerobotSchema') private typerobotSchema : Model<IRobotPersistence & Document>,
     @Inject('logger') private logger
   ) { }
 
@@ -141,12 +142,15 @@ export default class RobotRepo implements IRobotRepo {
   }
 
   public async getRobotsByTask(task:string): Promise<Robot[]> {
+
     const query = { taskspermited: { $in: [task] } }; 
-    const RobotRecord = await this.robotSchema.find( query );
+    const RobotRecord = await this.typerobotSchema.find( query );
+    const query2 = { robotType: { $in: [RobotRecord[0].robotType] } };
+    const RobotRecord2 = await this.robotSchema.find( query2 );
     const RobotArray : Robot[] = [];
-    if( RobotRecord.length > 0) {
+    if( RobotRecord2.length > 0) {
       for(var i=0; i< RobotRecord.length; i++){
-      RobotArray.push( await RobotMap.toDomain(RobotRecord[i]));
+      RobotArray.push( await RobotMap.toDomain(RobotRecord2[i]));
       }
 
       return RobotArray;
