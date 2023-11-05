@@ -18,26 +18,15 @@ export default (app: Router) => {
   route.post(
     '/create',
     celebrate({
-
-        /*buildingId: string;
-	buildingName: string;
-	description: string;
-	height: number;
-	width: number;
-	numOfFloors: number;
-	floors: string[];
-	elevatorFloors : string[];*/
       body: Joi.object({
-        hallwayId: Joi.string().required(),
-        buildingsId: Joi.array().required(),
-        floorId: Joi.array().required(),
+        //hallwayId: Joi.string().required(),
+        buildingsCode: Joi.array().required(),
+        floorsId: Joi.array().required(),
         position: Joi.array().required()     
       }),
     }),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger = Container.get('logger') as winston.Logger;
-      logger.debug('Calling Sign-Up endpoint with body: %o', req.body )
-
       try {
         const authServiceInstance = Container.get(AuthService);
         const hallwayOrError = await authServiceInstance.CreateHallway(req.body as IHallwayDTO);

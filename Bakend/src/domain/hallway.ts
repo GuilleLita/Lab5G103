@@ -9,9 +9,9 @@ import { Guard } from "../core/logic/Guard";
 import {IHallwayDTO} from "../dto/IHallwayDTO";
 
 interface HallwayProps {
-    hallwayId: string;
-    buildingsId: string[];
-    floorId: string[];
+    //hallwayId: string;
+    buildingsCode: string[];
+    floorsId: string[];
     position: number[];
 }
 
@@ -20,12 +20,16 @@ export class Hallway extends AggregateRoot<HallwayProps> {
     return this._id;
   }
 
-  get buildingsId (): string[] {
-    return this.props.buildingsId;
+  get hallwayId (): HallwayId {
+    return HallwayId.caller(this.id)
   }
 
-  get floorId() : string[]{
-    return this.props.floorId;
+  get buildingsCode (): string[] {
+    return this.props.buildingsCode;
+  }
+
+  get floorsId() : string[]{
+    return this.props.floorsId;
   }
 
   get position() : number[]{
@@ -39,9 +43,9 @@ export class Hallway extends AggregateRoot<HallwayProps> {
   public static create (props: HallwayProps, id?: UniqueEntityID): Result<Hallway> {
 
     const guardedProps = [
-      { argument: props.hallwayId, argumentName: 'hallwayId' },
-      { argument: props.buildingsId, argumentName: 'buildingsId' },
-      { argument: props.floorId, argumentName: 'floorId' },
+      //{ argument: props.hallwayId, argumentName: 'hallwayId' },
+      { argument: props.buildingsCode, argumentName: 'buildingsCode' },
+      { argument: props.floorsId, argumentName: 'floorsId' },
       { argument: props.position, argumentName: 'position' }
     ];
 

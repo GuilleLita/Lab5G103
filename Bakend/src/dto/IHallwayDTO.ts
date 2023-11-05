@@ -1,6 +1,6 @@
 export interface IHallwayDTO {
-	hallwayId: string;
-    buildingsId: string[];
-    floorId: string[];
+	  hallwayId: string;
+    buildingsCode: string[];
+    floorsId: string[];
     position: number[];
   }

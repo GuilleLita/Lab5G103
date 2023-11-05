@@ -1,6 +1,6 @@
 export interface IHallwayPersistence{
     hallwayId: string;
-    buildingsId: string[];
-    floorId: string[];
+    buildingsCode: string[];
+    floorsId: string[];
     position: number[];
 }

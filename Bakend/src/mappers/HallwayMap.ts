@@ -11,9 +11,9 @@ export class HallwayMap extends Mapper<Hallway> {
 
   public static toDTO( hallway: Hallway): IHallwayDTO {
     return {
-        hallwayId: hallway.id.toString(),
-	    buildingsId: hallway.buildingsId,
-	    floorId:  hallway.floorId,
+      hallwayId: hallway.id.toString(),
+	    buildingsCode: hallway.buildingsCode,
+	    floorsId:  hallway.floorsId,
       position: hallway.position
     } as IHallwayDTO
   }
@@ -36,9 +36,9 @@ export class HallwayMap extends Mapper<Hallway> {
 
   public static toPersistence (hallway: Hallway): any {
     const a = {
-        hallwayId: hallway.id.toString(),
-	    buildingsId: hallway.buildingsId,
-	    floorId:  hallway.floorId,
+      hallwayId: hallway.id.toString(),
+	    buildingsCode: hallway.buildingsCode,
+	    floorsId:  hallway.floorsId,
       position: hallway.position
     }
     return a;

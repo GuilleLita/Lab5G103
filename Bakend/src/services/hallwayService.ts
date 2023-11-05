@@ -11,8 +11,8 @@ import IHallwayService from './IServices/IHallwayService';
 import { HallwayMap } from "../mappers/HallwayMap";
 import { IHallwayDTO } from '../dto/IHallwayDTO';
 
-import IUserRepo from './IRepos/IUserRepo';
-import IRoleRepo from './IRepos/IRoleRepo';
+import IBuildingRepo from './IRepos/IBuildingRepo';
+import IFloorRepo from './IRepos/IFloorRepo';
 import IHallwayRepo from './IRepos/IHallwayRepo';
 
 import { Hallway } from '../domain/hallway';
@@ -26,17 +26,42 @@ import { Result } from "../core/logic/Result";
 export default class HallwayService implements IHallwayService{
   constructor(
       @Inject(config.repos.hallway.name) private hallwayRepo : IHallwayRepo,
+      @Inject(config.repos.building.name) private buildingRepo : IBuildingRepo,
+      @Inject(config.repos.floor.name) private floorRepo : IFloorRepo,
       //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
 
-    public async CreateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>> {
+  private comprobarHallway(hallwayDTO: IHallwayDTO): boolean{
+    if(hallwayDTO.buildingsCode.length != 2){
+      return false;
+    }
+    if(hallwayDTO.floorsId.length != 2){
+      return false;
+    }
+    for(let i = 0; i < hallwayDTO.buildingsCode.length; i++){
+      if(this.buildingRepo.findByCode(hallwayDTO.buildingsCode[i]) == null){
+        return false;
+      }
+      if(this.floorRepo.findById(hallwayDTO.floorsId[i]) == null){
+        return false;
+      }
+    }
+    return true;
+  }
 
+
+    public async CreateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>> {
+      try{
+
+        if(!this.comprobarHallway(hallwayDTO)){
+          return Result.fail<{hallwayDTO: IHallwayDTO}>("Hallway is not valid");
+        }
 
         const hallwayOrError = await Hallway.create({
-            hallwayId: hallwayDTO.hallwayId,
-            buildingsId: hallwayDTO.buildingsId,
-            floorId: hallwayDTO.floorId,
+            //hallwayId: hallwayDTO.hallwayId,
+            buildingsCode: hallwayDTO.buildingsCode,
+            floorsId: hallwayDTO.floorsId,
             position: hallwayDTO.position
           });
 
@@ -49,6 +74,9 @@ export default class HallwayService implements IHallwayService{
         await this.hallwayRepo.save(hallwayResult);
         const hallwayDTOResult = HallwayMap.toDTO( hallwayResult ) as IHallwayDTO;
         return Result.ok<{hallwayDTO: IHallwayDTO}>( {hallwayDTO: hallwayDTOResult} )
+        } catch (e) {
+          throw e;
+        }
   }
 
   /*public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {

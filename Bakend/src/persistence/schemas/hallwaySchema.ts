@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 const HallwaySchema = new mongoose.Schema(
   {
     hallwayId: {type: String, unique: true, required: true},
-	buildingsId: [String],
-	floorId: [String],
+	  buildingsCode: [String],
+	  floorsId: [String],
     position: [Number]
   },
   {

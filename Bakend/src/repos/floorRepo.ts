@@ -69,7 +69,7 @@ export default class FloorRepo implements IFloorRepo {
 
     const idX = floorId instanceof FloorId ? (<FloorId>floorId).id.toValue() : FloorId;
 
-    const query = { domainId: idX }; 
+    const query = { floorId: idX }; 
     const FloorRecord = await this.floorSchema.findOne( query );
 
     if( FloorRecord != null) {
