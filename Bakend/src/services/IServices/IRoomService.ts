@@ -3,5 +3,4 @@ import { IRoomDTO } from "../../dto/IRoomDTO";
 
 export default interface IRoomService  {
   CreateRoom(roomDTO: IRoomDTO): Promise<Result<{roomDTO: IRoomDTO}>>;
-
 }

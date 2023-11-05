@@ -75,4 +75,9 @@ export default (app: Router) => {
       }),
     }), (req, res, next) => ctrl.getFloorsByBuilding(req, res, next) );
 
+    route.get("/getbybuildingwithhallway",celebrate({
+      body: Joi.object({
+        buildingCode: Joi.string().required(),
+      }),
+    }), (req, res, next) => ctrl.getFloorsWithHallwaysByBuilding(req, res, next) );
 };

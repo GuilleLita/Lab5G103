@@ -42,20 +42,15 @@ export class TypeRobot extends AggregateRoot<TypeRobotProps> {
   }
 
   public static create (typerobotDTO: ITypeRobotDTO, id?: UniqueEntityID): Result<TypeRobot> {
-    const guardedProps = [
-      { argument: props.robotType, argumentName: 'robotType' },
-      { argument: props.mark, argumentName: 'mark' },
-      { argument: props.model, argumentName: 'model' }
-    ];
+    const type = typerobotDTO.robotType;
+    const mark = typerobotDTO.mark;
+    const model = typerobotDTO.model;
 
-    const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
-
-    if (!guardResult.succeeded) {
-      return Result.fail<TypeRobot>(guardResult.message)
-    }
-
-      const role = new TypeRobot({ ...props }, id);
+    if (!!type === false || type.length === 0) {
+      return Result.fail<TypeRobot>('Must provide a type name')
+    } else {
+      const role = new TypeRobot({ robotType: type, mark: mark, model: model }, id);
       return Result.ok<TypeRobot>( role )
     }
   }
-
+}

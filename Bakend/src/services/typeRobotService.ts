@@ -3,7 +3,7 @@ import argon2 from 'argon2';
 import config from "../../config";
 import ITypeRobotDTO from '../dto/ITypeRobotDTO';
 import { TypeRobot } from "../domain/typerobot";
-import ITypeRobotRepo from '../services/IRepos/ITypeRobotRepo';
+import ITypeRobotRepo from './IRepos/ITypeRobotRepo';
 import ITypeRobotService from './IServices/ITypeRobotService';
 import { Result } from "../core/logic/Result";
 import { TypeRobotMap } from "../mappers/TypeRobotMap";
@@ -11,7 +11,7 @@ import { TypeRobotMap } from "../mappers/TypeRobotMap";
 @Service()
 export default class TypeRobotService implements ITypeRobotService {
   constructor(
-      @Inject(config.repos.typerobot.robotType) private typerobotRepo : ITypeRobotRepo
+      @Inject(config.repos.typerobot.name) private typerobotRepo : ITypeRobotRepo
   ) {}
 
 

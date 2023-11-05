@@ -36,6 +36,19 @@ export class Hallway extends AggregateRoot<HallwayProps> {
     return this.props.position;
   }
 
+  set position(value: number[]){
+    this.props.position = value;
+  }
+
+  set floorsId(value: string[]){
+    this.props.floorsId = value;
+  } 
+
+  set buildingsCode(value: string[]){
+    this.props.buildingsCode = value;
+  }
+  
+
   private constructor (props: HallwayProps, id?: UniqueEntityID) {
     super(props, id);
   }

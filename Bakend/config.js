@@ -57,7 +57,14 @@ export default {
       name: "FloorController",
       path: "../controllers/floorController"
     },
-
+    typerobot: {
+      name: "TypeRobotController",
+      path: "../controllers/typeRobotController"
+    },
+    elevator: {
+      name: "ElevatorController",
+      path: "../controllers/elevatorController"
+    },
   },
 
   repos: {
@@ -92,6 +99,10 @@ export default {
     robot: {
       name: "RobotRepo",
       path: "../repos/robotRepo"
+    },
+    typerobot: {
+      name: "TypeRobotRepo",
+      path: "../repos/typeRobotRepo"
     }
   },
 
@@ -123,6 +134,10 @@ export default {
     robot: {
       name: "RobotService",
       path: "../services/robotService"
+    },
+    typerobot: {
+      name: "TypeRobotService",
+      path: "../services/typeRobotService"
     }
   },
 };

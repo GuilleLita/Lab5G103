@@ -45,13 +45,13 @@ export default class HallwayRepo implements IHallwayRepo {
         const HallwayCreated = await this.HallwaySchema.create(rawHallway);
 
         return HallwayMap.toDomain(HallwayCreated);
-      }/*else {
-        BuildingDocument.firstName = building.firstName;
-        BuildingDocument.lastName = building.lastName;
-        await BuildingDocument.save();
-
-        return building;
-      }*/
+      }else {
+        HallwayDocument.buildingsCode = hallway.buildingsCode;
+        HallwayDocument.floorsId = hallway.floorsId;
+        HallwayDocument.position = hallway.position;
+        await HallwayDocument.save();
+        return hallway;
+      }
     } catch (err) {
       throw err;
     }
@@ -71,5 +71,17 @@ export default class HallwayRepo implements IHallwayRepo {
     }
     else
       return null;
+  }
+
+  public async existsWithFloor (floorId: string): Promise<boolean> {
+
+    const query = { floorsId: floorId }; 
+    const HallwayRecord = await this.HallwaySchema.findOne( query );
+
+    if( HallwayRecord != null) {
+      return true;
+    }
+    else
+      return false;
   }
 }

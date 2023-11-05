@@ -11,7 +11,7 @@ import { Result } from "../core/logic/Result";
 @Service()
 export default class TypeRobotController implements ITypeRobotController /* TODO: extends ../core/infra/BaseController */ {
   constructor(
-      @Inject(config.services.typerobot.robotType) private typerobotServiceInstance : ITypeRobotService
+      @Inject(config.services.typerobot.name) private typerobotServiceInstance : ITypeRobotService
   ) {}
 
   public async createTypeRobot(req: Request, res: Response, next: NextFunction) {

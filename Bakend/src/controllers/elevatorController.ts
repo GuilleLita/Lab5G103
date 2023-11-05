@@ -14,7 +14,6 @@ export default class ElevatorController implements IElevatorController /* TODO: 
       @Inject(config.services.elevator.name) private elevatorServiceInstance : IElevatorService
   ) {}
 
-
   public async createElevator(req: Request, res: Response, next: NextFunction) {
     try {
       const elevatorOrError = await this.elevatorServiceInstance.CreateElevator(req.body as IElevatorDTO) as Result<{elevatorDTO: IElevatorDTO}>;

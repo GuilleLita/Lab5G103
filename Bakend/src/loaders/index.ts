@@ -8,6 +8,7 @@ import BuildingController from '../controllers/buildingController';
 
 import { flatMap, floor } from 'lodash';
 import e from 'express';
+import { type } from 'os';
 
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
@@ -121,6 +122,16 @@ export default async ({ expressApp }) => {
     path: config.controllers.robot.path
   }
 
+  const typeRobotController = {
+    name: config.controllers.typerobot.name,
+    path: config.controllers.typerobot.path
+  }
+
+  const elevatorController = {
+    name: config.controllers.elevator.name,
+    path: config.controllers.elevator.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -130,6 +141,7 @@ export default async ({ expressApp }) => {
     name: config.repos.user.name,
     path: config.repos.user.path
   }
+
 
   const roleService = {
     name: config.services.role.name,
@@ -183,7 +195,9 @@ export default async ({ expressApp }) => {
       roleController,
       buildingController,
       robotController,
-      floorController
+      floorController,
+      typeRobotController,
+      elevatorController
     ],
     repos: [
       roleRepo,

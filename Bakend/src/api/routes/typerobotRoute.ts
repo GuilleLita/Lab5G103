@@ -11,7 +11,7 @@ const route = Router();
 export default (app: Router) => {
   app.use('/typerobots', route);
 
-  const ctrl = Container.get(config.controllers.typerobot.robotType) as ITypeRobotController;
+  const ctrl = Container.get(config.controllers.typerobot.name) as ITypeRobotController;
 
   route.post('',
     celebrate({

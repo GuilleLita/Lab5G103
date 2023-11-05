@@ -8,14 +8,14 @@ import { Robot } from "../domain/robot";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 
-import TypeRobotRepo from "../repos/typerobotRepo";
+import TypeRobotRepo from "../repos/typeRobotRepo";
 
 export class RobotMap extends Mapper<Robot> {
 
   public static toDTO( robot: Robot): IRobotDTO {
     return {
       robotId: robot.id.toString(),
-	    robotType: robot.typerobot.robotType.toValue(),
+	    robotType: robot.robotType,
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
 	    destinationPosition: robot.destinationPosition,
@@ -30,7 +30,7 @@ export class RobotMap extends Mapper<Robot> {
 
     const robotOrError = Robot.create({
       robotId: raw.robotId,
-	    robotType: typerobot,
+	    robotType: typerobot.robotType,
 	    taskspermited:  raw.taskspermited,
 	    currentlytask: raw.currentlytask,
 	    destinationPosition: raw.destinationPosition,
@@ -46,7 +46,7 @@ export class RobotMap extends Mapper<Robot> {
 
     const a = {
       robotId: robot.id.toString(),
-	    robotType: robot.typerobot.robotType.toValue(),
+	    robotType: robot.robotType,
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
 	    destinationPosition: robot.destinationPosition,

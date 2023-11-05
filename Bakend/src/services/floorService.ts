@@ -11,14 +11,12 @@ import IFloorService from './IServices/IFloorService';
 import { FloorMap } from "../mappers/FloorMap";
 import { IFloorDTO } from '../dto/IFloorDTO';
 
-import IUserRepo from './IRepos/IUserRepo';
-import IRoleRepo from './IRepos/IRoleRepo';
+
 import IFloorRepo from './IRepos/IFloorRepo';
+import IHallwayRepo from './IRepos/IHallwayRepo';
 
 import { Floor } from '../domain/floor';
 
-
-import { Role } from '../domain/role';
 
 import { Result } from "../core/logic/Result";
 
@@ -26,6 +24,7 @@ import { Result } from "../core/logic/Result";
 export default class FloorService implements IFloorService{
   constructor(
       @Inject(config.repos.floor.name) private floorRepo : IFloorRepo,
+      @Inject(config.repos.hallway.name) private hallwayRepo : IHallwayRepo,
       //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
@@ -100,6 +99,31 @@ export default class FloorService implements IFloorService{
 
       const FloorDTOResult = Floors.map( Floor => FloorMap.toDTO( Floor ) as IFloorDTO);
       return Result.ok<{floorDTO: IFloorDTO[]}>( {floorDTO: FloorDTOResult} )
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async getFloorsWithHallwaysByBuilding(code: string): Promise<Result<{ floorDTO: IFloorDTO[]; }>> {
+    try {
+      const Floors = await this.floorRepo.findByBuildingCode(code);
+      const found = !!Floors === true;
+
+      if (!found) {
+        return Result.fail<{floorDTO: IFloorDTO[]}>("floor not found with buildingCode=" + code);
+      }
+
+      const FloorDTOResult = Floors.map( Floor => FloorMap.toDTO( Floor ) as IFloorDTO);
+      const FloorsWithHallways: IFloorDTO[] = [];
+      for (let i = 0; i < FloorDTOResult.length; i++) {
+        const Hallways = await this.hallwayRepo.existsWithFloor(FloorDTOResult[i].floorName);
+        if(Hallways){
+          FloorsWithHallways.push(FloorDTOResult[i]);
+        }
+
+      }
+
+      return Result.ok<{floorDTO: IFloorDTO[]}>( {floorDTO: FloorsWithHallways} )
     } catch (e) {
       throw e;
     }

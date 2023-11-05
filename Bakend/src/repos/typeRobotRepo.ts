@@ -12,7 +12,7 @@ export default class TypeRobotRepo implements ITypeRobotRepo {
   private models: any;
 
   constructor(
-    @Inject('typerobotSchema') private typerobotSchema : Model<IRolePersistence & Document>,
+    @Inject('typerobotSchema') private typerobotSchema : Model<ITypeRobotPersistence & Document>,
   ) {}
 
   private createBaseQuery (): any {
