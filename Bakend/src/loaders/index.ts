@@ -19,6 +19,11 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/buildingSchema',
   };
 
+  const typerobotSchema = {
+    name: 'typerobotSchema',
+    schema: '../persistence/schemas/typerobotSchema',
+  };
+
   const robotSchema = {
     name: 'robotSchema',
     schema: '../persistence/schemas/robotSchema',
@@ -61,6 +66,11 @@ export default async ({ expressApp }) => {
     path: config.services.hallway.path
   }
 
+  const typerobotService = {
+    name: config.services.typerobot.name,
+    path: config.services.typerobot.path
+  }
+
   const robotService = {
     name: config.services.robot.name,
     path: config.services.robot.path
@@ -69,6 +79,11 @@ export default async ({ expressApp }) => {
   const hallwayRepo = {
     name: config.repos.hallway.name,
     path: config.repos.hallway.path
+  }
+
+  const typerobotRepo = {
+    name: config.repos.typerobot.name,
+    path: config.repos.typerobot.path
   }
 
   const robotRepo = {
@@ -161,7 +176,8 @@ export default async ({ expressApp }) => {
       hallwaySchema,
       roomSchema,
       elevatorSchema,
-      robotSchema
+      robotSchema,
+      typerobotSchema
     ],
     controllers: [
       roleController,
@@ -177,7 +193,8 @@ export default async ({ expressApp }) => {
       hallwayRepo,
       roomRepo,
       elevatorRepo,
-      robotRepo
+      robotRepo,
+      typerobotRepo
     ],
     services: [
       roleService,
@@ -186,7 +203,8 @@ export default async ({ expressApp }) => {
       hallwayService,
       roomService,
       elevatorService,
-      robotService
+      robotService,
+      typerobotService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
