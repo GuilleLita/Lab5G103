@@ -12,9 +12,9 @@ import { RobotMap } from "../mappers/RobotMap";
 import { IRobotDTO } from '../dto/IRobotDTO';
 
 import IRobotRepo from './IRepos/IRobotRepo';
-
+import ITypeRobotRepo from './IRepos/ITypeRobotRepo';
 import { Robot } from '../domain/robot';
-
+import { TypeRobot } from '../domain/typerobot';
 
 
 import { Result } from "../core/logic/Result";
@@ -23,18 +23,17 @@ import { Result } from "../core/logic/Result";
 export default class RobotService implements IRobotService{
   constructor(
       @Inject(config.repos.robot.name) private robotRepo : IRobotRepo,
+      @Inject(config.repos.typerobot.name) private typerobotRepo : ITypeRobotRepo,     
       //@Inject(config.repos.Building.name) private BuildingRepo : IBuildingRepo,
       @Inject('logger') private logger,
   ) {}
 
     public async CreateRobot(robotDTO: IRobotDTO): Promise<Result<{ robotDTO: IRobotDTO; }>> {
-
+      
 
         const robotOrError = await Robot.create({
           robotId: robotDTO.robotId,
           robotType: robotDTO.robotType,
-          mark:  robotDTO.mark,
-          model: robotDTO.model,
           taskspermited: robotDTO.taskspermited,
           currentlytask: robotDTO.currentlytask,
           destinationPosition: robotDTO.destinationPosition,
@@ -60,8 +59,6 @@ export default class RobotService implements IRobotService{
       }
       else {
           Robot.robotType= robotDTO.robotType;
-          Robot.mark=  robotDTO.mark;
-          Robot.model= robotDTO.model;
           Robot.taskspermited= robotDTO.taskspermited;
           Robot.currentlytask= robotDTO.currentlytask;
           Robot.destinationPosition= robotDTO.destinationPosition;

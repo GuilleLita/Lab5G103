@@ -8,16 +8,14 @@ import { Robot } from "../domain/robot";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 
-import RobotRepo from "../repos/robotRepo";
+import TypeRobotRepo from "../repos/typerobotRepo";
 
 export class RobotMap extends Mapper<Robot> {
 
   public static toDTO( robot: Robot): IRobotDTO {
     return {
       robotId: robot.id.toString(),
-	    robotType: robot.robotType,
-	    mark:  robot.mark,
-	    model: robot.model,
+	    robotType: robot.typerobot.robotType.toValue(),
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
 	    destinationPosition: robot.destinationPosition,
@@ -26,16 +24,13 @@ export class RobotMap extends Mapper<Robot> {
   }
 
   public static async toDomain (raw: any): Promise<Robot> {
-    //const buildingEmailOrError = buildingEmail.create(raw.email);
-    //const buildingPasswordOrError = buildingPassword.create({value: raw.password, hashed: true});
-    //const repo = Container.get(RoleRepo);
-    //const role = await repo.findByDomainId(raw.role);
+    const repo = Container.get(TypeRobotRepo);
+    const typerobot = await repo.findByrobotType(raw.robotType);
+    //NO SE SI ES ESO O typerobot
 
     const robotOrError = Robot.create({
       robotId: raw.robotId,
-	    robotType: raw.robotType,
-	    mark:  raw.mark,
-	    model: raw.model,
+	    robotType: typerobot,
 	    taskspermited:  raw.taskspermited,
 	    currentlytask: raw.currentlytask,
 	    destinationPosition: raw.destinationPosition,
@@ -48,11 +43,10 @@ export class RobotMap extends Mapper<Robot> {
   }
 
   public static toPersistence (robot: Robot): any {
+
     const a = {
       robotId: robot.id.toString(),
-	    robotType: robot.robotType,
-	    mark:  robot.mark,
-	    model: robot.model,
+	    robotType: robot.typerobot.robotType.toValue(),
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
 	    destinationPosition: robot.destinationPosition,

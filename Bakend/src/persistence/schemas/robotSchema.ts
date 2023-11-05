@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 const RobotSchema = new mongoose.Schema(
   {
     robotId: {type: String, unique: true, required: true},
-	  robotType: {type: String},
+	  robotType: {type: String,
+                default: 'typerobot'},
 	  mark: {type: String},
     model: {type: String},
     taskspermited: [String],
