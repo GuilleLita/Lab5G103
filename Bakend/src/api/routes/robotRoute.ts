@@ -33,10 +33,9 @@ export default (app: Router) => {
       body: Joi.object({
         //buildingId: Joi.string().required(),
         robotType: Joi.string().required(),
-        mark: Joi.string().required(),
-        model: Joi.string().required(),
         taskspermited: Joi.array().required(),
         currentlytask: Joi.string().required(),
+        currentlyPosition: Joi.array().required(),
         destinationPosition: Joi.array().required(),
         status: Joi.string().required(),
       }),
@@ -63,15 +62,13 @@ export default (app: Router) => {
       }
     },
   );
-
-  route.put('/update',
+//you can`t update the task if the robot is inhibit
+  route.put('/updatetask',
     celebrate({
       body: Joi.object({
-        robotType: Joi.string().required(),
-        mark: Joi.string().required(),
-        model: Joi.string().required(),
-        taskspermited: Joi.array().required(),
+        
         currentlytask: Joi.string().required(),
+        currentlyPosition: Joi.array().required(),
         destinationPosition: Joi.array().required(),
         status: Joi.string().required(),
       }),
@@ -92,12 +89,21 @@ export default (app: Router) => {
     }
   );
 
+  route.patch('/desinhibit',
+    celebrate({
+      body: Joi.object({
+        status: Joi.string().required(),
+      }),
+    }),
+    (req, res, next) => {
+      if (req.body.status) {
+        req.body.status = 'working';
+      }
+    ctrl.desinhibitRobot(req, res, next);
+    }
+  );
   
-
   
-  route.get('/getall', function(req, res, next) {
-    ctrl.getAllRobots(req, res, next);
-  });
 
     route.get('/getall', function(req, res, next) {
       ctrl.getAllRobots(req, res, next);

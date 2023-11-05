@@ -36,6 +36,7 @@ export default class RobotService implements IRobotService{
           robotType: robotDTO.robotType,
           taskspermited: robotDTO.taskspermited,
           currentlytask: robotDTO.currentlytask,
+          currentlyPosition: robotDTO.currentlyPosition,
           destinationPosition: robotDTO.destinationPosition,
           status : robotDTO.status
           });
@@ -61,6 +62,7 @@ export default class RobotService implements IRobotService{
           Robot.robotType= robotDTO.robotType;
           Robot.taskspermited= robotDTO.taskspermited;
           Robot.currentlytask= robotDTO.currentlytask;
+          Robot.currentlyPosition= robotDTO.currentlyPosition;
           Robot.destinationPosition= robotDTO.destinationPosition;
           Robot.status= robotDTO.status;
 
@@ -69,6 +71,23 @@ export default class RobotService implements IRobotService{
         const RobotDTOResult = RobotMap.toDTO( Robot ) as IRobotDTO;
         return Result.ok<{robotDTO: IRobotDTO}>( {robotDTO: RobotDTOResult} )
         }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async desinhibitRobot(robotDTO: IRobotDTO): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
+    try {
+      const Robot = await this.robotRepo.findByDomainId(robotDTO.robotId);
+      if (Robot === null) {
+        return Result.fail<{ robotDTO: IRobotDTO }>("Robot not found");
+      }
+      Robot.status = 'working';
+  
+      await this.robotRepo.save(Robot);
+  
+      const RobotDTOResult = RobotMap.toDTO(Robot) as IRobotDTO;
+      return Result.ok<{ robotDTO: IRobotDTO }>({ robotDTO: RobotDTOResult });
     } catch (e) {
       throw e;
     }

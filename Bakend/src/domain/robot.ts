@@ -13,6 +13,7 @@ interface RobotProps {
 	robotType: string;
 	taskspermited: string[];
   currentlytask: string;
+  currentlyPosition: string[];
   destinationPosition: string[];
 	status: string;	//you can inhibit, being working, stop...
   }
@@ -32,6 +33,9 @@ export class Robot extends AggregateRoot<RobotProps> {
   get currentlytask() : string{
     return this.props.currentlytask;
   }
+  get currentlyPosition() : string[]{
+    return this.props.currentlyPosition;
+  }
   get destinationPosition() : string[]{
     return this.props.destinationPosition;
   }
@@ -50,6 +54,10 @@ export class Robot extends AggregateRoot<RobotProps> {
 
   set currentlytask ( value: string) {
     this.props.currentlytask = value;
+  }
+
+  set currentlyPosition ( value: string[]) {
+    this.props.currentlyPosition = value;
   }
 
   set destinationPosition ( value: string[]) {
@@ -72,6 +80,7 @@ export class Robot extends AggregateRoot<RobotProps> {
       { argument: props.robotType, argumentName: 'robotType' },
       { argument: props.taskspermited, argumentName: 'taskspermited' },
       { argument: props.currentlytask, argumentName: 'currentlytask'},
+      { argument: props.currentlyPosition, argumentName: 'currentlyPosition'},
       { argument: props.destinationPosition, argumentName: 'destinationPosition'},
       { argument: props.status, argumentName: 'status'}
     ];

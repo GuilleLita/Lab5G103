@@ -10,6 +10,7 @@ const RobotSchema = new mongoose.Schema(
     model: {type: String},
     taskspermited: [String],
     currentlytask: {type: String},
+    currentlyPosition: [String],
 	  destinationPosition: [String],
 	  status: {type: String}
   },

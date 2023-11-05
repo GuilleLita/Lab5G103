@@ -18,6 +18,7 @@ export class RobotMap extends Mapper<Robot> {
 	    robotType: robot.robotType,
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
+      currentlyPosition: robot.currentlyPosition,
 	    destinationPosition: robot.destinationPosition,
 	    status : robot.status
     } as IRobotDTO
@@ -30,11 +31,13 @@ export class RobotMap extends Mapper<Robot> {
 
     const robotOrError = Robot.create({
       robotId: raw.robotId,
-	    robotType: typerobot.robotType,
-	    taskspermited:  raw.taskspermited,
-	    currentlytask: raw.currentlytask,
-	    destinationPosition: raw.destinationPosition,
-	    status : raw.status
+      robotType: typerobot.robotType,
+      taskspermited: raw.taskspermited,
+      currentlytask: raw.currentlytask,
+      currentlyPosition: raw.currentlyPosition,
+      destinationPosition: raw.destinationPosition,
+      status: raw.status,
+      
     }, new UniqueEntityID(raw.robotId))
 
     robotOrError.isFailure ? console.log(robotOrError.error) : '';
@@ -49,6 +52,7 @@ export class RobotMap extends Mapper<Robot> {
 	    robotType: robot.robotType,
 	    taskspermited: robot.taskspermited,
 	    currentlytask: robot.currentlytask,
+      currentlyPosition: robot.currentlyPosition,
 	    destinationPosition: robot.destinationPosition,
 	    status : robot.status
     }
