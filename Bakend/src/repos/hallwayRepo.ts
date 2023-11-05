@@ -34,7 +34,7 @@ export default class HallwayRepo implements IHallwayRepo {
   }
 
   public async save (hallway: Hallway): Promise<Hallway> {
-    const query = { domainId: hallway.id.toString() }; 
+    const query = { hallwayId: hallway.id.toString() }; 
 
     const HallwayDocument = await this.HallwaySchema.findOne( query );
 
@@ -59,11 +59,11 @@ export default class HallwayRepo implements IHallwayRepo {
 
 
 
-  public async findById (hallwayId: HallwayId | string): Promise<Hallway> {
+  public async findById (_hallwayId: HallwayId | string): Promise<Hallway> {
 
-    const idX = hallwayId instanceof HallwayId ? (<HallwayId>hallwayId).id.toValue() : HallwayId;
+    const idX = _hallwayId instanceof HallwayId ? (<HallwayId>_hallwayId).id.toValue() : _hallwayId;
 
-    const query = { domainId: idX }; 
+    const query = { hallwayId: idX }; 
     const HallwayRecord = await this.HallwaySchema.findOne( query );
 
     if( HallwayRecord != null) {

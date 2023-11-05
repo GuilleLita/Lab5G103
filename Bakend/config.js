@@ -65,6 +65,10 @@ export default {
       name: "ElevatorController",
       path: "../controllers/elevatorController"
     },
+    hallway: {
+      name: "HallwayController",
+      path: "../controllers/hallwayController"
+    },
   },
 
   repos: {

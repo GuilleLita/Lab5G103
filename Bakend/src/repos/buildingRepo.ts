@@ -82,10 +82,14 @@ export default class BuildingRepo implements IBuildingRepo {
     const BuildingRecord = await this.buildingSchema.findOne( query );
 
     if( BuildingRecord != null) {
+
       return BuildingMap.toDomain(BuildingRecord);
     }
-    else
+    else{
+
       return null;
+    }
+      
   }
 
   public async getAll (): Promise<Building[]> {

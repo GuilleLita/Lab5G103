@@ -31,6 +31,22 @@ export default class HallwayController implements IHallwayController /* TODO: ex
     }
   };
 
+  public async updateHallway(req: Request, res: Response, next: NextFunction) {
+    try {
+      const hallwayOrError = await this.hallwayServiceInstance.updateHallway(req.body as IHallwayDTO) as Result<{hallwayDTO: IHallwayDTO}>;
+
+      if (hallwayOrError.isFailure) {
+        return res.status(402).send(hallwayOrError.errorValue());
+      }
+
+      const hallwayDTO = hallwayOrError.getValue();
+      return res.status(201).json( hallwayDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  }
+
   /*public async updateRole(req: Request, res: Response, next: NextFunction) {
     try {
       const roleOrError = await this.roleServiceInstance.updateRole(req.body as IRoleDTO) as Result<IRoleDTO>;

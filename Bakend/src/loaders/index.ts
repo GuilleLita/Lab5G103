@@ -132,6 +132,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.elevator.path
   }
 
+  const hallwayController = {
+    name: config.controllers.hallway.name,
+    path: config.controllers.hallway.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -197,7 +202,8 @@ export default async ({ expressApp }) => {
       robotController,
       floorController,
       typeRobotController,
-      elevatorController
+      elevatorController,
+      hallwayController
     ],
     repos: [
       roleRepo,
