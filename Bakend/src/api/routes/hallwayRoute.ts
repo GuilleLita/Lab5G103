@@ -7,6 +7,8 @@ import { IHallwayDTO } from '../../dto/IHallwayDTO';
 import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
+import config from "../../../config";
+import IHallwayController from '../../controllers/IControllers/IHallwayController';
 
 var hallway_controller = require('../../controllers/hallwayController');
 
@@ -14,6 +16,7 @@ const route = Router();
 
 export default (app: Router) => {
     app.use('/hallway', route);
+    const ctrl = Container.get(config.controllers.hallway.name) as IHallwayController;
 
   route.post(
     '/create',
@@ -46,6 +49,25 @@ export default (app: Router) => {
     },
   );
 
-  
+  route.put(
+    '/update',
+    celebrate({
+      body: Joi.object({
+        hallwayId: Joi.string().required(),
+        buildingsCode: Joi.array().required(),
+        floorsId: Joi.array().required(),
+        position: Joi.array().required()     
+      }),
+    }),
+    (req, res, next) => ctrl.updateHallway(req, res, next) );
+
+    route.get('/getbetweenbuildings',
+    celebrate({
+      body: Joi.object({
+        building1: Joi.string().required(),
+        building2: Joi.string().required(),
+      }),
+    }),
+     (req, res, next) => ctrl.getBetweenBuildings(req, res, next) );
 
 };

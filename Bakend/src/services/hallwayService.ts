@@ -21,6 +21,7 @@ import { Hallway } from '../domain/hallway';
 import { Role } from '../domain/role';
 
 import { Result } from "../core/logic/Result";
+import e from 'express';
 
 @Service()
 export default class HallwayService implements IHallwayService{
@@ -32,7 +33,7 @@ export default class HallwayService implements IHallwayService{
       @Inject('logger') private logger,
   ) {}
 
-  private comprobarHallway(hallwayDTO: IHallwayDTO): boolean{
+  private async comprobarHallway(hallwayDTO: IHallwayDTO): Promise<boolean>{
     if(hallwayDTO.buildingsCode.length != 2){
       return false;
     }
@@ -40,10 +41,9 @@ export default class HallwayService implements IHallwayService{
       return false;
     }
     for(let i = 0; i < hallwayDTO.buildingsCode.length; i++){
-      if(this.buildingRepo.findByCode(hallwayDTO.buildingsCode[i]) == null){
-        return false;
-      }
-      if(this.floorRepo.findById(hallwayDTO.floorsId[i]) == null){
+      let building = await this.buildingRepo.findByCode(hallwayDTO.buildingsCode[i]);
+      
+      if(building == null){
         return false;
       }
     }
@@ -53,10 +53,11 @@ export default class HallwayService implements IHallwayService{
 
     public async CreateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>> {
       try{
-
-        if(!this.comprobarHallway(hallwayDTO)){
+        let comprobar = await this.comprobarHallway(hallwayDTO);
+        if(!comprobar){
           return Result.fail<{hallwayDTO: IHallwayDTO}>("Hallway is not valid");
         }
+
 
         const hallwayOrError = await Hallway.create({
             //hallwayId: hallwayDTO.hallwayId,
@@ -79,13 +80,19 @@ export default class HallwayService implements IHallwayService{
         }
   }
 
-  public async UpdateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>>  {
+  public async updateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>>  {
     try {
       const hallway = await this.hallwayRepo.findById(hallwayDTO.hallwayId);
       const found = !!hallway === true;
 
+
       if (!found) {
         return Result.fail<{hallwayDTO: IHallwayDTO}>("Hallway not found with id=" + hallwayDTO.hallwayId);
+      }
+      
+      let comprobar = await this.comprobarHallway(hallwayDTO);
+      if(!comprobar){
+        return Result.fail<{hallwayDTO: IHallwayDTO}>("Hallway is not valid");
       }
 
       hallway.buildingsCode = hallwayDTO.buildingsCode;
@@ -101,9 +108,22 @@ export default class HallwayService implements IHallwayService{
       }
   }
 
-  existsHallwayswhithFloor(floorId: string): Promise<Result<boolean>> {
-    throw new Error('Method not implemented.');
-  }
+  public async  getBetweenBuildings(building1: string, building2: string): Promise<Result<{ hallwayDTO: IHallwayDTO[]; }>> {
+      try {
 
+        const hallways = await this.hallwayRepo.findByBuildings(building1, building2);
+        const found = !!hallways === true;
+
+        if (!found) {
+          return Result.fail<{hallwayDTO: IHallwayDTO[]}>("Hallway not found with buildingCode=" + building1 + " and " + building2);
+        }
+
+        const hallwayDTOResult = hallways.map( hallway => HallwayMap.toDTO( hallway ) as IHallwayDTO);
+        return Result.ok<{hallwayDTO: IHallwayDTO[]}>( {hallwayDTO: hallwayDTOResult} )
+      }
+      catch (e) {
+        throw e;
+      }
+  }
 
 }

@@ -19,19 +19,14 @@ export class HallwayMap extends Mapper<Hallway> {
   }
 
   public static async toDomain (raw: any): Promise<Hallway> {
-    //const userEmailOrError = UserEmail.create(raw.email);
-    //const userPasswordOrError = UserPassword.create({value: raw.password, hashed: true});
-    //const repo = Container.get(RoleRepo);
-    //const role = await repo.findByDomainId(raw.role);
+    const hallwayOrError = Hallway.create({
+      buildingsCode: raw.buildingsCode,
+      floorsId: raw.floorsId,
+      position: raw.position
 
-    //const userOrError = Building.create({
-
-    //}, new UniqueEntityID(raw.domainId))
-
-    //userOrError.isFailure ? console.log(userOrError.error) : '';
-    
-    //return userOrError.isSuccess ? userOrError.getValue() : null;
-    return null;
+      }, new UniqueEntityID(raw.hallwayId))
+    hallwayOrError.isFailure ? console.log(hallwayOrError.error) : '';
+    return hallwayOrError.isSuccess ? hallwayOrError.getValue() : null;
   }
 
   public static toPersistence (hallway: Hallway): any {

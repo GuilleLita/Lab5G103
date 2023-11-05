@@ -34,7 +34,7 @@ export default class HallwayRepo implements IHallwayRepo {
   }
 
   public async save (hallway: Hallway): Promise<Hallway> {
-    const query = { domainId: hallway.id.toString() }; 
+    const query = { hallwayId: hallway.id.toString() }; 
 
     const HallwayDocument = await this.HallwaySchema.findOne( query );
 
@@ -59,11 +59,11 @@ export default class HallwayRepo implements IHallwayRepo {
 
 
 
-  public async findById (hallwayId: HallwayId | string): Promise<Hallway> {
+  public async findById (_hallwayId: HallwayId | string): Promise<Hallway> {
 
-    const idX = hallwayId instanceof HallwayId ? (<HallwayId>hallwayId).id.toValue() : HallwayId;
+    const idX = _hallwayId instanceof HallwayId ? (<HallwayId>_hallwayId).id.toValue() : _hallwayId;
 
-    const query = { domainId: idX }; 
+    const query = { hallwayId: idX }; 
     const HallwayRecord = await this.HallwaySchema.findOne( query );
 
     if( HallwayRecord != null) {
@@ -83,5 +83,21 @@ export default class HallwayRepo implements IHallwayRepo {
     }
     else
       return false;
+  }
+
+  public async  findByBuildings(code1: string, code2: string): Promise<Hallway[]> {
+      const query = { buildingsCode: { $in: [code1, code2] } };
+      const HallwayRecord = await this.HallwaySchema.find( query );
+
+      const Hallways: Hallway[] = [];
+
+      if( HallwayRecord != null) {
+        for (let i = 0; i < HallwayRecord.length; i++) {
+          Hallways.push(await HallwayMap.toDomain(HallwayRecord[i]));
+        }
+        return Hallways;
+      }
+      else
+        return null;
   }
 }

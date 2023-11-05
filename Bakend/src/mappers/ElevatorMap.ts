@@ -20,11 +20,10 @@ export class ElevatorMap extends Mapper<Elevator> {
 
   public static async toDomain (raw: any): Promise<Elevator> {
     const elevatorOrError = Elevator.create({
-      elevatorId: raw.id.toString(),
 	    buildingId: raw.buildingId,
 	    floorId:  raw.floorId,
       position: raw.position
-      }, new UniqueEntityID(raw.floorId))
+      }, new UniqueEntityID(raw.elevatorId))
     elevatorOrError.isFailure ? console.log(elevatorOrError.error) : '';
     return elevatorOrError.isSuccess ? elevatorOrError.getValue() : null;
   }
@@ -32,7 +31,7 @@ export class ElevatorMap extends Mapper<Elevator> {
   public static toPersistence (elevator: Elevator): any {
     const a = {
       elevatorId: elevator.id.toString(),
-	    buildingsId: elevator.buildingId,
+	    buildingId: elevator.buildingId,
 	    floorId:  elevator.floorId,
       position: elevator.position
     }

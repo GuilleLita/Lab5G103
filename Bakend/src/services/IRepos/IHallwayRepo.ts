@@ -7,4 +7,5 @@ export default interface IHallwayRepo extends Repo<Hallway> {
 	//findByEmail (email: UserEmail | string): Promise<User>;
 	findById (id: string): Promise<Hallway>;
 	existsWithFloor (name:  string): Promise<boolean>;
-}
+	findByBuildings (code1: string, code2: string): Promise<Hallway[]>;
+}	
