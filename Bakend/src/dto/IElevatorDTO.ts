@@ -1,5 +1,5 @@
 export interface IElevatorDTO {
-	elevatorId: string;
+	  elevatorId: string;
     buildingId: string;
     floorId: string;
     position: number[];

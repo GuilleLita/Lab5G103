@@ -13,9 +13,12 @@ export default class ElevatorRepo implements IElevatorRepo {
   private models: any;
 
   constructor(
-    @Inject('elevatorSchema') private ElevatorSchema : Model<IElevatorPersistence & Document>,
+    @Inject('elevatorSchema') private elevatorSchema : Model<IElevatorPersistence & Document>,
     @Inject('logger') private logger
   ) { }
+  findByBuildingCode(code: string): Promise<Elevator[]> {
+    throw new Error('Method not implemented.');
+  }
 
   private createBaseQuery (): any {
     return {
@@ -28,7 +31,7 @@ export default class ElevatorRepo implements IElevatorRepo {
     const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : ElevatorId;
 
     const query = { domainId: idX}; 
-    const ElevatorDocument = await this.ElevatorSchema.findOne( query );
+    const ElevatorDocument = await this.elevatorSchema.findOne( query );
 
     return !!ElevatorDocument === true;
   }
@@ -36,13 +39,13 @@ export default class ElevatorRepo implements IElevatorRepo {
   public async save (elevator: Elevator): Promise<Elevator> {
     const query = { domainId: elevator.id.toString() }; 
 
-    const ElevatorDocument = await this.ElevatorSchema.findOne( query );
+    const ElevatorDocument = await this.elevatorSchema.findOne( query );
 
     try {
       if (ElevatorDocument === null ) {
         const rawElevator: any = ElevatorMap.toPersistence(elevator);
 
-        const ElevatorCreated = await this.ElevatorSchema.create(rawElevator);
+        const ElevatorCreated = await this.elevatorSchema.create(rawElevator);
 
         return ElevatorMap.toDomain(ElevatorCreated);
       }/*else {
@@ -64,7 +67,7 @@ export default class ElevatorRepo implements IElevatorRepo {
     const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : ElevatorId;
 
     const query = { domainId: idX }; 
-    const ElevatorRecord = await this.ElevatorSchema.findOne( query );
+    const ElevatorRecord = await this.elevatorSchema.findOne( query );
 
     if( ElevatorRecord != null) {
       return ElevatorMap.toDomain(ElevatorRecord);

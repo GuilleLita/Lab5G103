@@ -7,7 +7,8 @@ import floor from './routes/floorRoute';
 import hallway from './routes/hallwayRoute';
 import room from './routes/roomRoute';
 import robot from './routes/robotRoute';
-
+import typerobot from './routes/typerobotRoute';
+import elevator from './routes/elevatorRoute';
 
 export default () => {
 	const app = Router();
@@ -20,6 +21,8 @@ export default () => {
 	hallway(app);
 	room(app);
 	robot(app);
+	typerobot(app);
+	elevator(app);
 
 	
 	return app

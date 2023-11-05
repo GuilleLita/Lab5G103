@@ -11,7 +11,7 @@ export class ElevatorMap extends Mapper<Elevator> {
 
   public static toDTO( elevator: Elevator): IElevatorDTO {
     return {
-        elevatorId: elevator.id.toString(),
+      elevatorId: elevator.id.toString(),
 	    buildingId: elevator.buildingId,
 	    floorId:  elevator.floorId,
       position: elevator.position
@@ -19,24 +19,19 @@ export class ElevatorMap extends Mapper<Elevator> {
   }
 
   public static async toDomain (raw: any): Promise<Elevator> {
-    //const userEmailOrError = UserEmail.create(raw.email);
-    //const userPasswordOrError = UserPassword.create({value: raw.password, hashed: true});
-    //const repo = Container.get(RoleRepo);
-    //const role = await repo.findByDomainId(raw.role);
-
-    //const userOrError = Building.create({
-
-    //}, new UniqueEntityID(raw.domainId))
-
-    //userOrError.isFailure ? console.log(userOrError.error) : '';
-    
-    //return userOrError.isSuccess ? userOrError.getValue() : null;
-    return null;
+    const elevatorOrError = Elevator.create({
+      elevatorId: raw.id.toString(),
+	    buildingId: raw.buildingId,
+	    floorId:  raw.floorId,
+      position: raw.position
+      }, new UniqueEntityID(raw.floorId))
+    elevatorOrError.isFailure ? console.log(elevatorOrError.error) : '';
+    return elevatorOrError.isSuccess ? elevatorOrError.getValue() : null;
   }
 
   public static toPersistence (elevator: Elevator): any {
     const a = {
-        ElevatorId: elevator.id.toString(),
+      elevatorId: elevator.id.toString(),
 	    buildingsId: elevator.buildingId,
 	    floorId:  elevator.floorId,
       position: elevator.position

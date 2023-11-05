@@ -9,7 +9,7 @@ import { Guard } from "../core/logic/Guard";
 import {IElevatorDTO} from "../dto/IElevatorDTO";
 
 interface ElevatorProps {
-    ElevatorId: string;
+    elevatorId: string;
     buildingId: string;
     floorId: string;
     position: number[];
@@ -39,7 +39,7 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
   public static create (props: ElevatorProps, id?: UniqueEntityID): Result<Elevator> {
 
     const guardedProps = [
-      { argument: props.ElevatorId, argumentName: 'ElevatorId' },
+      { argument: props.elevatorId, argumentName: 'ElevatorId' },
       { argument: props.buildingId, argumentName: 'buildingId' },
       { argument: props.floorId, argumentName: 'floorId' },
       { argument: props.position, argumentName: 'position' }
