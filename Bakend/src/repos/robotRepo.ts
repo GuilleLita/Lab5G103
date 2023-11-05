@@ -47,8 +47,6 @@ export default class RobotRepo implements IRobotRepo {
         return RobotMap.toDomain(RobotCreated);
       }else {
         RobotDocument.robotType = robot.robotType;
-	      RobotDocument.mark = robot.mark;
-        RobotDocument.model = robot.model;
         RobotDocument.taskspermited= robot.taskspermited;
         RobotDocument.currentlytask= robot.currentlytask;
 	      RobotDocument.destinationPosition= robot.destinationPosition;
@@ -61,6 +59,30 @@ export default class RobotRepo implements IRobotRepo {
       throw err;
     }
   }
+
+  public async saveInhibit(robot: Robot): Promise<Robot> {
+    const query = { robotId: robot.id.toString() };
+    const robotDocument = await this.robotSchema.findOne(query);
+  
+    try {
+      if (robotDocument === null) {
+        const rawRobot: any = RobotMap.toPersistence(robot);
+        const robotCreated = await this.robotSchema.create(rawRobot);
+        return RobotMap.toDomain(robotCreated);
+      } else {
+        // Actualizar solo el campo 'status'
+        if (robot.status) {
+          robotDocument.status = robot.status;
+        }
+        
+        await robotDocument.save();
+        return robot;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+  
 
 
 

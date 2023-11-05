@@ -78,6 +78,27 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateRobot(req, res, next) );
 
+    route.patch('/inhibit',
+    celebrate({
+      body: Joi.object({
+        status: Joi.string().required(),
+      }),
+    }),
+    (req, res, next) => {
+      if (req.body.status) {
+        req.body.status = 'inhibit';
+      }
+    ctrl.inhibitRobot(req, res, next);
+    }
+  );
+
+  
+
+  
+  route.get('/getall', function(req, res, next) {
+    ctrl.getAllRobots(req, res, next);
+  });
+
     route.get('/getall', function(req, res, next) {
       ctrl.getAllRobots(req, res, next);
     });
