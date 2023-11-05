@@ -69,5 +69,10 @@ export default (app: Router) => {
     (req, res, next) => ctrl.updateFloor(req, res, next) );
 
 
+    route.get("/getbybuilding",celebrate({
+      body: Joi.object({
+        buildingCode: Joi.string().required(),
+      }),
+    }), (req, res, next) => ctrl.getFloorsByBuilding(req, res, next) );
 
 };
