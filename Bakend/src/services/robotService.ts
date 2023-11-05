@@ -59,8 +59,7 @@ export default class RobotService implements IRobotService{
         return Result.fail<{robotDTO: IRobotDTO}>("Robot not found");
       }
       else {
-          Robot.robotType= robotDTO.robotType;
-          Robot.taskspermited= robotDTO.taskspermited;
+        
           Robot.currentlytask= robotDTO.currentlytask;
           Robot.currentlyPosition= robotDTO.currentlyPosition;
           Robot.destinationPosition= robotDTO.destinationPosition;

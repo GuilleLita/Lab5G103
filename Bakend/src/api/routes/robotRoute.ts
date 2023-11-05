@@ -63,6 +63,7 @@ export default (app: Router) => {
     },
   );
 //you can`t update the task if the robot is inhibit
+//you have to update everytime to move
   route.put('/updatetask',
     celebrate({
       body: Joi.object({
