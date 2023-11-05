@@ -35,7 +35,7 @@ export default class ElevatorController implements IElevatorController /* TODO: 
       const elevatorOrError = await this.elevatorServiceInstance.updateElevator(req.body as IElevatorDTO) as Result<{elevatorDTO: IElevatorDTO}>;
 
       if (elevatorOrError.isFailure) {
-        return res.status(404).send();
+        return res.status(402).send(elevatorOrError.errorValue());
       }
 
       const elevatorDTO = elevatorOrError.getValue();
@@ -48,9 +48,9 @@ export default class ElevatorController implements IElevatorController /* TODO: 
 
   public async getElevatorsByBuilding(req: Request, res: Response, next: NextFunction) {
     try {
-      const elevatorOrError = await this.elevatorServiceInstance.getElevatorsByBuilding(req.body.buildingCode) as Result<{elevatorDTO: IElevatorDTO[]}>;
+      const elevatorOrError = await this.elevatorServiceInstance.getElevatorsByBuilding(req.body.buildingcode) as Result<{elevatorDTO: IElevatorDTO[]}>;
       if (elevatorOrError.isFailure) {
-        return res.status(404).send();
+        return res.status(402).send(elevatorOrError.errorValue());
       }
 
       const elevatorDTO = elevatorOrError.getValue();

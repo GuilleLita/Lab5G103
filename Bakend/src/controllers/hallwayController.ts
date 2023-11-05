@@ -45,8 +45,26 @@ export default class HallwayController implements IHallwayController /* TODO: ex
     catch (e) {
       return next(e);
     }
+
   }
 
+  public async getBetweenBuildings(req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log(req.body.building1);
+      const hallwayOrError = await this.hallwayServiceInstance.getBetweenBuildings(req.body.building1, req.body.building2) as Result<{hallwayDTO: IHallwayDTO[]}>;
+
+      if (hallwayOrError.isFailure) {
+        return res.status(402).send(hallwayOrError.errorValue());
+      }
+
+      const hallwayDTO = hallwayOrError.getValue();
+      return res.status(201).json( hallwayDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+
+  }
   /*public async updateRole(req: Request, res: Response, next: NextFunction) {
     try {
       const roleOrError = await this.roleServiceInstance.updateRole(req.body as IRoleDTO) as Result<IRoleDTO>;

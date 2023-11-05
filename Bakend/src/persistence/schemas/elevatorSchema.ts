@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 
 const ElevatorSchema = new mongoose.Schema(
   {
-    ElevatorId: {type: String, unique: true, required: true},
-	buildingsId: {type: String},
-	floorId: {type: String},
+    elevatorId: {type: String, unique: true, required: true},
+	  buildingId: {type: String},
+	  floorId: {type: String},
     position: [Number]
   },
   {

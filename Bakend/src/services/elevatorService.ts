@@ -35,7 +35,7 @@ export default class ElevatorService implements IElevatorService{
       }
 
       const ElevatorOrError = await Elevator.create({
-        elevatorId: elevatorDTO.elevatorId,
+        //elevatorId: elevatorDTO.elevatorId,
         buildingId: elevatorDTO.buildingId,
         floorId: elevatorDTO.floorId,
         position: elevatorDTO.position
@@ -79,7 +79,7 @@ export default class ElevatorService implements IElevatorService{
   public async getElevatorsByBuilding(buildingCode: string): Promise<Result<{ elevatorDTO: IElevatorDTO[]; }>>  {
     try {
       const Elevators = await this.elevatorRepo.findByBuildingCode(buildingCode);
-      const found = !!Elevators === true;
+      const found = !!Elevators ;
 
       if (!found) {
         return Result.fail<{elevatorDTO: IElevatorDTO[]}>("elevator not found with buildingCode=" + buildingCode);

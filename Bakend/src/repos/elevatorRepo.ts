@@ -16,9 +16,7 @@ export default class ElevatorRepo implements IElevatorRepo {
     @Inject('elevatorSchema') private elevatorSchema : Model<IElevatorPersistence & Document>,
     @Inject('logger') private logger
   ) { }
-  findByBuildingCode(code: string): Promise<Elevator[]> {
-    throw new Error('Method not implemented.');
-  }
+
 
   private createBaseQuery (): any {
     return {
@@ -37,7 +35,7 @@ export default class ElevatorRepo implements IElevatorRepo {
   }
 
   public async save (elevator: Elevator): Promise<Elevator> {
-    const query = { domainId: elevator.id.toString() }; 
+    const query = { elevatorId: elevator.id.toString() }; 
 
     const ElevatorDocument = await this.elevatorSchema.findOne( query );
 
@@ -48,13 +46,13 @@ export default class ElevatorRepo implements IElevatorRepo {
         const ElevatorCreated = await this.elevatorSchema.create(rawElevator);
 
         return ElevatorMap.toDomain(ElevatorCreated);
-      }/*else {
-        BuildingDocument.firstName = building.firstName;
-        BuildingDocument.lastName = building.lastName;
-        await BuildingDocument.save();
-
-        return building;
-      }*/
+      }else {
+        ElevatorDocument.buildingId = elevator.buildingId;
+        ElevatorDocument.floorId = elevator.floorId;
+        ElevatorDocument.position = elevator.position;
+        await ElevatorDocument.save();
+        return elevator;
+      }
     } catch (err) {
       throw err;
     }
@@ -64,9 +62,9 @@ export default class ElevatorRepo implements IElevatorRepo {
 
   public async findById (elevatorId: ElevatorId | string): Promise<Elevator> {
 
-    const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : ElevatorId;
+    const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : elevatorId;
 
-    const query = { domainId: idX }; 
+    const query = { elevatorId: idX }; 
     const ElevatorRecord = await this.elevatorSchema.findOne( query );
 
     if( ElevatorRecord != null) {
@@ -75,4 +73,21 @@ export default class ElevatorRepo implements IElevatorRepo {
     else
       return null;
   }
+
+  public async findByBuildingCode (buildingCode: string): Promise<Elevator[]> {
+      
+      const query = { buildingId: buildingCode }; 
+      const ElevatorRecord = await this.elevatorSchema.find( query );
+
+      const Elevators: Elevator[] = []
+      console.log(ElevatorRecord);
+      if( ElevatorRecord.length > 0) {
+        for (var i = 0; i < ElevatorRecord.length; i++) {
+          Elevators.push(await ElevatorMap.toDomain(ElevatorRecord[i]));
+        }
+        return Elevators;
+      }
+      else
+        return null;
+    }
 }

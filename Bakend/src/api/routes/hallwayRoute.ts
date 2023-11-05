@@ -61,4 +61,13 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateHallway(req, res, next) );
 
+    route.get('/getbetweenbuildings',
+    celebrate({
+      body: Joi.object({
+        building1: Joi.string().required(),
+        building2: Joi.string().required(),
+      }),
+    }),
+     (req, res, next) => ctrl.getBetweenBuildings(req, res, next) );
+
 };

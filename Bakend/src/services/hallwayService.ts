@@ -108,6 +108,22 @@ export default class HallwayService implements IHallwayService{
       }
   }
 
+  public async  getBetweenBuildings(building1: string, building2: string): Promise<Result<{ hallwayDTO: IHallwayDTO[]; }>> {
+      try {
 
+        const hallways = await this.hallwayRepo.findByBuildings(building1, building2);
+        const found = !!hallways === true;
+
+        if (!found) {
+          return Result.fail<{hallwayDTO: IHallwayDTO[]}>("Hallway not found with buildingCode=" + building1 + " and " + building2);
+        }
+
+        const hallwayDTOResult = hallways.map( hallway => HallwayMap.toDTO( hallway ) as IHallwayDTO);
+        return Result.ok<{hallwayDTO: IHallwayDTO[]}>( {hallwayDTO: hallwayDTOResult} )
+      }
+      catch (e) {
+        throw e;
+      }
+  }
 
 }

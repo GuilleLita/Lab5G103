@@ -29,7 +29,6 @@ export default (app: Router) => {
     }),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger = Container.get('logger') as winston.Logger;
-      logger.debug('Calling Sign-Up endpoint with body: %o', req.body )
 
       try {
         const authServiceInstance = Container.get(AuthService);
@@ -65,7 +64,7 @@ export default (app: Router) => {
 
     route.get("/getbybuilding",celebrate({
       body: Joi.object({
-        buildingCode: Joi.string().required(),
+        buildingcode: Joi.string().required(),
       }),
     }), (req, res, next) => ctrl.getElevatorsByBuilding(req, res, next) );
 
