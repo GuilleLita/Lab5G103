@@ -94,4 +94,20 @@ export default class FloorController implements IFloorController /* TODO: extend
       return next(e);
     }
   }
+
+  public async uploadFloorMap(req: Request, res: Response, next: NextFunction) {
+    try {
+      const floorOrError = await this.floorServiceInstance.uploadFloorMap(req.body.floorName, req.body.grid) as Result<{floorDTO: IFloorDTO}>;
+
+      if (floorOrError.isFailure) {
+        return res.status(402).send(floorOrError.errorValue());
+      }
+
+      const floorDTO = floorOrError.getValue();
+      return res.status(201).json( floorDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  }
 }

@@ -6,4 +6,5 @@ export default interface IFloorController  {
   getFloorsByBuilding(req: Request, res: Response, next: NextFunction);
   getFloorsWithHallwaysByBuilding(req: Request, res: Response, next: NextFunction);
   getFloorsWithElevatorByBuilding(req: Request, res: Response, next: NextFunction);
+  uploadFloorMap(req: Request, res: Response, next: NextFunction);
 }

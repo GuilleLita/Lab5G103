@@ -37,7 +37,7 @@ export default class FloorRepo implements IFloorRepo {
     const query = { floorId: floor.id.toString() }; 
 
     const FloorDocument = await this.floorSchema.findOne( query );
-
+    
     try {
       if (FloorDocument === null ) {
         const rawFloor: any = FloorMap.toPersistence(floor);

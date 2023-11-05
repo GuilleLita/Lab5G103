@@ -156,4 +156,26 @@ export default class FloorService implements IFloorService{
       
   }
 
+  public async uploadFloorMap(floor: string, grid: [[number]]): Promise<Result<{ floorDTO: IFloorDTO; }>> {
+      try {
+        const Floor = await this.floorRepo.findByName(floor);
+        
+        const found = !!Floor === true;
+        if (!found) {
+          return Result.fail<{floorDTO: IFloorDTO}>("floor not found with name=" + floor);
+        }
+        if(grid.length != Floor.height || grid[0].length != Floor.width){
+          return Result.fail<{floorDTO: IFloorDTO}>("grid size is not correct");
+        }
+        console.log(grid);
+        Floor.grid = grid;
+        await this.floorRepo.save(Floor);
+        const FloorDTOResult = FloorMap.toDTO( Floor ) as IFloorDTO;
+        return Result.ok<{floorDTO: IFloorDTO}>( {floorDTO: FloorDTOResult} )
+      }
+      catch (e) {
+        throw e;
+      }
+  }
+
 }

@@ -7,4 +7,5 @@ export default interface IFloorService  {
   getFloorsByBuilding(code: string): Promise<Result<{floorDTO: IFloorDTO[]}>>;
   getFloorsWithHallwaysByBuilding(code: string): Promise<Result<{floorDTO: IFloorDTO[]}>>;
   getFloorsWithElevatorByBuilding(code: string): Promise<Result<{floorDTO: IFloorDTO[]}>>;
+  uploadFloorMap(floor: string, grid: [[number]]): Promise<Result<{floorDTO: IFloorDTO}>>;
 }

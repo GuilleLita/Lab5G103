@@ -68,6 +68,16 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateFloor(req, res, next) );
 
+    route.patch(
+      '/uploadfloormap',
+      celebrate({
+        body: Joi.object({
+          floorName: Joi.string().required(),
+          grid: Joi.array().required(),
+        }),
+      }),
+      (req, res, next) => ctrl.uploadFloorMap(req, res, next) );
+
 
     route.get("/getbybuilding",celebrate({
       body: Joi.object({
