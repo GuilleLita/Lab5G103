@@ -68,13 +68,11 @@ export default (app: Router) => {
     route.patch('/inhibit',
     celebrate({
       body: Joi.object({
-        status: Joi.string().required(),
+        robotId: Joi.string().required(),
+        //status: Joi.string().required(),
       }),
     }),
     (req, res, next) => {
-      if (req.body.status) {
-        req.body.status = 'inhibit';
-      }
     ctrl.inhibitRobot(req, res, next);
     }
   );
@@ -82,13 +80,10 @@ export default (app: Router) => {
   route.patch('/desinhibit',
     celebrate({
       body: Joi.object({
-        status: Joi.string().required(),
+        robotId: Joi.string().required(),
       }),
     }),
     (req, res, next) => {
-      if (req.body.status) {
-        req.body.status = 'working';
-      }
     ctrl.desinhibitRobot(req, res, next);
     }
   );

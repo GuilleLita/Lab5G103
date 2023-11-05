@@ -8,8 +8,6 @@ import { Floor } from "../domain/floor";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 
-import RoleRepo from "../repos/roleRepo";
-
 export class FloorMap extends Mapper<Floor> {
 
   public static toDTO( Floor: Floor): IFloorDTO {

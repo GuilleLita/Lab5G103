@@ -26,7 +26,6 @@ export default class FloorService implements IFloorService{
       @Inject(config.repos.floor.name) private floorRepo : IFloorRepo,
       @Inject(config.repos.hallway.name) private hallwayRepo : IHallwayRepo,
       @Inject(config.repos.elevator.name) private elevatorRepo : IElevatorRepo,
-      //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
 

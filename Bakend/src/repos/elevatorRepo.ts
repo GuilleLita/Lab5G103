@@ -27,9 +27,9 @@ export default class ElevatorRepo implements IElevatorRepo {
 
   public async exists (elevatorId: ElevatorId | string): Promise<boolean> {
 
-    const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : ElevatorId;
+    const idX = elevatorId instanceof ElevatorId ? (<ElevatorId>elevatorId).id.toValue() : elevatorId;
 
-    const query = { domainId: idX}; 
+    const query = { elevatorId: idX}; 
     const ElevatorDocument = await this.elevatorSchema.findOne( query );
 
     return !!ElevatorDocument === true;

@@ -35,18 +35,6 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/hallwaySchema',
   };
 
-  const userSchema = {
-    // compare with the approach followed in repos and services
-    name: 'userSchema',
-    schema: '../persistence/schemas/userSchema',
-  };
-
-  const roleSchema = {
-    // compare with the approach followed in repos and services
-    name: 'roleSchema',
-    schema: '../persistence/schemas/roleSchema',
-  };
-
   const floorSchema = {
     name: 'floorSchema',
     schema: '../persistence/schemas/floorSchema',
@@ -112,10 +100,6 @@ export default async ({ expressApp }) => {
     path: config.services.room.path
   }
 
-  const roleController = {
-    name: config.controllers.role.name,
-    path: config.controllers.role.path
-  }
 
   const robotController = {
     name: config.controllers.robot.name,
@@ -135,22 +119,6 @@ export default async ({ expressApp }) => {
   const hallwayController = {
     name: config.controllers.hallway.name,
     path: config.controllers.hallway.path
-  }
-
-  const roleRepo = {
-    name: config.repos.role.name,
-    path: config.repos.role.path
-  }
-
-  const userRepo = {
-    name: config.repos.user.name,
-    path: config.repos.user.path
-  }
-
-
-  const roleService = {
-    name: config.services.role.name,
-    path: config.services.role.path
   }
 
   const buildingController = {
@@ -186,8 +154,6 @@ export default async ({ expressApp }) => {
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
-      userSchema,
-      roleSchema,
       buildingSchema,
       floorSchema,
       hallwaySchema,
@@ -197,7 +163,6 @@ export default async ({ expressApp }) => {
       typerobotSchema
     ],
     controllers: [
-      roleController,
       buildingController,
       robotController,
       floorController,
@@ -206,8 +171,6 @@ export default async ({ expressApp }) => {
       hallwayController
     ],
     repos: [
-      roleRepo,
-      userRepo,
       buildingRepo,
       floorRepo,
       hallwayRepo,
@@ -217,7 +180,6 @@ export default async ({ expressApp }) => {
       typerobotRepo
     ],
     services: [
-      roleService,
       buildingService,
       floorService,
       hallwayService,

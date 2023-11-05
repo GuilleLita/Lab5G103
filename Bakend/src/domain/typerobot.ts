@@ -59,8 +59,8 @@ export class TypeRobot extends AggregateRoot<TypeRobotProps> {
     if (!!type === false || type.length === 0) {
       return Result.fail<TypeRobot>('Must provide a type name')
     } else {
-      const role = new TypeRobot({ robotType: type, mark: mark, model: model, taskspermited: taskspermited }, id);
-      return Result.ok<TypeRobot>( role )
+      const typero = new TypeRobot({ robotType: type, mark: mark, model: model, taskspermited: taskspermited }, id);
+      return Result.ok<TypeRobot>( typero )
     }
   }
 }

@@ -2,7 +2,6 @@ import { AggregateRoot } from "../core/domain/AggregateRoot";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 import { Result } from "../core/logic/Result";
-import { RoleId } from "./roleId";
 import { Guard } from "../core/logic/Guard";
 
 
@@ -102,8 +101,8 @@ export class Building extends AggregateRoot<BuildingProps> {
       return Result.fail<Building>(guardResult.message)
     }
 
-      const role = new Building({ ...props }, id);
-      return Result.ok<Building>( role )
+      const building = new Building({ ...props }, id);
+      return Result.ok<Building>( building )
     
   }
 }

@@ -83,8 +83,8 @@ export class Robot extends AggregateRoot<RobotProps> {
       return Result.fail<Robot>(guardResult.message)
     }
 
-      const role = new Robot({ ...props }, id);
-      return Result.ok<Robot>( role )
+      const robot = new Robot({ ...props }, id);
+      return Result.ok<Robot>( robot )
     
   }
 }

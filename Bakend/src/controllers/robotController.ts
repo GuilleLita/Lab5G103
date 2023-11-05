@@ -7,6 +7,7 @@ import IRobotService from '../services/IServices/IRobotService';
 import {IRobotDTO} from '../dto/IRobotDTO';
 
 import { Result } from "../core/logic/Result";
+import { Robot } from '../domain/robot';
 
 @Service()
 export default class RobotController implements IRobotController /* TODO: extends ../core/infra/BaseController */ {
@@ -54,10 +55,10 @@ export default class RobotController implements IRobotController /* TODO: extend
         req.body.status = 'inhibit';
       }
   
-      const RobotOrError = await this.robotServiceInstance.updateRobot(req.body as IRobotDTO) as Result<{robotDTO: IRobotDTO}>;
+      const RobotOrError = await this.robotServiceInstance.inhibitRobot(req.body.robotId) as Result<{robotDTO: IRobotDTO}>;
   
       if (RobotOrError.isFailure) {
-        return res.status(404).send();
+        return res.status(402).send(RobotOrError.errorValue());
       }
   
       const robotDTO = RobotOrError.getValue();
@@ -70,14 +71,11 @@ export default class RobotController implements IRobotController /* TODO: extend
   public async desinhibitRobot(req: Request, res: Response, next: NextFunction) {
     try {
     
-      if (req.body.status) {
-        req.body.status = 'working';
-      }
   
-      const RobotOrError = await this.robotServiceInstance.updateRobot(req.body as IRobotDTO) as Result<{robotDTO: IRobotDTO}>;
+      const RobotOrError = await this.robotServiceInstance.desinhibitRobot(req.body.robotId) as Result<{robotDTO: IRobotDTO}>;
   
       if (RobotOrError.isFailure) {
-        return res.status(404).send();
+        return res.status(402).send(RobotOrError.errorValue());
       }
   
       const robotDTO = RobotOrError.getValue();

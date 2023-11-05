@@ -74,9 +74,9 @@ export default class RobotService implements IRobotService{
     }
   }
 
-  public async desinhibitRobot(robotDTO: IRobotDTO): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
+  public async desinhibitRobot(robotId: string): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
     try {
-      const Robot = await this.robotRepo.findByDomainId(robotDTO.robotId);
+      const Robot = await this.robotRepo.findByDomainId(robotId);
       if (Robot === null) {
         return Result.fail<{ robotDTO: IRobotDTO }>("Robot not found");
       }
@@ -91,9 +91,9 @@ export default class RobotService implements IRobotService{
     }
   }
 
-  public async inhibitRobot(robotDTO: IRobotDTO): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
+  public async inhibitRobot(robotId: string): Promise<Result<{ robotDTO: IRobotDTO; }>>  {
     try {
-      const Robot = await this.robotRepo.findByDomainId(robotDTO.robotId);
+      const Robot = await this.robotRepo.findByDomainId(robotId);
       if (Robot === null) {
         return Result.fail<{ robotDTO: IRobotDTO }>("Robot not found");
       }

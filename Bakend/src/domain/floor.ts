@@ -119,8 +119,8 @@ export class Floor extends AggregateRoot<FloorProps> {
       return Result.fail<Floor>(guardResult.message)
     }
 
-      const role = new Floor({ ...props }, id);
-      return Result.ok<Floor>( role )
+      const floor = new Floor({ ...props }, id);
+      return Result.ok<Floor>( floor )
     
   }
 }

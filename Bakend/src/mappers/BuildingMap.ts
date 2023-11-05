@@ -8,8 +8,6 @@ import { Building } from "../domain/building";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 
-import RoleRepo from "../repos/roleRepo";
-
 export class BuildingMap extends Mapper<Building> {
 
   public static toDTO( building: Building): IBuildingDTO {
@@ -26,10 +24,7 @@ export class BuildingMap extends Mapper<Building> {
   }
 
   public static async toDomain (raw: any): Promise<Building> {
-    //const buildingEmailOrError = buildingEmail.create(raw.email);
-    //const buildingPasswordOrError = buildingPassword.create({value: raw.password, hashed: true});
-    //const repo = Container.get(RoleRepo);
-    //const role = await repo.findByDomainId(raw.role);
+
 
     const buildingOrError = Building.create({
       buildingCode: raw.buildingCode,

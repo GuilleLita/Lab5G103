@@ -6,7 +6,6 @@ export default interface IRobotRepo extends Repo<Robot> {
 	save(robot: Robot): Promise<Robot>;
 	saveInhibit(robot: Robot): Promise<Robot>;
 	savedesInhibit(robot: Robot): Promise<Robot>;
-	//findByEmail (email: UserEmail | string): Promise<User>;
 	findByDomainId (id: string): Promise<Robot>;
 	getAll(): Promise<Robot[]>;
 	getRobotsByTask(task:string): Promise<Robot[]>;

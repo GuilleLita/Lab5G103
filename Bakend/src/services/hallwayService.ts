@@ -1,9 +1,7 @@
 import { Container, Service, Inject } from 'typedi';
 
-import jwt from 'jsonwebtoken';
 import config from '../../config';
-import argon2 from 'argon2';
-import { randomBytes } from 'crypto';
+
 
 //import MailerService from './mailer.ts.bak';
 
@@ -17,9 +15,6 @@ import IHallwayRepo from './IRepos/IHallwayRepo';
 
 import { Hallway } from '../domain/hallway';
 
-
-import { Role } from '../domain/role';
-
 import { Result } from "../core/logic/Result";
 import e from 'express';
 
@@ -29,7 +24,6 @@ export default class HallwayService implements IHallwayService{
       @Inject(config.repos.hallway.name) private hallwayRepo : IHallwayRepo,
       @Inject(config.repos.building.name) private buildingRepo : IBuildingRepo,
       @Inject(config.repos.floor.name) private floorRepo : IFloorRepo,
-      //@Inject(config.repos.role.name) private roleRepo : IRoleRepo,
       @Inject('logger') private logger,
   ) {}
 

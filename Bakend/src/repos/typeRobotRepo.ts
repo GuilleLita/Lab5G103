@@ -22,7 +22,7 @@ export default class TypeRobotRepo implements ITypeRobotRepo {
   }
 
   public async exists( typerobot: TypeRobot): Promise<boolean> {
-    const robotType = typerobot.robotType; // Obtén el valor del atributo robotType desde el objeto role
+    const robotType = typerobot.robotType; // Obtén el valor del atributo robotType desde el objeto 
 
     // Construye la consulta utilizando robotType en lugar de id
     const query = { robotType: robotType }; 

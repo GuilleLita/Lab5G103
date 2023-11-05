@@ -21,7 +21,7 @@ export default (app: Router) => {
     '/create',
     celebrate({
       body: Joi.object({
-        elevatorId: Joi.string().required(),
+        //elevatorId: Joi.string().required(),
         buildingId: Joi.string().required(),
         floorId: Joi.string().required(),
         position: Joi.array().required()
