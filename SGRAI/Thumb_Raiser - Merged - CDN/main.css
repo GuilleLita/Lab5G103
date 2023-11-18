@@ -1,0 +1,79 @@
+.mi-letra {
+  font-family: 'Amatic SC', cursive !important;
+  font-size: 140%;
+}
+
+.contacto {
+  font-family: 'Amatic SC', cursive !important;
+  font-size: 200%;
+  text-decoration: none !important;
+}
+
+
+.sobre-mi {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 130%;
+  font-style: italic;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif !important;
+}
+
+.image-container {
+  max-width: 260px !important; 
+  min-width: 180px !important;
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.circle-button {
+  width: 50px;
+  height: 50px;
+  background-color: #c3c2fd48; 
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  position: fixed;
+  align-items: center;
+  color: white; 
+}
+
+/*importante para que el enlace no cambie de color al posar el cursor*/
+.circle-button:hover {
+  color: white; 
+}
+
+.elemento-hover {
+  transition: box-shadow 0.3s;
+}
+
+.elemento-hover:hover {
+  box-shadow: 0 0 10px rgba(255, 140, 140, 0.3);
+}
+
+.img-hover {
+  transition: transform 0.3s;
+}
+
+.img-hover:hover {
+  transform: scale(1.1);
+}
+
+
+.bg-custom-yellow {
+    background-color: rgb(188, 39, 49)
+  }
+
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
