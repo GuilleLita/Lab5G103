@@ -27,29 +27,29 @@ export default class HallwayService implements IHallwayService{
       @Inject('logger') private logger,
   ) {}
 
-  private async comprobarHallway(hallwayDTO: IHallwayDTO): Promise<boolean>{
+  private async comprobarHallway(hallwayDTO: IHallwayDTO): Promise<string>{
     if(hallwayDTO.buildingsCode.length != 2){
-      return false;
+      return "Hallway must have 2 buildings";
     }
     if(hallwayDTO.floorsId.length != 2){
-      return false;
+      return "Hallway must have 2 floors";
     }
     for(let i = 0; i < hallwayDTO.buildingsCode.length; i++){
       let building = await this.buildingRepo.findByCode(hallwayDTO.buildingsCode[i]);
       
       if(building == null){
-        return false;
+        return "Building with code " + hallwayDTO.buildingsCode[i] + " not found";
       }
     }
-    return true;
+    return "ok";
   }
 
 
     public async CreateHallway(hallwayDTO: IHallwayDTO): Promise<Result<{ hallwayDTO: IHallwayDTO; }>> {
       try{
         let comprobar = await this.comprobarHallway(hallwayDTO);
-        if(!comprobar){
-          return Result.fail<{hallwayDTO: IHallwayDTO}>("Hallway is not valid");
+        if(comprobar != "ok"){
+          return Result.fail<{hallwayDTO: IHallwayDTO}>(comprobar);
         }
 
 

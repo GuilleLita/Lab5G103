@@ -18,7 +18,8 @@ const route = Router();
 export default (app: Router) => {
     app.use('/building', route);
     const ctrl = Container.get(config.controllers.building.name) as IBuildingController;
-  route.post(
+  
+    route.post(
     '/create',
     celebrate({
 
