@@ -73,9 +73,9 @@ function AddHallway() {
             <div className="Hallway-Form">
                 <div className="Hallway-Form-Field">
                     <label htmlFor="building1">Building 1</label>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={} />
+                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} />
                     <label htmlFor="floor1">Floor</label>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions2()} />
+                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions2} />
                 </div>
                 <div className="Hallway-Form-Field">
                     <label htmlFor="building2">Building 2</label>
