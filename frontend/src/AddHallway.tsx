@@ -142,7 +142,7 @@ function AddHallway() {
                     const error = (data && data.message) || response.status;
                     return Promise.reject(error);
                 }
-                
+                alert("Hallway created")
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -176,6 +176,7 @@ function AddHallway() {
 
             </div>
             <button className="submit" onClick={OnClickListner} >Create Hallway</button>
+
         </div>
 
     );
