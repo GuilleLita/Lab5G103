@@ -31,9 +31,10 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    align-items: top;
+    align-items: center;
     padding: 0px 60px;
-    justify-content: top;
+
+    justify-content: center;
     font-size: calc(10px + 2vmin);
     color: rgb(252, 87, 87);
     font-family: 'Montserrat', sans-serif;
@@ -54,4 +55,27 @@
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 2px;
+}
+
+.submit:active{
+    background-color: #c52525;
+}
+
+.PositionForm{
+    background-color: #ffffff;
+    display: flex;
+    min-height: 15vh;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    color: rgb(252, 87, 87);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.input{
+    font-family: 'Montserrat', sans-serif;
+    padding: 2px ;
+    font-size: 24px;
 }
