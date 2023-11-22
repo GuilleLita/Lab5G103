@@ -4,7 +4,7 @@ import { OBB } from "three/addons/math/OBB.js";
 import { merge } from "./merge.js";
 import Ground from "./ground.js";
 import Wall from "./wall.js";
-
+import Door from "./door.js";
 /*
  * parameters = {
  *  url: String,
@@ -31,6 +31,7 @@ export default class Maze extends THREE.Group {
             this.size = description.maze.size;
             this.halfSize = { width: this.size.width / 2.0, depth: this.size.depth / 2.0 };
             this.map = description.maze.map;
+            this.mapdoor = description.maze.mapdoor;
             this.exitLocation = this.cellToCartesian(description.maze.exitLocation);
 
             // Create the helpers
@@ -93,6 +94,34 @@ export default class Maze extends THREE.Group {
                 secondaryColor: new THREE.Color(parseInt(description.wall.secondaryColor, 16))
             });
 
+// Create a door
+const door = new Door({
+    groundHeight: description.ground.size.height,
+    segments: new THREE.Vector2(description.door.segments.width, description.door.segments.height),
+    materialParameters: {
+        color: new THREE.Color(parseInt(description.door.primaryColor, 16)),
+        mapUrl: description.door.maps.color.url,
+        aoMapUrl: description.door.maps.ao.url,
+        aoMapIntensity: description.door.maps.ao.intensity,
+        displacementMapUrl: description.door.maps.displacement.url,
+        displacementScale: description.door.maps.displacement.scale,
+        displacementBias: description.door.maps.displacement.bias,
+        normalMapUrl: description.door.maps.normal.url,
+        normalMapType: normalMapTypes[description.door.maps.normal.type],
+        normalScale: new THREE.Vector2(description.door.maps.normal.scale.x, description.door.maps.normal.scale.y),
+        bumpMapUrl: description.door.maps.bump.url,
+        bumpScale: description.door.maps.bump.scale,
+        roughnessMapUrl: description.door.maps.roughness.url,
+        roughness: description.door.maps.roughness.rough,
+        wrapS: wrappingModes[description.door.wrapS],
+        wrapT: wrappingModes[description.door.wrapT],
+        repeat: new THREE.Vector2(description.door.repeat.u, description.door.repeat.v),
+        magFilter: magnificationFilters[description.door.magFilter],
+        minFilter: minificationFilters[description.door.minFilter]
+    },
+    secondaryColor: new THREE.Color(parseInt(description.door.secondaryColor, 16))
+});
+
             // Build the maze
             let geometry;
             let geometries = [];
@@ -136,16 +165,49 @@ export default class Maze extends THREE.Group {
                         }
                         this.helper.add(new THREE.Box3Helper(this.aabb[i][j][1], this.helpersColor));
                     }
+
+                    if (this.mapdoor[i][j] == 2 || this.mapdoor[i][j] == 3) {
+                        this.aabb[i][j][0] = new THREE.Box3();
+                        for (let k = 0; k < 2; k++) {
+                            geometry = door.geometries[k].clone();
+                            geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(j - this.halfSize.width + 0.5, 0.25, i - this.halfSize.depth));
+                            geometry.computeBoundingBox();
+                            geometry.boundingBox.applyMatrix4(new THREE.Matrix4().makeScale(this.scale.x, this.scale.y, this.scale.z));
+                            geometries[k].push(geometry);
+                            this.aabb[i][j][0].union(geometry.boundingBox);
+                        }
+                        this.helper.add(new THREE.Box3Helper(this.aabb[i][j][0], this.helpersColor));
+                    }
+                    if (this.mapdoor[i][j] == 1 || this.mapdoor[i][j] == 3) {
+                        this.aabb[i][j][1] = new THREE.Box3();
+                        for (let k = 0; k < 2; k++) {
+                            geometry = door.geometries[k].clone();
+                            geometry.applyMatrix4(new THREE.Matrix4().makeRotationY(Math.PI / 2.0));
+                            geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(j - this.halfSize.width, 0.25, i - this.halfSize.depth + 0.5));
+                            geometry.computeBoundingBox();
+                            geometry.boundingBox.applyMatrix4(new THREE.Matrix4().makeScale(this.scale.x, this.scale.y, this.scale.z));
+                            geometries[k].push(geometry);
+                            this.aabb[i][j][1].union(geometry.boundingBox);
+                        }
+                        this.helper.add(new THREE.Box3Helper(this.aabb[i][j][1], this.helpersColor));
+                    }
                 }
             }
-
-            let mergedGeometry, mesh;
+            let wallMergedGeometry;
+            let doorMergedGeometry
+            
             for (let i = 0; i < 2; i++) {
-                mergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[i], false);
-                mesh = new THREE.Mesh(mergedGeometry, wall.materials[i]);
-                mesh.castShadow = true;
-                mesh.receiveShadow = true;
-                this.add(mesh);
+                wallMergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[0], false);
+                doorMergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[1], false);
+                let wallMesh = new THREE.Mesh(wallMergedGeometry, wall.materials[i]);
+                let doorMesh = new THREE.Mesh(doorMergedGeometry, door.materials[i]);
+            
+                wallMesh.castShadow = true;
+                wallMesh.receiveShadow = true;
+                doorMesh.castShadow = true;
+                doorMesh.receiveShadow = true;
+                this.add(wallMesh);
+                this.add(doorMesh);
             }
 
             // Store the player's initial position and direction
@@ -210,6 +272,7 @@ export default class Maze extends THREE.Group {
                 return true;
             }
         }
+        
         return false;
     }
 
