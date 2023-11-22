@@ -4,7 +4,6 @@ import { Container } from 'typedi';
 import AuthService from '../../services/roomService';
 import { IRoomDTO } from '../../dto/IRoomDTO';
 
-import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';
 import winston = require('winston');
 
