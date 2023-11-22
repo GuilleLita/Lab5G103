@@ -48,7 +48,8 @@ export default class ElevatorController implements IElevatorController /* TODO: 
 
   public async getElevatorsByBuilding(req: Request, res: Response, next: NextFunction) {
     try {
-      const elevatorOrError = await this.elevatorServiceInstance.getElevatorsByBuilding(req.body.buildingcode) as Result<{elevatorDTO: IElevatorDTO[]}>;
+      let buildingcode = <string>req.query.buildingCode;
+      const elevatorOrError = await this.elevatorServiceInstance.getElevatorsByBuilding(buildingcode) as Result<{elevatorDTO: IElevatorDTO[]}>;
       if (elevatorOrError.isFailure) {
         return res.status(402).send(elevatorOrError.errorValue());
       }

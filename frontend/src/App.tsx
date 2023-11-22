@@ -3,6 +3,7 @@ import './App.css';
 import { createStore } from 'state-pool';
 import AddHallway from './AddHallway';
 import EditFloor from './EditFloor';
+import ListElevators from './ListElevators';
 
 const store = createStore();
 store.setState("body", "home");
@@ -54,9 +55,7 @@ function Body() {
         )
     case "listElevators":
       return (
-        <div className="App-body">
-            <h2>ListElevators</h2>
-        </div>
+         <ListElevators />
         )
     default:
       return (

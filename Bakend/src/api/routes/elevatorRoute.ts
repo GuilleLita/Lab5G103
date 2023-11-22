@@ -62,10 +62,6 @@ export default (app: Router) => {
     (req, res, next) => ctrl.updateElevator(req, res, next) );
 
 
-    route.get("/getbybuilding",celebrate({
-      body: Joi.object({
-        buildingcode: Joi.string().required(),
-      }),
-    }), (req, res, next) => ctrl.getElevatorsByBuilding(req, res, next) );
+    route.get("/getbybuilding", (req, res, next) => ctrl.getElevatorsByBuilding(req, res, next) );
 
 };
