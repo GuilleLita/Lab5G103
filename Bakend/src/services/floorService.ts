@@ -177,4 +177,20 @@ export default class FloorService implements IFloorService{
       }
   }
 
+  public async getFloor(floorName: string): Promise<Result<{ floorDTO: IFloorDTO; }>> {
+    try {
+      const Floor = await this.floorRepo.findByName(floorName);
+      const found = !!Floor === true;
+
+      if (!found) {
+        return Result.fail<{floorDTO: IFloorDTO}>("floor not found with name=" + floorName);
+      }
+
+      const FloorDTOResult = FloorMap.toDTO( Floor ) as IFloorDTO;
+      return Result.ok<{floorDTO: IFloorDTO}>( {floorDTO: FloorDTOResult} )
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }

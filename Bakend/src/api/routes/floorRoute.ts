@@ -78,6 +78,7 @@ export default (app: Router) => {
       }),
       (req, res, next) => ctrl.uploadFloorMap(req, res, next) );
 
+    route.get('', (req, res, next) => ctrl.getFloor(req, res, next) );
 
     route.get("/getbybuilding",celebrate({
       body: Joi.object({

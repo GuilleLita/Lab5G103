@@ -176,7 +176,6 @@ function AddHallway() {
 
             </div>
             <button className="submit" onClick={OnClickListner} >Create Hallway</button>
-
         </div>
 
     );

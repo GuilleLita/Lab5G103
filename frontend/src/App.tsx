@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { createStore } from 'state-pool';
 import AddHallway from './AddHallway';
+import EditFloor from './EditFloor';
 
 const store = createStore();
 store.setState("body", "home");
@@ -49,9 +50,7 @@ function Body() {
         )
     case "editFloor":
       return (
-        <div className="App-body">
-            <h2>EditFloor</h2>
-        </div>
+        <EditFloor />
         )
     case "listElevators":
       return (
