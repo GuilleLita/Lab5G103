@@ -4,7 +4,6 @@ import { OBB } from "three/addons/math/OBB.js";
 import { merge } from "./merge.js";
 import Ground from "./ground.js";
 import Wall from "./wall.js";
-//import Door from "./door.js";
 
 /*
  * parameters = {
@@ -33,7 +32,7 @@ export default class Maze extends THREE.Group {
             this.halfSize = { width: this.size.width / 2.0, depth: this.size.depth / 2.0 };
             this.map = description.maze.map;
             this.exitLocation = this.cellToCartesian(description.maze.exitLocation);
-            //this.doorC301 = this.cellToCartesian(description.maze.doorC301);
+
             // Create the helpers
             this.helper = new THREE.Group();
 
@@ -93,7 +92,6 @@ export default class Maze extends THREE.Group {
                 },
                 secondaryColor: new THREE.Color(parseInt(description.wall.secondaryColor, 16))
             });
-            //const door = new Door();
 
             // Build the maze
             let geometry;
@@ -138,13 +136,8 @@ export default class Maze extends THREE.Group {
                         }
                         this.helper.add(new THREE.Box3Helper(this.aabb[i][j][1], this.helpersColor));
                     }
-                    /*if((i==this.doorC301.x)&&(j==this.doorC301.y)){
-                        door=wall;
-                    }*/
-                    
                 }
             }
-            
 
             let mergedGeometry, mesh;
             for (let i = 0; i < 2; i++) {
