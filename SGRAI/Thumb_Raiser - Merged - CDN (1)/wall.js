@@ -2,7 +2,7 @@ import * as THREE from "three";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import { merge } from "./merge.js";
 import MultiTexturedMaterial from "./material.js";
-import * as TWEEN from "three/addons/libs/tween.module.js";
+
 /*
  * parameters = {
  *  size: Vector3,
