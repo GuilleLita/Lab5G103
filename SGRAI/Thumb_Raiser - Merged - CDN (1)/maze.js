@@ -125,8 +125,11 @@ const door = new Door({
             // Build the maze
             let geometry;
             let geometries = [];
+            let geometriesdoors = [];
             geometries[0] = [];
             geometries[1] = [];
+            geometriesdoors[0] = [];
+            geometriesdoors[1] = [];
             this.aabb = [];
             for (let i = 0; i <= this.size.depth; i++) { // In order to represent the southmost walls, the map depth is one row greater than the actual maze depth
                 this.aabb[i] = [];
@@ -173,7 +176,7 @@ const door = new Door({
                             geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(j - this.halfSize.width + 0.5, 0.25, i - this.halfSize.depth));
                             geometry.computeBoundingBox();
                             geometry.boundingBox.applyMatrix4(new THREE.Matrix4().makeScale(this.scale.x, this.scale.y, this.scale.z));
-                            geometries[k].push(geometry);
+                            geometriesdoors[k].push(geometry);
                             this.aabb[i][j][0].union(geometry.boundingBox);
                         }
                         this.helper.add(new THREE.Box3Helper(this.aabb[i][j][0], this.helpersColor));
@@ -186,7 +189,7 @@ const door = new Door({
                             geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(j - this.halfSize.width, 0.25, i - this.halfSize.depth + 0.5));
                             geometry.computeBoundingBox();
                             geometry.boundingBox.applyMatrix4(new THREE.Matrix4().makeScale(this.scale.x, this.scale.y, this.scale.z));
-                            geometries[k].push(geometry);
+                            geometriesdoors[k].push(geometry);
                             this.aabb[i][j][1].union(geometry.boundingBox);
                         }
                         this.helper.add(new THREE.Box3Helper(this.aabb[i][j][1], this.helpersColor));
@@ -197,8 +200,8 @@ const door = new Door({
             let doorMergedGeometry
             
             for (let i = 0; i < 2; i++) {
-                wallMergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[0], false);
-                doorMergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[1], false);
+                wallMergedGeometry = BufferGeometryUtils.mergeGeometries(geometries[i], false);
+                doorMergedGeometry = BufferGeometryUtils.mergeGeometries(geometriesdoors[i], false);
                 let wallMesh = new THREE.Mesh(wallMergedGeometry, wall.materials[i]);
                 let doorMesh = new THREE.Mesh(doorMergedGeometry, door.materials[i]);
             

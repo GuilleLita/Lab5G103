@@ -2,29 +2,29 @@
     "maze": {
         "size": { "width": 6, "depth": 10 },
     "map": [
-        [0, 3, 2, 2, 2, 2, 1], 
-        [3, 2, 1, 3, 2, 2, 1],
+        [3, 2, 2, 2, 2, 2, 1], 
+        [3, 2, 0, 2, 2, 2, 1],
         [1, 0, 1, 1, 0, 0, 1],
-        [3, 2, 1, 3, 2, 2, 1],
+        [3, 2, 1, 1, 0, 0, 1],
         [1, 0, 1, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1],
-        [3, 2, 1, 2, 3, 2, 1],
-        [1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 3, 2, 2, 2, 1],
+        [1, 0, 1, 1, 0, 0, 1],
+        [3, 2, 1, 2, 2, 2, 1],
+        [1, 0, 0, 0, 1, 0, 1],
+        [1, 0, 3, 0, 2, 2, 1],
         [1, 0, 1, 0, 0, 0, 1],
         [2, 2, 2, 2, 2, 2, 0]
         
     ],
     "mapdoor": [
-        [3, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 2, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0]
         
@@ -40,7 +40,7 @@
         "primaryColor": "0xffffff",
         "maps": {
             "color": {
-                "url": "./textures/ground_0003_2k_372HqZ/ground_0003_color_2k.jpg"
+                "url": "./textures/ground_0003_2k_372HqZ/208.jpg"
             },
             "ao": {
                 "url": "./textures/ground_0003_2k_372HqZ/ground_0003_ao_2k.jpg",
@@ -52,7 +52,7 @@
                 "bias": -0.53
             },
             "normal": {
-                "url": "./textures/ground_0003_2k_372HqZ/ground_0003_normal_opengl_2k.png",
+                "url": "./textures/ground_0003_2k_372HqZ/208_norm.jpg",
                 "type": 0,
                 "scale": { "x": 2.0, "y": 2.0 }
             },
@@ -114,7 +114,7 @@
         "primaryColor": "0xffffff",
         "maps": {
             "color": {
-                "url": "./textures/concrete_0007_2k_xtGY5J/concrete_0007_color_2k.jpg"
+                "url": "./textures/concrete_0007_2k_xtGY5J/240.jpg"
             },
             "ao": {
                 "url": "./textures/concrete_0007_2k_xtGY5J/concrete_0007_ao_2k.jpg",
@@ -126,7 +126,7 @@
                 "bias": -0.25
             },
             "normal": {
-                "url": "./textures/concrete_0007_2k_xtGY5J/concrete_0007_normal_opengl_2k.png",
+                "url": "./textures/concrete_0007_2k_xtGY5J/240_norm.jpg",
                 "type": 0,
                 "scale": { "x": 2.0, "y": 2.0 }
                 },
