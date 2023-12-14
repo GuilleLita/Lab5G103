@@ -23,7 +23,7 @@ function ListElevators(){
 
     const customStyles = {
         control: (base:any) => ({
-          ...base,
+        ...base,
           height: 40,
           minHeight: 40,
           width: 200,

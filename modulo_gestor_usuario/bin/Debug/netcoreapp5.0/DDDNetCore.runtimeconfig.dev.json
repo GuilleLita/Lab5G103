@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\elemo\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\elemo\\.nuget\\packages"
+    ]
+  }
+}
