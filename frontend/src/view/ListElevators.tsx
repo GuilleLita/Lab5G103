@@ -1,6 +1,6 @@
 import React from 'react';
 import  AsyncSelect, { useAsync } from 'react-select/async';
-import config from './config'
+import config from '../config'
 import './ListElevator.css';
 
 const fetchBuildings = async  ()  => {
@@ -23,7 +23,7 @@ function ListElevators(){
 
     const customStyles = {
         control: (base:any) => ({
-        ...base,
+          ...base,
           height: 40,
           minHeight: 40,
           width: 200,

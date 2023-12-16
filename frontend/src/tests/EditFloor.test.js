@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import EditFloor from './EditFloor';
+import EditFloor from '../view/EditFloor';
 
 test('display test h2', () =>{
     const { getByText } = render(<EditFloor/>);

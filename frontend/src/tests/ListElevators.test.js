@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import ListElevators from './ListElevators';
+import ListElevators from '../view/ListElevators';
 
 test('display RobDroneGo correctly', () =>{
     const { getByText } = render(<ListElevators/>);

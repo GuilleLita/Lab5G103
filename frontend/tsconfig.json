@@ -1,4 +1,4 @@
-{
+/*{
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -22,5 +22,44 @@
   },
   "include": [
     "src"
+  ]
+}*/
+
+
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "es2017",
+      "esnext.asynciterable",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "pretty": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "allowJs": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "./src/**/*", "index.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests"
   ]
 }

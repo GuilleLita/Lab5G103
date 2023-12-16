@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import App from './App';
-import AddHallway from './AddHallway';
+import AddHallway from '../view/AddHallway';
 
 test('display Edit Floor correctly', () =>{
     const { getByText } = render(<AddHallway/>);

@@ -1,4 +1,4 @@
-import config from './config';
+import config from '../config';
 import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import ReactSelect from 'react-select';

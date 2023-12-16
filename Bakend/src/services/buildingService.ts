@@ -23,7 +23,6 @@ import { Result } from "../core/logic/Result";
 export default class BuildingService implements IBuildingService{
   constructor(
       @Inject(config.repos.building.name) private buildingRepo : IBuildingRepo,
-      //@Inject(config.repos.Building.name) private BuildingRepo : IBuildingRepo,
       @Inject('logger') private logger,
   ) {}
 

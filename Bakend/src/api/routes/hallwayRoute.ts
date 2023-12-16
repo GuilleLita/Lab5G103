@@ -35,6 +35,7 @@ export default (app: Router) => {
 
         if (hallwayOrError.isFailure) {
           logger.debug(hallwayOrError.errorValue())
+          console.log(hallwayOrError.errorValue());
           return res.status(401).send(hallwayOrError.errorValue());
         }
     

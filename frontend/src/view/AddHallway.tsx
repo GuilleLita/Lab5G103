@@ -3,15 +3,20 @@ import  AsyncSelect, { useAsync } from 'react-select/async';
 import  ReactSelect from 'react-select';
 import { useState } from 'react';
 import {useRef} from 'react';
-import config from './config'
+import config from '../config'
 
-
+//import fetch from 'node-fetch';
 import './AddHallway.css';
 import { get } from 'http';
 import Input from 'react-select/dist/declarations/src/components/Input';
 
-const fetchBuildings = async  ()  => {
-    var buildings: any[] =  []
+import AddHallwayViewModel from '../viewmodel/AddHallwayViewModel';
+import buildingService from '../services/buildingService';
+import { hallwayService } from '../services/hallwayService';
+import { visitIterationBody } from 'typescript';
+
+const fetchBuildings = async (): Promise<any[]> => {
+    var buildings: any[] = [];
     const res = await fetch(config.ServerURL + '/api/building/getall');
     const data = await res.json();
     for (let i = 0; i < data.buildingDTO.length; i++) {
@@ -22,8 +27,8 @@ const fetchBuildings = async  ()  => {
 }
 
 
-
 function AddHallway() {
+    let viewmodel = new AddHallwayViewModel(buildingService.instance, hallwayService.instance);    
     const [floor1Options, setFloor1Options] = useState<any[]>([]);
     const [floor2Options, setFloor2Options] = useState<any[]>([]);
 
@@ -35,14 +40,6 @@ function AddHallway() {
 
     const position1 = useRef<any>(null);
     const position2 = useRef<any>(null);
-
-    const getBuildings = async () => {
-        const res = await fetch(config.ServerURL + '/api/building/getall');
-        const data = await res.json();
-        var retVal: any[] = data.buildingDTO;
-        return retVal;
-    }
-
     
     const customStyles = {
         control: (base:any) => ({
@@ -55,24 +52,6 @@ function AddHallway() {
         })
       };
 
-    const searchFloors = async (buildingName: string) => {
-        let floors: any[] = [];
-        console.log(buildingName);
-        let buildings = await getBuildings();
-        for (let i = 0; i < buildings.length; i++) {
-            if (buildings[i].buildingName === buildingName) {
-                floors = buildings[i].floors;
-                break;
-            }
-        }
-        let retVal: any[] = [];
-        for (let i = 0; i < floors.length; i++) {
-            retVal.push({ value: floors[i], label: floors[i] });
-            
-        }
-        
-        return retVal;
-    }
 
     const promiseOptions = () =>
         new Promise<any[]>((resolve) => {  
@@ -85,7 +64,7 @@ function AddHallway() {
         if (option) {
             
             setSelected(option)
-            setFloor1Options(await searchFloors(option.value));
+            setFloor1Options(await viewmodel.searchFloors(option.value));
           }
     }
 
@@ -93,7 +72,7 @@ function AddHallway() {
         if (option) {
             
             setSelected2(option)
-            setFloor2Options(await searchFloors(option.value));
+            setFloor2Options(await viewmodel.searchFloors(option.value));
           }
     }
 
@@ -109,44 +88,17 @@ function AddHallway() {
           }
     }
 
-    const getCodes = async (building1: string, building2: string) => {
-        let buildings = await getBuildings();
-        let retVal: string[] = []
-        for(let i = 0; i < buildings.length; i++ ){
-            if(buildings[i].buildingName === building1 || buildings[i].buildingName === building2){
-                retVal.push(buildings[i].buildingCode)
-            }
-        }
-        return retVal
-    }
-
     const OnClickListner = async () =>{
-        let buildingCodes: string[] = await getCodes(selected.value, selected2.value)
         if (position1.current !== null && position2.current !== null) {
             let input1 = position1.current.value
-            let input2 = position2.current.value
-        
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ buildingsCode: buildingCodes, floorsId: [floorSelected.value, floorSelected2.value], position: [input1, input2] })
-        };
-        fetch( config.ServerURL +'/api/hallway/create', requestOptions)
-            .then(async response => {
-                const isJson = response.headers.get('content-type')?.includes('application/json');
-                const data = isJson && await response.json();
-    
-                // check for error response
-                if (!response.ok) {
-                    // get error message from body or default to response status
-                    const error = (data && data.message) || response.status;
-                    return Promise.reject(error);
-                }
-                alert("Hallway created")
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
+            let input2 = position2.current.value   
+            let hallwayOrError = viewmodel.setHallway(selected.value, selected2.value, floorSelected.value, floorSelected2.value, input1, input2)
+            if ((await hallwayOrError).isFailure) {
+                alert("Error: " + (await hallwayOrError).errorValue())
+            } else {
+
+                alert("Hallway added")
+            }
         }
     }
 
@@ -182,3 +134,4 @@ function AddHallway() {
 }
 
 export default AddHallway;
+
