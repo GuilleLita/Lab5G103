@@ -7,6 +7,7 @@ import IHallwayService from '../services/IServices/IHallwayService';
 
 import { IHallwayDTO } from '../dto/IHallwayDTO';
 import { Result } from '../core/logic/Result';
+import { IBuildingDTO } from '../dto/IBuildingDTO';
 
 
 export default class AddHallwayViewModel 
@@ -85,36 +86,17 @@ export default class AddHallwayViewModel
         
     }
 
-    //Esto al service, mas o menso
-    /*public async OnClickListner(){
-        let buildingCodes: string[] = await this.getCodes(selected.value, selected2.value)
-        if (position1.current !== null && position2.current !== null) {
-            let input1 = position1.current.value
-            let input2 = position2.current.value
-        
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ buildingsCode: buildingCodes, floorsId: [floorSelected.value, floorSelected2.value], position: [input1, input2] })
-            };
-            fetch( config.ServerURL +'/api/hallway/create', requestOptions)
-                .then(async response => {
-                    const isJson = response.headers.get('content-type')?.includes('application/json');
-                    const data = isJson && await response.json();
-        
-                    // check for error response
-                    if (!response.ok) {
-                        // get error message from body or default to response status
-                        const error = (data && data.message) || response.status;
-                        return Promise.reject(error);
-                    }
-                    alert("Hallway created")
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
-        }
-    }*/
 
+    public async fetchBuildings() : Promise<any[]>{
+        var buildings: IBuildingDTO[] = [];
+        var retval : any[] = [];
+        const data = await this.buildingService.getBuildings();
+        buildings = data.getValue().buildingDTO;
+        for (let i = 0; i < buildings.length; i++) {
+            retval.push({ value: buildings[i].buildingName, label: buildings[i].buildingName });
+        }
+    
+        return retval;
+    }
 }
 

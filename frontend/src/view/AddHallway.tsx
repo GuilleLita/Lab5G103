@@ -15,16 +15,7 @@ import buildingService from '../services/buildingService';
 import { hallwayService } from '../services/hallwayService';
 import { visitIterationBody } from 'typescript';
 
-const fetchBuildings = async (): Promise<any[]> => {
-    var buildings: any[] = [];
-    const res = await fetch(config.ServerURL + '/api/building/getall');
-    const data = await res.json();
-    for (let i = 0; i < data.buildingDTO.length; i++) {
-        buildings.push({ value: data.buildingDTO[i].buildingName, label: data.buildingDTO[i].buildingName });
-    }
 
-    return buildings;
-}
 
 
 function AddHallway() {
@@ -56,7 +47,7 @@ function AddHallway() {
     const promiseOptions = () =>
         new Promise<any[]>((resolve) => {  
             
-            resolve(fetchBuildings());
+            resolve(viewmodel.fetchBuildings());
         }
     );
 
@@ -94,7 +85,7 @@ function AddHallway() {
             let input2 = position2.current.value   
             let hallwayOrError = viewmodel.setHallway(selected.value, selected2.value, floorSelected.value, floorSelected2.value, input1, input2)
             if ((await hallwayOrError).isFailure) {
-                alert("Error: " + (await hallwayOrError).errorValue())
+                alert((await hallwayOrError).errorValue())
             } else {
 
                 alert("Hallway added")

@@ -24,7 +24,7 @@ export default class buildingService implements IBuildingService{
             const Buildings = await res.json().then((data) => {
                 return data.buildingDTO;
             });
-            console.log(Buildings);
+            //console.log(Buildings);
             
             if (Buildings === null) {
               return Result.fail<{buildingDTO: IBuildingDTO[]}>("Building not found");
