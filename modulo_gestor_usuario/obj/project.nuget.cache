@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S1sYkNrA7KOovIvmYv75MCpGE8XRI/mvVa7KLJ0jsokH5dUXEpMBdiVioCzgTdz5lFgqR3qDpnf2xgeODVRn3g==",
+  "dgSpecHash": "Yc6mF5Gd3dmNmcaAsSQ/RcXp8WhbghmXJBXD4zq5d8CwIGaw/cZWNlSJKWWyXkxwvHrrpgKWdm6wmkG3HBF2Yg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elemo\\Pictures\\dddnetcore\\DDDNetCore.csproj",
+  "projectFilePath": "C:\\Users\\elemo\\Pictures\\Lab5G103\\modulo_gestor_usuario\\DDDNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.0\\microsoft.aspnetcore.jsonpatch.5.0.0.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.0.nupkg.sha512",
@@ -106,10 +106,10 @@
     "C:\\Users\\elemo\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": [
     {
