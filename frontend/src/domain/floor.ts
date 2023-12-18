@@ -26,7 +26,7 @@ export class Floor extends AggregateRoot<FloorProps> {
   get floorId (): FloorId {
     return FloorId.caller(this.id)
   }
-  get name (): string {
+  get floorName (): string {
     return this.props.floorName;
   }
 
@@ -68,7 +68,7 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.grid;
   }
 
-  set name ( value: string) {
+  set floorName ( value: string) {
     this.props.floorName = value;
   }
 

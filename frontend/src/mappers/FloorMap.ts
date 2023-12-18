@@ -13,7 +13,7 @@ export class FloorMap extends Mapper<Floor> {
   public static toDTO( Floor: Floor): IFloorDTO {
     return {
       //floorId: Floor.id.toString(),
-        floorName: Floor.name,
+        floorName: Floor.floorName,
         description:  Floor.description,
         buildingCode: Floor.buildingCode,
         height: Floor.height,
@@ -24,8 +24,8 @@ export class FloorMap extends Mapper<Floor> {
     } as IFloorDTO
   }
 
-  public static async toDomain (raw: any): Promise<Floor> {
-
+  public static async toDomain (raw: IFloorDTO): Promise<Floor> {
+    console.log(raw);
     const floorOrError = Floor.create({
       floorName: raw.floorName,
       description:  raw.description,
@@ -34,15 +34,16 @@ export class FloorMap extends Mapper<Floor> {
       width:  raw.width,
       rooms: raw.rooms,
       grid: raw.grid
-      }, new UniqueEntityID(raw.floorId))
-    floorOrError.isFailure ? console.log(floorOrError.error) : '';
+      })
+      console.log(floorOrError);
+    //floorOrError.isFailure ? console.log(floorOrError.error) : '';
     return floorOrError.isSuccess ? floorOrError.getValue() : null;
   }
 
   public static toPersistence (floor: Floor): any {
     const a = {
         floorId: floor.id.toString(),
-        floorName: floor.name,
+        floorName: floor.floorName,
         description:  floor.description,
         buildingCode: floor.buildingCode,
         height: floor.height,

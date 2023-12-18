@@ -15,9 +15,9 @@ export class hallwayService implements IHallwayService{
     }
 
     public async CreateHallway(hallway: IHallwayDTO): Promise<Result<{hallwayDTO: IHallwayDTO}>> {
-        console.log(hallway);
+
         try {
-            
+            console.log(JSON.stringify(hallway));
             const res = await fetch(config.ServerURL + '/api/hallway/create', {
                 method: 'POST',
                 headers: {
@@ -37,4 +37,6 @@ export class hallwayService implements IHallwayService{
             throw e;
         }
     }
+
+    
 }

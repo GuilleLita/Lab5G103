@@ -4,55 +4,19 @@ import AsyncSelect from 'react-select/async';
 import ReactSelect from 'react-select';
 import { useRef } from 'react';
 
-
+import EditFloorViewModel from '../viewmodel/EditFloorViewModel';
+import buildingService from '../services/buildingService';
+import floorService  from '../services/floorService';
 
 import './EditFloor.css'
 import { parse } from 'path';
+import { Floor } from '../domain/floor';
 
-const fetchFloors = async  (building: string)  => {
-    var buildings: any[] =  []
-    const res = await fetch(config.ServerURL + '/api/building/getall');
-    const data = await res.json();
-    for (let i = 0; i < data.buildingDTO.length; i++) {
-        buildings.push({ value: data.buildingDTO[i].buildingName, label: data.buildingDTO[i].buildingName });
-    }
-
-    return buildings;
-}
-
-const fetchBuildings = async () => {
-    var buildings: any[] =  []
-    const res = await fetch(config.ServerURL + '/api/building/getall');
-    const data = await res.json();
-    for (let i = 0; i < data.buildingDTO.length; i++) {
-        buildings.push({ value: data.buildingDTO[i].buildingName, label: data.buildingDTO[i].buildingName });
-    }
-
-    return buildings;
-}
-
-type Floor = { 
-    floorName: string;
-    description: string;
-    buildingCode: string;
-    height: number;
-    width: number;
-    rooms: string[];
-    grid: number[][];
- }
-
-const getFloor = async (floorName: string) => {
-    let floor: Floor = {floorName: '', description: '', buildingCode: '', height: 0, width: 0, rooms: [], grid: [[]]};
-    
-    const res = await fetch( config.ServerURL +'/api/floor?floorName='+floorName)
-
-    const data = await res.json();
-    floor = data.floorDTO;
-    return floor;
-}
 
 
 function EditFloor(){
+    let viewmodel = new EditFloorViewModel(buildingService.instance, floorService.instance);
+
     const customStyles = {
         control: (base:any) => ({
           ...base,
@@ -65,10 +29,19 @@ function EditFloor(){
     };
     const [floor1Options, setFloor1Options] = useState<any[]>([]);
 
-    const handleGridChange = (row: number, col: number) => (event: any) => {
+    //#############
+    //GRID STUFF
+    //#############
+    const handleGridChange = (row: number, col: number) => async (event: any) => {
         let newGrid = floorSelected.grid;
         newGrid[row][col] = event.target.value;
-        setFloorSelect({...floorSelected, grid: newGrid});
+        let floorOrError =  await viewmodel.FloorWithNewGrid(floorSelected, newGrid);
+        if(floorOrError != null){
+            setFloorSelect(floorOrError);
+        }
+        else{
+            alert("Error");
+        }
     }
     
     const Grid = () => {
@@ -92,9 +65,19 @@ function EditFloor(){
             </div>
         )
     }
+    //#############
+    //END GRID STUFF
+    //#############
 
+    
     const [selected, setSelected] = useState({ value: '', label: ''});
-    const [floorSelected, setFloorSelect] = useState<Floor>({floorName: 'None', description: ' ', buildingCode: ' ', height: 0, width: 0, rooms: [], grid: [[]]});
+    const [floorSelected, setFloorSelect] = useState<Floor>(Floor.create({floorName: '',
+                                                    description: '',
+                                                    buildingCode: '',
+                                                    height: 0,
+                                                    width: 0, 
+                                                    rooms:[],
+                                                    grid: []}).getValue());
     const [roomsList, setRooms] = useState<string[]>([]);
 
     const desc = useRef<any>(null);
@@ -110,14 +93,14 @@ function EditFloor(){
         setRooms(roomsList.filter((r) => r !== room));
     }
     
-    var arrayDataItems = roomsList.map((room) => <li>{room}<button className='liButton' onClick={handleLiClick(room)}>Delete</button></li>);
+    var arrayDataItems = roomsList.map((room) => <li    key={room}>{room}<button className='liButton' onClick={handleLiClick(room)}>Delete</button></li>);
     
     type SelectOptionType = { label: string, value: string }
     
     const promiseOptions = () =>
         new Promise<any[]>((resolve) => {  
           
-          resolve(fetchBuildings());
+          resolve(viewmodel.searchBuildings());
         }
         );
 
@@ -132,8 +115,7 @@ function EditFloor(){
 
     const handleFloorInputChange =async (option: SelectOptionType | null) => {
         if (option) {
-            console.log(option.value);
-            let floor = await getFloor(option.value);
+            let floor = await viewmodel.getFloorbyName(option.value);
             setFloorSelect(floor);
             setRooms(floor.rooms);
             desc.current.value = floor.description;
@@ -144,17 +126,10 @@ function EditFloor(){
           }
     }
 
-    const getBuildings = async () => {
-        const res = await fetch(config.ServerURL + '/api/building/getall');
-        const data = await res.json();
-        var retVal: any[] = data.buildingDTO;
-        return retVal;
-    }
-
     const searchFloors = async (buildingName: string) => {
         let floors: any[] = [];
         console.log(buildingName);
-        let buildings = await getBuildings();
+        let buildings = await viewmodel.getBuildings();
         for (let i = 0; i < buildings.length; i++) {
             if (buildings[i].buildingName === buildingName) {
                 floors = buildings[i].floors;
@@ -171,23 +146,21 @@ function EditFloor(){
     }
 
     const OnClickListner = async () => {
-        let floor: Floor = {floorName: '', description: '', buildingCode: '', height: 0, width: 0, rooms: [], grid: [[]]};
-        floor = floorSelected;
-        floor.description = desc.current.value;
-        floor.buildingCode = build.current.value;
-        floor.height = height.current.value;
-        floor.width = width.current.value;
-        floor.rooms = roomsList;
-        console.log(floor);
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(floor)
-        };
-        const res = await fetch(config.ServerURL + '/api/floor/update', requestOptions);
-        const data = await res.json();
-        console.log(data);
-        alert("Floor updated")
+        let newfloor = await Floor.create({floorName: floorSelected.floorName,
+                                description: desc.current.value,
+                                buildingCode: build.current.value,
+                                height: height.current.value,
+                                width: width.current.value, 
+                                rooms: roomsList,
+                                grid: floorSelected.grid});
+        if(newfloor.isSuccess){
+            viewmodel.updateFloor(newfloor.getValue());
+            alert("Floor updated")
+        }
+        else{
+            alert(newfloor.error);
+        }
+       
     }
 
 
@@ -217,7 +190,7 @@ function EditFloor(){
                             <input ref={build} type="text" id="build" name="name" className='input' />
                             <p className='infotext'>Height </p>
                             <input ref={height} type="text" id="height" name="name" className='input' onBlur={
-                                (event) => {
+                                async (event) => {
                                     if(event.target.value === '') return;
                                     let newGrid = floorSelected.grid;
                                     let length = parseInt(event.target.value);
@@ -233,14 +206,20 @@ function EditFloor(){
                                         }
                                         
                                     }
-                                    setFloorSelect({...floorSelected, grid: newGrid});
                                     
+                                    let floorOrError = await viewmodel.FloorWithNewGrid(floorSelected, newGrid);
+                                    if(floorOrError != null){
+                                        setFloorSelect(floorOrError);
+                                    }
+                                    else{
+                                        alert(floorOrError);
+                                    }
                                 }
                             
                             } />
                             <p className='infotext'>Width </p>
                             <input ref={width} type="text" id="width" name="name" className='input' onBlur={
-                                (event) => {
+                                async (event) => {
                                     if(event.target.value === '') return;
                                     let newGrid = floorSelected.grid;
                                     let length = parseInt(event.target.value);
@@ -252,8 +231,14 @@ function EditFloor(){
                                             }
                                         }
                                     }
-                                    setFloorSelect({...floorSelected, grid: newGrid});
-                                    
+                                    let floorOrError = await viewmodel.FloorWithNewGrid(floorSelected, newGrid);
+                                    if(floorOrError != null){
+                                        setFloorSelect(floorOrError);
+                                    }
+                                    else{
+                                        alert(floorOrError);
+                                    }
+                                                                    
                                 }
                             
                             

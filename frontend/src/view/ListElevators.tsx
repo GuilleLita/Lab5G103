@@ -2,19 +2,13 @@ import React from 'react';
 import  AsyncSelect, { useAsync } from 'react-select/async';
 import config from '../config'
 import './ListElevator.css';
+import ListElevatorViewModel from '../viewmodel/ListElevatorViewModel';
+import buildingService from '../services/buildingService';
+import elevatorService from '../services/elevatorService';
 
-const fetchBuildings = async  ()  => {
-    var buildings: any[] =  []
-    const res = await fetch(config.ServerURL + '/api/building/getall');
-    const data = await res.json();
-    for (let i = 0; i < data.buildingDTO.length; i++) {
-        buildings.push({ value: data.buildingDTO[i].buildingName, label: data.buildingDTO[i].buildingName });
-    }
-
-    return buildings;
-}
 
 function ListElevators(){
+    let virewmodel = new ListElevatorViewModel(buildingService.instance,elevatorService.instance);
 
     const [selected, setSelected] = React.useState<any>(null);
     const [elevators, setElevators] = React.useState<any[]>([]);
@@ -32,44 +26,19 @@ function ListElevators(){
         })
     };
 
-    const getBuildings = async () => {
-        const res = await fetch(config.ServerURL + '/api/building/getall');
-        const data = await res.json();
-        var retVal: any[] = data.buildingDTO;
-        return retVal;
-    }
-
-    const searchElevators = async (buildingName: string) => {
-        let elevators: any[] = [];
-        let buildings = await getBuildings();
-        let buildingCode = "";
-        for (let i = 0; i < buildings.length; i++) {
-            if (buildings[i].buildingName === buildingName) {
-                buildingCode = buildings[i].buildingCode;
-                break;
-            }
-        }
-        console.log(buildingCode);
-        const res = await fetch(config.ServerURL + '/api/elevator/getbybuilding?buildingCode=' + buildingCode);
-        const data = await res.json();
-        for (let i = 0; i < data.elevatorDTO.length; i++) {
-            elevators.push(data.elevatorDTO[i]);
-        }
-        console.log(elevators);
-        return elevators;
-    }
+    
 
     const promiseOptions = () =>
         new Promise<any[]>((resolve) => {  
             
-            resolve(fetchBuildings());
+            resolve(virewmodel.searchBuildings());
         }
     );
 
     const handleInputChange =async (option: SelectOptionType | null) => {
         if (option) {
             setSelected(option)
-            let _elevators = await searchElevators(option.value);
+            let _elevators = await virewmodel.searchElevators(option.value);
             setElevators(_elevators);
         }
     }
