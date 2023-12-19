@@ -1,29 +1,32 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using DDDSample1.Domain.Shared;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using DDDSample1.Interfaces;
+using DDDSample1.Implementations;
+using MongoDB.Driver;
 namespace DDDSample1.Domain.Families
 {
     public class FamilyService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IFamilyRepository _repo;
-
-        public FamilyService(IUnitOfWork unitOfWork, IFamilyRepository repo)
+       // private readonly IUnitOfWork _unitOfWork;
+        //private readonly IFamilyRepository _repo;
+  
+        private readonly IMongoCollection<FamilyDto> _family;
+        public FamilyService(iMongoDBSettings settings)
         {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DB);
         }
 
         public async Task<List<FamilyDto>> GetAllAsync()
         {
-            var list = await this._repo.GetAllAsync();
-            
-            List<FamilyDto> listDto = list.ConvertAll<FamilyDto>(fam => new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description});
+            var families = await _family.Find(f => true).ToListAsync();
 
-            return listDto;
+            return families;
         }
-
+/*
         public async Task<FamilyDto> GetByIdAsync(FamilyId id)
         {
             var fam = await this._repo.GetByIdAsync(id);
@@ -89,6 +92,6 @@ namespace DDDSample1.Domain.Families
             await this._unitOfWork.CommitAsync();
 
             return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+        }*/
     }
 }

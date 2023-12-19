@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DDDSample1.Domain.Shared;
 using DDDSample1.Domain.Roles;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Users
 {
     public class UserService

@@ -24,7 +24,7 @@ namespace DDDSample1.Controllers
         {
             return await _service.GetAllAsync();
         }
-
+/*
         // GET: api/Families/F1
         [HttpGet("{id}")]
         public async Task<ActionResult<FamilyDto>> GetGetById(String id)
@@ -107,6 +107,6 @@ namespace DDDSample1.Controllers
             {
                return BadRequest(new {Message = ex.Message});
             }
-        }
+        }*/
     }
 }

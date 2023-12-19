@@ -15,7 +15,9 @@ using DDDSample1.Domain.Roles;
 using DDDSample1.Domain.Users;
 using DDDSample1.Domain.Families;
 using Microsoft.OpenApi.Models;
-
+using DDDSample1.Implementations;
+using DDDSample1.Interfaces;
+using Microsoft.Extensions.Options;
 namespace DDDSample1
 {
     public class Startup
@@ -43,6 +45,11 @@ namespace DDDSample1
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tu API", Version = "v1" });
 });
 
+        //aqui introduzco lo de mongo
+        services.Configure<MongoDBSettings>(Configuration.GetSection(nameof(MongoDBSettings)));
+        services.AddSingleton<iMongoDBSettings> (
+            s => s.GetRequiredService<IOptions<MongoDBSettings>>().Value);
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

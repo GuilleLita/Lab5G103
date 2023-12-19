@@ -1,7 +1,8 @@
 using System;
 using DDDSample1.Domain.Shared;
 using Newtonsoft.Json;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Users
 {
     public class UserId : EntityId

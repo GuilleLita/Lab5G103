@@ -1,10 +1,13 @@
 using DDDSample1.Domain.Shared;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Families
 {
+    [BsonIgnoreExtraElements]
     public class Family : Entity<FamilyId>, IAggregateRoot
     {
-
+        [BsonElement("Description")]
+        [BsonRepresentation(BsonType.String)]
         public string Description { get;  private set; }
 
         public bool Active{ get;  private set; }
