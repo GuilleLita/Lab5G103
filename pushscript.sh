@@ -26,7 +26,7 @@ screen -dmS ${BACK_NAME} npm run start
 #Iniciar de nuevo frontend
 cd ..
 cd ${FRON_DIR}
-screen -dmS ${BACK_NAME} npm run start
+screen -dmS ${FRON_NAME} npm run start
 
 
 
