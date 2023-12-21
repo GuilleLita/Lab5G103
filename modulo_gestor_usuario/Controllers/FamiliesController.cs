@@ -24,10 +24,10 @@ namespace DDDSample1.Controllers
         {
             return await _service.GetAllAsync();
         }
-/*
+
         // GET: api/Families/F1
         [HttpGet("{id}")]
-        public async Task<ActionResult<FamilyDto>> GetGetById(String id)
+        public async Task<ActionResult<FamilyDto>> GetGetById(Guid id)
         {
             var fam = await _service.GetByIdAsync(new FamilyId(id));
 
@@ -38,7 +38,7 @@ namespace DDDSample1.Controllers
 
             return fam;
         }
-
+ 
         // POST: api/Families
         [HttpPost]
         public async Task<ActionResult<FamilyDto>> Create(FamilyDto dto)
@@ -48,7 +48,7 @@ namespace DDDSample1.Controllers
             return CreatedAtAction(nameof(GetGetById), new { id = fam.Id }, fam);
         }
 
-        
+        /*
         // PUT: api/Families/F5
         [HttpPut("{id}")]
         public async Task<ActionResult<FamilyDto>> Update(String id, FamilyDto dto)

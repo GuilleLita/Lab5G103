@@ -1,3 +1,4 @@
+using System;
 using DDDSample1.Domain.Shared;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -17,9 +18,9 @@ namespace DDDSample1.Domain.Families
             this.Active = true;
         }
 
-        public Family(string code, string description)
+        public Family(string description)
         {
-            this.Id = new FamilyId(code);
+            this.Id = new FamilyId(Guid.NewGuid());
             this.Description = description;
             this.Active = true;
         }

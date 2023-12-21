@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7cfdzG4e7pe08v6nEW5RxAKoyaugiZB9wuvt3k7cTQuk7uYQx2gpJAPbO2RLPUqWDL9UCagri2vwn24o+dYOLQ==",
+  "dgSpecHash": "+/+cIHFfef7/N6zaDoUgfWI33DvJBeoUmaMuf/gYZsic8PnB31qmbwO2liE/arPDVGdCNTt3JJaVxMcVOUxhFA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elemo\\Pictures\\dddnetcore\\DDDNetCore.csproj",
+  "projectFilePath": "C:\\Users\\elemo\\Music\\Lab5G103\\modulo_gestor_usuario\\DDDNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elemo\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
@@ -121,10 +121,10 @@
     "C:\\Users\\elemo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\zstdsharp.port\\0.7.3\\zstdsharp.port.0.7.3.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\elemo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": [
     {

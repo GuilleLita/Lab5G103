@@ -18,6 +18,7 @@ namespace DDDSample1.Domain.Families
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DB);
+            _family = database.GetCollection<FamilyDto>("families");
         }
 
         public async Task<List<FamilyDto>> GetAllAsync()
@@ -36,18 +37,32 @@ namespace DDDSample1.Domain.Families
 
             return new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description};
         }
+*/
+    public async Task<FamilyDto> GetByIdAsync(FamilyId id)
+{
+    var filter = Builders<FamilyDto>.Filter.Eq("_id", id); // Suponiendo que el ID es una cadena
+
+    var family = await _family.Find(filter).FirstOrDefaultAsync();
+
+    if (family == null)
+        return null;
+
+    return family;
+}
+
 
         public async Task<FamilyDto> AddAsync(FamilyDto dto)
-        {
-            var family = new Family(dto.Id, dto.Description);
+{
+    var family = new Family(dto.Description);
 
-            await this._repo.AddAsync(family);
+    var convertion=new FamilyDto {Description = family.Description };
 
-            await this._unitOfWork.CommitAsync();
+    await _family.InsertOneAsync(convertion);
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+    return new FamilyDto { Id = family.Id.AsGuid(), Description = family.Description };
+}
 
+/*
         public async Task<FamilyDto> UpdateAsync(FamilyDto dto)
         {
             var family = await this._repo.GetByIdAsync(new FamilyId(dto.Id)); 

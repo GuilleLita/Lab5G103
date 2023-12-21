@@ -8,8 +8,8 @@ namespace DDDSample1.Domain.Families
     public class FamilyDto
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public String Id { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public Guid Id { get; set; }
         [BsonElement("Description")]
         [BsonRepresentation(BsonType.String)]
         public string Description { get; set; }
