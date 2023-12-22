@@ -48,7 +48,7 @@ namespace DDDSample1.Controllers
             return CreatedAtAction(nameof(GetGetById), new { id = cat.Id }, cat);
         }
 
-        
+        /*
         // PUT: api/Roles/5
         [HttpPut("{id}")]
         public async Task<ActionResult<RoleDto>> Update(Guid id, RoleDto dto)
@@ -107,6 +107,6 @@ namespace DDDSample1.Controllers
             {
                return BadRequest(new {Message = ex.Message});
             }
-        }
+        }*/
     }
 }

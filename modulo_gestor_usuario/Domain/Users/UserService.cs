@@ -2,44 +2,57 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DDDSample1.Domain.Shared;
 using DDDSample1.Domain.Roles;
+using DDDSample1.Interfaces;
+using DDDSample1.Implementations;
+using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Users
 {
     public class UserService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserRepository _repo;
+        //private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUserRepository _repo;
 
-        private readonly IRoleRepository _repoCat;
-
-        public UserService(IUnitOfWork unitOfWork, IUserRepository repo, IRoleRepository repoRoles)
+        //private readonly IRoleRepository _repoCat;
+private readonly IMongoCollection<UserDto> _user;
+        public UserService(iMongoDBSettings settings)
         {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
-            this._repoCat = repoRoles;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DB);
+            _user = database.GetCollection<UserDto>("users");
         }
 
         public async Task<List<UserDto>> GetAllAsync()
         {
-            var list = await this._repo.GetAllAsync();
-            
-            List<UserDto> listDto = list.ConvertAll<UserDto>(prod => 
-                new UserDto(prod.Id.AsGuid(),prod.Username,prod.Password,prod.RoleId));
+            var users = await _user.Find(f => true).ToListAsync();
 
-            return listDto;
+            return users;
         }
 
         public async Task<UserDto> GetByIdAsync(UserId id)
-        {
-            var prod = await this._repo.GetByIdAsync(id);
-            
-            if(prod == null)
-                return null;
+{
+    var filter = Builders<UserDto>.Filter.Eq("_id", id); // Suponiendo que el ID es una cadena
 
-            return new UserDto(prod.Id.AsGuid(),prod.Username,prod.Password,prod.RoleId);
-        }
+    var user = await _user.Find(filter).FirstOrDefaultAsync();
 
+    if (user == null)
+        return null;
+
+    return user;
+}
+
+ public async Task<UserDto> AddAsync(CreatingUserDto dto)
+{
+    var user = new User(dto.Username, dto.Password, dto.RoleId);
+
+    var convertion=new UserDto (user.Id.AsGuid(),user.Username,user.Password,user.RoleId);
+
+    await _user.InsertOneAsync(convertion);
+
+    return new UserDto (user.Id.AsGuid(),user.Username,user.Password,user.RoleId);
+}
+/*
         public async Task<UserDto> AddAsync(CreatingUserDto dto)
         {
             await checkRoleIdAsync(dto.RoleId);
@@ -105,6 +118,6 @@ namespace DDDSample1.Domain.Users
            var role = await _repoCat.GetByIdAsync(roleId);
            if (role == null)
                 throw new BusinessRuleValidationException("Invalid Role Id.");
-        }
+        }*/
     }
 }

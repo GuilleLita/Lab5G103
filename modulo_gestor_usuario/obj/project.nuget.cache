@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+/+cIHFfef7/N6zaDoUgfWI33DvJBeoUmaMuf/gYZsic8PnB31qmbwO2liE/arPDVGdCNTt3JJaVxMcVOUxhFA==",
+  "dgSpecHash": "1vJ8Hrl6m5UAQg/3eRKK+msiY5bKVgNw+4hbc/zXeMlsJaWuy9r1/Imxtys4UfIL1kLRcR7f+iSwecYwu0dn+g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\elemo\\Music\\Lab5G103\\modulo_gestor_usuario\\DDDNetCore.csproj",
+  "projectFilePath": "C:\\Users\\elemo\\Music\\Lab5G103 - copia\\modulo_gestor_usuario\\DDDNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elemo\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\elemo\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

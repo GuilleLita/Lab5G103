@@ -7,14 +7,14 @@ namespace DDDSample1.Domain.Roles
     public class RoleId : EntityId
     {
         [JsonConstructor]
-        public RoleId(Guid value) : base(value)
+        public RoleId(Guid values) : base(values)
         {
         }
 
-        public RoleId(String value) : base(value)
+        public RoleId(String values) : base(values)
         {
         }
-
+        
         override
         protected  Object createFromString(String text){
             return new Guid(text);
@@ -26,9 +26,10 @@ namespace DDDSample1.Domain.Roles
             return obj.ToString();
         }
         
-       
+    
         public Guid AsGuid(){
             return (Guid) base.ObjValue;
         }
     }
+    
 }

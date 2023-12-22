@@ -1,29 +1,56 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using DDDSample1.Domain.Shared;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using DDDSample1.Interfaces;
+using DDDSample1.Implementations;
+using MongoDB.Driver;
 namespace DDDSample1.Domain.Roles
 {
     public class RoleService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IRoleRepository _repo;
-
-        public RoleService(IUnitOfWork unitOfWork, IRoleRepository repo)
+        //private readonly IUnitOfWork _unitOfWork;
+        //private readonly IRoleRepository _repo;
+private readonly IMongoCollection<RoleDto> _role;
+        public RoleService(iMongoDBSettings settings)
         {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DB);
+            _role = database.GetCollection<RoleDto>("roles");
         }
 
         public async Task<List<RoleDto>> GetAllAsync()
         {
-            var list = await this._repo.GetAllAsync();
-            
-            List<RoleDto> listDto = list.ConvertAll<RoleDto>(cat => new RoleDto{Id = cat.Id.AsGuid(), Description = cat.Description});
+            var roles = await _role.Find(f => true).ToListAsync();
 
-            return listDto;
+            return roles;
         }
 
+        public async Task<RoleDto> GetByIdAsync(RoleId id)
+        {
+            var filter = Builders<RoleDto>.Filter.Eq("_id", id); // Suponiendo que el ID es una cadena
+
+            var role = await _role.Find(filter).FirstOrDefaultAsync();
+
+            if (role == null)
+                return null;
+
+            return role;
+        }
+
+        public async Task<RoleDto> AddAsync(CreatingRoleDto dto)
+{
+    var role = new Role(dto.Description);
+
+    var convertion=new RoleDto {Description = role.Description };
+
+    await _role.InsertOneAsync(convertion);
+
+    return new RoleDto { Id = role.Id.AsGuid(), Description = role.Description };
+}
+
+/*
         public async Task<RoleDto> GetByIdAsync(RoleId id)
         {
             var cat = await this._repo.GetByIdAsync(id);
@@ -89,6 +116,6 @@ namespace DDDSample1.Domain.Roles
             await this._unitOfWork.CommitAsync();
 
             return new RoleDto { Id = role.Id.AsGuid(), Description = role.Description };
-        }
+        }*/
     }
 }

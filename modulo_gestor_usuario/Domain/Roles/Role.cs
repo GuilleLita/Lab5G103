@@ -1,11 +1,15 @@
 using System;
 using DDDSample1.Domain.Shared;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace DDDSample1.Domain.Roles
-{
+{[BsonIgnoreExtraElements]
     public class Role : Entity<RoleId>, IAggregateRoot
     {
-     
+     [BsonElement("Description")]
+        [BsonRepresentation(BsonType.String)]
+        
         public string Description { get;  private set; }
 
         public bool Active{ get;  private set; }

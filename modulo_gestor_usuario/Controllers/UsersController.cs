@@ -57,7 +57,7 @@ namespace DDDSample1.Controllers
             }
         }
 
-        
+        /*
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDto>> Update(Guid id, UserDto dto)
@@ -116,6 +116,6 @@ namespace DDDSample1.Controllers
             {
                return BadRequest(new {Message = ex.Message});
             }
-        }
+        }*/
     }
 }

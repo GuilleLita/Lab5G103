@@ -4,11 +4,18 @@ using DDDSample1.Domain.Roles;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Users
-{
+{[BsonIgnoreExtraElements]
     public class User : Entity<UserId>, IAggregateRoot
-    {
+    { [BsonElement("Username")]
+        [BsonRepresentation(BsonType.String)]
+       
         public string Username { get;  private set; }
+        [BsonElement("Password")]
+        [BsonRepresentation(BsonType.String)]
         public string Password { get;  private set; }
+        [BsonElement("RoleId")]
+        //[BsonRepresentation(BsonType.String)]
+        
         public RoleId RoleId { get;  private set; }
         public bool Active{ get;  private set; }
 

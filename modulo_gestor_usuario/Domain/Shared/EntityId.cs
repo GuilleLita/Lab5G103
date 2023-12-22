@@ -1,5 +1,6 @@
 using System;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 namespace DDDSample1.Domain.Shared
 {
     /// <summary>
@@ -7,6 +8,7 @@ namespace DDDSample1.Domain.Shared
     /// </summary>
     public abstract class EntityId: IEquatable<EntityId>, IComparable<EntityId>
     {
+        [BsonIgnore]
         protected Object ObjValue {get;}
 
         public String Value { 
