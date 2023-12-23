@@ -62,6 +62,10 @@ export default {
       name: "ElevatorController",
       path: "../controllers/elevatorController"
     },
+    task: {
+      name: "TaskController",
+      path: "../controllers/taskController"
+    },
     hallway: {
       name: "HallwayController",
       path: "../controllers/hallwayController"
@@ -85,6 +89,10 @@ export default {
     room: {
       name: "RoomRepo",
       path: "../repos/roomRepo"
+    },
+    task: {
+      name: "TaskRepo",
+      path: "../repos/taskRepo"
     },
     elevator: {
       name: "ElevatorRepo",
@@ -117,6 +125,10 @@ export default {
     room: {
       name: "RoomService",
       path: "../services/roomService"
+    },
+    task: {
+      name: "TaskService",
+      path: "../services/taskService"
     },
     elevator: {
       name: "ElevatorService",

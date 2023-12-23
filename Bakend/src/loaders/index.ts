@@ -19,6 +19,10 @@ export default async ({ expressApp }) => {
     name: 'buildingSchema',
     schema: '../persistence/schemas/buildingSchema',
   };
+  const taskSchema = {
+    name: 'taskSchema',
+    schema: '../persistence/schemas/taskSchema',
+  };
 
   const typerobotSchema = {
     name: 'typerobotSchema',
@@ -54,7 +58,10 @@ export default async ({ expressApp }) => {
     name: config.services.hallway.name,
     path: config.services.hallway.path
   }
-
+  const taskService = {
+    name: config.services.task.name,
+    path: config.services.task.path
+  }
   const typerobotService = {
     name: config.services.typerobot.name,
     path: config.services.typerobot.path
@@ -68,6 +75,11 @@ export default async ({ expressApp }) => {
   const hallwayRepo = {
     name: config.repos.hallway.name,
     path: config.repos.hallway.path
+  }
+
+  const taskRepo = {
+    name: config.repos.task.name,
+    path: config.repos.task.path
   }
 
   const typerobotRepo = {
@@ -105,7 +117,10 @@ export default async ({ expressApp }) => {
     name: config.controllers.robot.name,
     path: config.controllers.robot.path
   }
-
+  const taskController = {
+    name: config.controllers.task.name,
+    path: config.controllers.task.path
+  }
   const typeRobotController = {
     name: config.controllers.typerobot.name,
     path: config.controllers.typerobot.path
@@ -160,7 +175,8 @@ export default async ({ expressApp }) => {
       roomSchema,
       elevatorSchema,
       robotSchema,
-      typerobotSchema
+      typerobotSchema,
+      taskSchema
     ],
     controllers: [
       buildingController,
@@ -168,7 +184,8 @@ export default async ({ expressApp }) => {
       floorController,
       typeRobotController,
       elevatorController,
-      hallwayController
+      hallwayController,
+      taskController
     ],
     repos: [
       buildingRepo,
@@ -177,7 +194,8 @@ export default async ({ expressApp }) => {
       roomRepo,
       elevatorRepo,
       robotRepo,
-      typerobotRepo
+      typerobotRepo,
+      taskRepo
     ],
     services: [
       buildingService,
@@ -186,7 +204,8 @@ export default async ({ expressApp }) => {
       roomService,
       elevatorService,
       robotService,
-      typerobotService
+      typerobotService,
+      taskService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

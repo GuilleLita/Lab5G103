@@ -6,6 +6,7 @@ import room from './routes/roomRoute';
 import robot from './routes/robotRoute';
 import typerobot from './routes/typerobotRoute';
 import elevator from './routes/elevatorRoute';
+import task from './routes/taskRoute';
 
 export default () => {
 	const app = Router();
@@ -17,6 +18,7 @@ export default () => {
 	robot(app);
 	typerobot(app);
 	elevator(app);
+	task(app);
 
 	
 	return app

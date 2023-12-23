@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DDDNetCore
-build_property.ProjectDir = C:\Users\elemo\Music\Lab5G103 - copia\modulo_gestor_usuario\
+build_property.ProjectDir = C:\Users\elemo\Music\Lab5G103\modulo_gestor_usuario\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
