@@ -29,9 +29,12 @@ function AddTask() {
     const [floorSelected2, setFloorSelect2] = useState({ value: '', label: ''});
     type SelectOptionType = { label: string, value: string }
 
-    const position1 = useRef<any>(null);
-    const position2 = useRef<any>(null);
-    
+    const taskName = useRef<any>(null);
+    const initialPoint1 = useRef<any>(null);
+    const initialPoint2 = useRef<any>(null);
+    const destinationPoint1 = useRef<any>(null);
+    const destinationPoint2 = useRef<any>(null);
+    const status = useRef<any>(null);
     const customStyles = {
         control: (base:any) => ({
           ...base,
@@ -78,33 +81,42 @@ function AddTask() {
             setFloorSelect(option)
           }
     }
-/*
+
     const OnClickListner = async () =>{
-        if (position1.current !== null && position2.current !== null) {
-            let input1 = position1.current.value
-            let input2 = position2.current.value   
-            let hallwayOrError = viewmodel.setTask(selected.value, selected2.value, floorSelected.value, floorSelected2.value, input1, input2)
-            if ((await hallwayOrError).isFailure) {
-                alert((await hallwayOrError).errorValue())
+        if (taskName.current !== null && status.current !== null && initialPoint1.current !== null && initialPoint2.current !== null && destinationPoint1.current !== null && destinationPoint2.current !== null) {
+            let input0 = taskName.current.value
+            let input1 = initialPoint1.current.value
+            let input2 = initialPoint2.current.value
+            let input3 = destinationPoint1.current.value
+            let input4 = destinationPoint2.current.value
+            let input5 = status.current.value   
+            let taskOrError = viewmodel.setTask(input0, selected.value, selected2.value, floorSelected.value, floorSelected2.value, input1, input2, input3, input4, input5)
+            if ((await taskOrError).isFailure) {
+                alert((await taskOrError).errorValue())
             } else {
 
-                alert("Hallway added")
+                alert("Task added")
             }
         }
     }
 
 
     return (
-        <div className="Hallway-body">
-            <h1>Add Hallway</h1>
-            <div className="Hallway-Form">
-                <div className="Hallway-Form-Field">
+        <div className="Task-body">
+            <h1>Add Task</h1>
+            <div className='taskName'>
+                <label htmlFor="taskName">taskName:  </label>
+                <input ref={taskName} type="text" id="taskName" name="name" className='input' />
+            </div>
+            <div className="Task-Form">
+                
+                <div className="Task-Form-Field">
                     <label htmlFor="building1">Building 1</label>
                     <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
                     <label htmlFor="floor1">Floor</label>
                     <ReactSelect styles={customStyles} isSearchable={false} options={floor1Options} onChange={handleFloorInputChange}/>
                 </div>
-                <div className="Hallway-Form-Field">
+                <div className="Task-Form-Field">
                     <label htmlFor="building2">Building 2</label>
                     <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange2} />
                     <label htmlFor="floor2">Floor</label>
@@ -113,13 +125,24 @@ function AddTask() {
                 
             </div>
             <div className='PositionForm'>
-                <label htmlFor="position">Position in bulilding 1:  </label>
-                <input ref={position1} type="text" id="position1" name="name" className='input' />
-                <input ref={position2} type="text" id="position2" name="name" className='input' />
+                <label htmlFor="position">Initial Position:  </label>
+                <input ref={initialPoint1} type="text" id="initialPoint1" name="name" className='input' />
+                <input ref={initialPoint2} type="text" id="initialPoint2" name="name" className='input' />
 
+            </div>
+            <div className='PositionForm'>
+                <label htmlFor="position">Destination Position:  </label>
+                <input ref={destinationPoint1} type="text" id="destinationPoint1" name="name" className='input' />
+                <input ref={destinationPoint2} type="text" id="destinationPoint2" name="name" className='input' />
+
+            </div>
+            <div className='Status'>
+                <label htmlFor="status">Status:  </label>
+                <input ref={status} type="text" id="status" name="name" className='input' />
             </div>
             <button className="submit" onClick={OnClickListner} >Create Hallway</button>
         </div>
 
-    );*/
+    );
 }
+export default AddTask;

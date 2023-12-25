@@ -4,6 +4,7 @@ import { createStore } from 'state-pool';
 import AddHallway from './AddHallway';
 import EditFloor from './EditFloor';
 import ListElevators from './ListElevators';
+import AddTask from './AddTask';
 
 const store = createStore();
 store.setState("body", "home");
@@ -27,6 +28,7 @@ function App() {
           <button className="Header-Button" onClick={()=>ChangeBody("addHallway")}>Add Hallway</button>
           <button className="Header-Button" onClick={()=>ChangeBody("editFloor")}>Edit Floor</button>
           <button className="Header-Button" onClick={()=>ChangeBody("listElevators")}>List elevators in building</button>
+          <button className="Header-Button" onClick={()=>ChangeBody("addTask")}>Add Task</button>
         </div>
         
       </div>
@@ -57,6 +59,10 @@ function Body() {
       return (
          <ListElevators />
         )
+    case "addTask":
+      return (
+        <AddTask />
+            )
     default:
       return (
         <div className="App-body">

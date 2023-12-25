@@ -72,7 +72,7 @@ export default class AddTaskViewModel
     }
 
 
-    public async setTask (name: string, building1: string, building2: string, floor1: string, floor2: string, initialPoint1: string, initialPoint2: string, destinationPoint1: string, destinationPoint2: string): Promise<Result<{taskDTO: ITaskDTO}>>{
+    public async setTask (name: string, building1: string, building2: string, floor1: string, floor2: string, initialPoint1: string, initialPoint2: string, destinationPoint1: string, destinationPoint2: string, status: string): Promise<Result<{taskDTO: ITaskDTO}>>{
         let buildingCodes: string[] = await this.getCodes(building1, building2)
         
         
@@ -82,7 +82,8 @@ export default class AddTaskViewModel
                 buildingsCode: buildingCodes,
                 floorsId: [floor1, floor2], 
                 initialPoint: [parseInt(initialPoint1), parseInt(initialPoint2)],
-                destinationPoint: [parseInt(destinationPoint1), parseInt(destinationPoint2)]} as ITaskDTO;
+                destinationPoint: [parseInt(destinationPoint1), parseInt(destinationPoint2)],
+                status: status} as ITaskDTO;
                  
 
         return this.taskService.CreateTask(task);

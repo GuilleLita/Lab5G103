@@ -1,8 +1,8 @@
-.Hallway{
+.Task{
     text-align: center;
 }
 
-.Hallway-body{
+.Task-body{
     background-color: #ffffff;
     min-height: 87vh;
     display: flex;
@@ -15,7 +15,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.Hallway-Form{
+.Task-Form{
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -27,7 +27,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.Hallway-Form-Field{
+.Task-Form-Field{
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -40,6 +40,7 @@
     font-family: 'Montserrat', sans-serif;
 
 }
+
 
 .submit{
     background-color: #cc3556;
