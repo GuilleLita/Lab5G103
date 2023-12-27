@@ -58,6 +58,27 @@ export default class TaskService implements ITaskService{
       }
 }
 
+public async updateTaskStatus(taskId: string, newStatus: string): Promise<Result<{ taskDTO: ITaskDTO }>> {
+  try {
+      const task = await this.taskRepo.findById(taskId);
+
+      if (!task) {
+          return Result.fail<{ taskDTO: ITaskDTO }>(`Task not found with id=${taskId}`);
+      }
+
+      task.status = newStatus;
+
+      await this.taskRepo.save(task);
+
+      const updatedTaskDTO = TaskMap.toDTO(task) as ITaskDTO;
+
+      return Result.ok<{ taskDTO: ITaskDTO }>({ taskDTO: updatedTaskDTO });
+  } catch (error) {
+      throw error;
+  }
+}
+
+
   public async updateTask(taskDTO: ITaskDTO): Promise<Result<{ taskDTO: ITaskDTO; }>>  {
     try {
       const Task = await this.taskRepo.findById(taskDTO.taskId);
@@ -76,6 +97,36 @@ export default class TaskService implements ITaskService{
       await this.taskRepo.save(Task);
       const TaskDTOResult = TaskMap.toDTO( Task ) as ITaskDTO;
       return Result.ok<{taskDTO: ITaskDTO}>( {taskDTO: TaskDTOResult} )
+    } catch (e) {
+      throw e;
+    }
+  }
+  public async getTaskId(): Promise<Result<{ taskDTO: ITaskDTO[]; }>>  {
+    try {
+      const Tasks = await this.taskRepo.getAll();
+
+      if (Task === null) {
+        return Result.fail<{taskDTO: ITaskDTO[]}>("Task not found");
+      }
+      else {
+        const TasksDTOResult = Tasks.map( Task => TaskMap.toDTO( Task ) as ITaskDTO );
+        return Result.ok<{taskDTO: ITaskDTO[]}>( {taskDTO: TasksDTOResult} )
+        }
+    } catch (e) {
+      throw e;
+    }
+  }
+  public async getTasksByStatus(status: string): Promise<Result<{ taskDTO: ITaskDTO[]; }>>  {
+    try {
+      const Tasks = await this.taskRepo.findStatus(status);
+      const found = !!Tasks ;
+
+      if (!found) {
+        return Result.fail<{taskDTO: ITaskDTO[]}>("Task not found with status=" + status);
+      }
+
+      const TaskDTOResult = Tasks.map( Task => TaskMap.toDTO( Task ) as ITaskDTO);
+      return Result.ok<{taskDTO: ITaskDTO[]}>( {taskDTO: TaskDTOResult} )
     } catch (e) {
       throw e;
     }

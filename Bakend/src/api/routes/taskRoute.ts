@@ -66,7 +66,19 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateTask(req, res, next) );
 
+    route.patch(
+      '/updatetaskstatus',
+      celebrate({
+        body: Joi.object({
+          taskId: Joi.string().required(),
+          status: Joi.string().required(),
+        }),
+      }),
+      (req, res, next) => ctrl.updateTaskStatus(req, res, next) );
 
-    //route.get("/getbybuilding", (req, res, next) => ctrl.getElevatorsByBuilding(req, res, next) );
-
+      route.get('/getall', function(req, res, next) {
+        ctrl.getTaskId(req, res, next);
+      });
+      
+    route.get("/getbystatus", (req, res, next) => ctrl.getTasksByStatus(req, res, next) );
 };

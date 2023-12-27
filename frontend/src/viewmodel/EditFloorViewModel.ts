@@ -52,7 +52,7 @@ export default class EditFloorViewModel {
         }
         let floor = floorOrError.getValue().floorDTO;
         
-        return FloorMap.toDomain(floor);;
+        return FloorMap.toDomain(floor);
     }
 
     public async searchBuildings () {

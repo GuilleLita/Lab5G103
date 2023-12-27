@@ -45,6 +45,52 @@ export default class TaskController implements ITaskController /* TODO: extends 
       return next(e);
     }
   };
+  public async updateTaskStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      const taskOrError = await this.taskServiceInstance.updateTask(req.body as ITaskDTO) as Result<{taskDTO: ITaskDTO}>;
+
+      if (taskOrError.isFailure) {
+        return res.status(402).send(taskOrError.errorValue());
+      }
+
+      const taskDTO = taskOrError.getValue();
+      return res.status(201).json( taskDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+  
+  public async getTaskId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const taskOrError = await this.taskServiceInstance.getTaskId() as Result<{taskDTO: ITaskDTO[]}>;
+
+      if (taskOrError.isFailure) {
+        return res.status(404).send();
+      }
+
+      const taskDTO = taskOrError.getValue();
+      return res.status(201).json( taskDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  };
+  public async getTasksByStatus(req: Request, res: Response, next: NextFunction) {
+    try {
+      let status = <string>req.query.status;
+      const taskOrError = await this.taskServiceInstance.getTasksByStatus(status) as Result<{taskDTO: ITaskDTO[]}>;
+      if (taskOrError.isFailure) {
+        return res.status(402).send(taskOrError.errorValue());
+      }
+
+      const taskDTO = taskOrError.getValue();
+      return res.status(201).json( taskDTO );
+    }
+    catch (e) {
+      return next(e);
+    }
+  }
 /*
   public async getElevatorsByBuilding(req: Request, res: Response, next: NextFunction) {
     try {

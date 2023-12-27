@@ -5,7 +5,8 @@ import AddHallway from './AddHallway';
 import EditFloor from './EditFloor';
 import ListElevators from './ListElevators';
 import AddTask from './AddTask';
-
+import UpdateTask from './UpdateTask';
+import ListTask from './ListTask';
 const store = createStore();
 store.setState("body", "home");
 
@@ -29,6 +30,8 @@ function App() {
           <button className="Header-Button" onClick={()=>ChangeBody("editFloor")}>Edit Floor</button>
           <button className="Header-Button" onClick={()=>ChangeBody("listElevators")}>List elevators in building</button>
           <button className="Header-Button" onClick={()=>ChangeBody("addTask")}>Add Task</button>
+          <button className="Header-Button" onClick={()=>ChangeBody("updateTask")}>Update Task</button>
+          <button className="Header-Button" onClick={()=>ChangeBody("listTask")}>List Task</button>
         </div>
         
       </div>
@@ -63,6 +66,14 @@ function Body() {
       return (
         <AddTask />
             )
+    case "updateTask":
+      return (
+        <UpdateTask />
+            )
+    case "listTask":
+              return (
+                <ListTask />
+                    )
     default:
       return (
         <div className="App-body">

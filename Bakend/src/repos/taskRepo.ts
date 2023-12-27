@@ -24,6 +24,19 @@ export default class TaskRepo implements ITaskRepo {
     }
   }
 
+  public async getAll (): Promise<Task[]> {
+    const TaskRecord = await this.taskSchema.find();
+    const TaskArray : Task[] = [];
+    if( TaskRecord != null) {
+      for(var i=0; i< TaskRecord.length; i++){
+      TaskArray.push( await TaskMap.toDomain(TaskRecord[i]));
+      }
+
+      return TaskArray;
+    }
+    else
+      return null;
+  }
   public async exists (taskId: TaskId | string): Promise<boolean> {
 
     const idX = taskId instanceof TaskId ? (<TaskId>taskId).id.toValue() : taskId;
@@ -72,6 +85,21 @@ export default class TaskRepo implements ITaskRepo {
 
     if( TaskRecord != null) {
       return TaskMap.toDomain(TaskRecord);
+    }
+    else
+      return null;
+  }
+
+  public async findStatus (status: string): Promise<Task[]> {
+    const query = { status: status };
+    const taskRecord = await this.taskSchema.find( query );
+    const taskArray: Task[] = [];
+    console.log(taskRecord);
+    if( taskRecord.length > 0) {
+      for(let i = 0; i < taskRecord.length; i++){
+        taskArray.push(await TaskMap.toDomain(taskRecord[i]));
+      }
+      return taskArray;  
     }
     else
       return null;

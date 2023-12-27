@@ -29,7 +29,7 @@ export class TaskMap extends Mapper<Task> {
 	    initialPoint:  raw.initialPoint,
       destinationPoint: raw.destinationPoint,
       status: raw.status
-      }, new UniqueEntityID(raw.elevatorId))
+      }, new UniqueEntityID(raw.taskId))
     taskOrError.isFailure ? console.log(taskOrError.error) : '';
     return taskOrError.isSuccess ? taskOrError.getValue() : null;
   }
