@@ -30,7 +30,7 @@ function App() {
           <button className="Header-Button" onClick={()=>ChangeBody("editFloor")}>Edit Floor</button>
           <button className="Header-Button" onClick={()=>ChangeBody("listElevators")}>List elevators in building</button>
           <button className="Header-Button" onClick={()=>ChangeBody("addTask")}>Add Task</button>
-          <button className="Header-Button" onClick={()=>ChangeBody("updateTask")}>Update Task</button>
+          <button className="Header-Button" onClick={()=>ChangeBody("rejectacceptTask")}>Reject/Accept Task</button>
           <button className="Header-Button" onClick={()=>ChangeBody("listTask")}>List Task</button>
         </div>
         
@@ -66,7 +66,7 @@ function Body() {
       return (
         <AddTask />
             )
-    case "updateTask":
+    case "rejectacceptTask":
       return (
         <UpdateTask />
             )

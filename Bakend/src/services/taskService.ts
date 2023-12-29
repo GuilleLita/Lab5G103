@@ -37,7 +37,7 @@ export default class TaskService implements ITaskService{
         //elevatorId: elevatorDTO.elevatorId,
         taskName: taskDTO.taskName,
         buildingsCode: taskDTO.buildingsCode,
-          floorsId: taskDTO.floorsId,
+        floorsId: taskDTO.floorsId,
         initialPoint: taskDTO.initialPoint,
         destinationPoint: taskDTO.destinationPoint,
         status: taskDTO.status
@@ -87,11 +87,11 @@ public async updateTaskStatus(taskId: string, newStatus: string): Promise<Result
       if (!found) {
         return Result.fail<{taskDTO: ITaskDTO}>("task not found with id=" + taskDTO.taskId);
       }
-      Task.taskName = taskDTO.taskName;
-      Task.buildingsCode= taskDTO.buildingsCode,
-      Task.floorsId= taskDTO.floorsId,
-      Task.initialPoint = taskDTO.initialPoint;
-      Task.destinationPoint = taskDTO.destinationPoint;
+      Task.taskName = Task.taskName;
+      Task.buildingsCode= Task.buildingsCode,
+      Task.floorsId= Task.floorsId,
+      Task.initialPoint = Task.initialPoint;
+      Task.destinationPoint = Task.destinationPoint;
       Task.status = taskDTO.status;
 
       await this.taskRepo.save(Task);

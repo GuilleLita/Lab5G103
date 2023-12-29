@@ -23,11 +23,7 @@ function UpdateTask() {
     let viewmodel = new UpdateTaskViewModel(buildingService.instance, taskService.instance);    
     const [selected, setSelected] = useState({ value: '', label: ''});
     type SelectOptionType = { label: string, value: string }
-    const taskName = useRef<any>(null);
-    const buildingsCode = useRef<any>(null);
-    const floorsId = useRef<any>(null);
-    const initialPoint = useRef<any>(null);
-    const destinationPoint = useRef<any>(null);
+    
     const status = useRef<any>(null);
     const customStyles = {
         control: (base:any) => ({
@@ -57,20 +53,10 @@ function UpdateTask() {
     }
 
     const OnClickListner = async () => {
-        let newtask = Task.create({
-                                taskName: taskName.current.value,
-                                buildingsCode: buildingsCode.current.value,
-                                floorsId: floorsId.current.value,
-                                initialPoint: initialPoint.current.value, 
-                                destinationPoint: destinationPoint.current.value,
-                                status: status.current.value});
-        if(newtask.isSuccess){
-            viewmodel.updateTask(newtask.getValue());
-            alert("task updated")
-        }
-        else{
-            alert(newtask.error);
-        }
+        let statusinsertado=status.current.value;
+            viewmodel.updateTaskStatus(selected.value, statusinsertado);
+            alert("task updated");
+        
        
     }
 
@@ -78,8 +64,8 @@ function UpdateTask() {
 
     return (
         <div className="Task-Body">
-            <h1>EditTask</h1>
-            <p>Edit any propety and click Update Task to edit the Task with the new values</p>
+            <h1>Reject or Accept Tasks</h1>
+            <p>Select the Id and introduce Reject or Accept in status</p>
             <div className='twoboxes'>
                 <div className="Task-selection">
                     <p>Which is the id of the task?</p>
@@ -91,25 +77,14 @@ function UpdateTask() {
                         
                         <div className='info'>
                            
-                            <p className='infotext'>taskName </p>
-                            <textarea ref={taskName} id="taskName" name="name" className='input-desc' />
-                            <p className='infotext'>buildingsCode </p>
-                            <textarea ref={buildingsCode} id="buildingsCode" name="name" className='input-desc' />
-                            <p className='infotext'>floorsId </p>
-                            <textarea ref={floorsId} id="floorsId" name="name" className='input-desc' />
-                            <p className='infotext'>initialPoint </p>
-                            <textarea ref={initialPoint} id="initialPoint" name="name" className='input-desc' />
-                            <p className='infotext'>status </p>
-                            <textarea ref={destinationPoint} id="destinationPoint" name="name" className='input-desc' />
                             <p className='infotext'>status </p>
                             <textarea ref={status} id="status" name="name" className='input-desc' />
                             
-                            
+                            <button className="submit" onClick={OnClickListner} >Update Task</button>
+                
                             
                         </div>
-                        
-                        <button className="submit" onClick={OnClickListner} >Update Task</button>
-                    </div>
+                        </div>
 
                 </div> 
                 

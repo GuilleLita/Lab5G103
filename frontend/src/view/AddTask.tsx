@@ -140,7 +140,7 @@ function AddTask() {
                 <label htmlFor="status">Status:  </label>
                 <input ref={status} type="text" id="status" name="name" className='input' />
             </div>
-            <button className="submit" onClick={OnClickListner} >Create Hallway</button>
+            <button className="submit" onClick={OnClickListner} >Create Task</button>
         </div>
 
     );

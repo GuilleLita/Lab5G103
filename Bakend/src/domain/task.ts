@@ -33,7 +33,7 @@ export class Task extends AggregateRoot<TaskProps> {
   get floorsId() : string[]{
     return this.props.floorsId;
   }
-  get intialPoint() : number[]{
+  get initialPoint() : number[]{
     return this.props.initialPoint;
   }
 

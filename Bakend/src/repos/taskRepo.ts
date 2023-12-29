@@ -24,19 +24,28 @@ export default class TaskRepo implements ITaskRepo {
     }
   }
 
-  public async getAll (): Promise<Task[]> {
-    const TaskRecord = await this.taskSchema.find();
-    const TaskArray : Task[] = [];
-    if( TaskRecord != null) {
-      for(var i=0; i< TaskRecord.length; i++){
-      TaskArray.push( await TaskMap.toDomain(TaskRecord[i]));
+  public async getAll(): Promise<Task[]> {
+    try {
+      const TaskRecord = await this.taskSchema.find();
+  
+      if (!TaskRecord || TaskRecord.length === 0) {
+        // No se encontraron tareas
+        return [];
       }
-
+  
+      const TaskArray: Task[] = [];
+  
+      for (const taskRecord of TaskRecord) {
+        const task = await TaskMap.toDomain(taskRecord);
+        TaskArray.push(task);
+      }
+  
       return TaskArray;
+    } catch (error) {
+      throw error;
     }
-    else
-      return null;
   }
+  
   public async exists (taskId: TaskId | string): Promise<boolean> {
 
     const idX = taskId instanceof TaskId ? (<TaskId>taskId).id.toValue() : taskId;

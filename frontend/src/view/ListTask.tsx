@@ -71,7 +71,10 @@ function ListTasks(){
                         <label htmlFor="floorsId" >floorsId</label>
                         <p className='Task-p'>{task.floorsId[0]}, {task.floorsId[1]}</p>
                         </div>
-                        
+                        <div className="Task-list-item-text">
+                        <label htmlFor="initialPoint" >initialPoint</label>
+                        <p className='Task-p'>{task.initialPoint[0]}, {task.initialPoint[1]}</p>
+                        </div>
                         <div className="Task-list-item-text">
                         <label htmlFor="destinationPoint" >destinationPoint</label>
                         <p className='Task-p'>{task.destinationPoint[0]}, {task.destinationPoint[1]}</p>

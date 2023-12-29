@@ -19,9 +19,9 @@ export default class UpdateTaskViewModel
         )
 
     {}; 
-    public async updateTask(task: Task): Promise<boolean> {
-        let taskDTO = TaskMap.toDTO(task);
-        let taskOrError = await this.taskService.updateTask(taskDTO);
+    public async updateTaskStatus(taskId: string, status: string): Promise<boolean> {
+        //let taskDTO = TaskMap.toDTO(task);
+        let taskOrError = await this.taskService.updateTaskStatus(taskId, status);
         if (taskOrError.isFailure) {
             return false;
         }
