@@ -75,7 +75,6 @@ export default class AddTaskViewModel
     public async setTask (name: string, building1: string, building2: string, floor1: string, floor2: string, initialPoint1: string, initialPoint2: string, destinationPoint1: string, destinationPoint2: string, status: string): Promise<Result<{taskDTO: ITaskDTO}>>{
         let buildingCodes: string[] = await this.getCodes(building1, building2)
         
-        
         let task = 
                 {
                 taskName: name,

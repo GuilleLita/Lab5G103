@@ -1,12 +1,10 @@
 import config from '../config'
-import { Service, Inject} from 'typedi';
+import {Inject} from 'typedi';
 
 import IBuildingService from '../services/IServices/IBuildingService';
 import ITaskService from '../services/IServices/ITaskService';
 
 import { ITaskDTO } from '../dto/ITaskDTO';
-import { Result } from '../core/logic/Result';
-import { IBuildingDTO } from '../dto/IBuildingDTO';
 import { TaskMap } from '../mappers/TaskMap';
 import { Task } from '../domain/task';
 
