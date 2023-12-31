@@ -67,9 +67,9 @@ function UpdateTask() {
             <h1>Reject or Accept Tasks</h1>
             <p>Select the Id and introduce Reject or Accept in status</p>
             <div className='twoboxes'>
-                <div className="Task-selection">
+                <div className="Task-selection" id="status-dropdown">
                     <p>Which is the id of the task?</p>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
+                    <AsyncSelect styles={customStyles} id="status-dropdown2" isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
                     </div> 
                 <div className="Task-info">
                     
@@ -80,7 +80,7 @@ function UpdateTask() {
                             <p className='infotext'>status </p>
                             <textarea ref={status} id="status" name="name" className='input-desc' />
                             
-                            <button className="submit" onClick={OnClickListner} >Update Task</button>
+                            <button className="submit" id="Update" onClick={OnClickListner} >Update Task</button>
                 
                             
                         </div>

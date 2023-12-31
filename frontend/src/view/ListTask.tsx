@@ -49,7 +49,7 @@ function ListTasks(){
         <div className="Task-body">
             <h4>Select status to lists their tasks</h4>
             <label htmlFor="status">status</label>
-            <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
+            <AsyncSelect styles={customStyles} id="status-dropdown" isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
             
             <div className="Task-list">
                 <h4>Tasks</h4>

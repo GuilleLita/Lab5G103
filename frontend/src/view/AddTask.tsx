@@ -112,15 +112,15 @@ function AddTask() {
                 
                 <div className="Task-Form-Field">
                     <label htmlFor="building1">Building 1</label>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
+                    <AsyncSelect styles={customStyles} id="building1" isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
                     <label htmlFor="floor1">Floor</label>
-                    <ReactSelect styles={customStyles} isSearchable={false} options={floor1Options} onChange={handleFloorInputChange}/>
+                    <ReactSelect styles={customStyles} id="floor1" isSearchable={false} options={floor1Options} onChange={handleFloorInputChange}/>
                 </div>
                 <div className="Task-Form-Field">
                     <label htmlFor="building2">Building 2</label>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange2} />
+                    <AsyncSelect styles={customStyles} id="building2" isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange2} />
                     <label htmlFor="floor2">Floor</label>
-                    <ReactSelect styles={customStyles} isSearchable={false} options={floor2Options} onChange={handleFloorInputChange2} />
+                    <ReactSelect styles={customStyles} id="floor2" isSearchable={false} options={floor2Options} onChange={handleFloorInputChange2} />
                 </div>
                 
             </div>
@@ -140,7 +140,7 @@ function AddTask() {
                 <label htmlFor="status">Status:  </label>
                 <input ref={status} type="text" id="status" name="name" className='input' />
             </div>
-            <button className="submit" onClick={OnClickListner} >Create Task</button>
+            <button className="submit" id="Create" onClick={OnClickListner} >Create Task</button>
         </div>
 
     );
