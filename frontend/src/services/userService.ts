@@ -38,4 +38,28 @@ export default class userService implements IUserService {
         }
     }
 
+
+    public async signUp(user: IUserDTO): Promise<Result<{userDTO: IUserDTO, token: any}>> {
+        try {
+            console.log(JSON.stringify(user));
+            const res = await fetch(config.ServerURL + '/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+                });
+            if(res.status === 201){
+                const data = await res.json();
+                return Result.ok<{userDTO: IUserDTO, token: any}>(data);
+            }
+            else{
+
+                return Result.fail<{userDTO: IUserDTO, token: any}>(await res.text());
+            }
+        }
+        catch (e) {
+            throw e;
+        }
+    }
 }
