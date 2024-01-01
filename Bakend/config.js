@@ -70,6 +70,14 @@ export default {
       name: "HallwayController",
       path: "../controllers/hallwayController"
     },
+    user: {
+      name: "UserController",
+      path: "../controllers/userController"
+    },
+    role: {
+      name: "RoleController",
+      path: "../controllers/roleController"
+    },
   },
 
   repos: {
@@ -105,7 +113,15 @@ export default {
     typerobot: {
       name: "TypeRobotRepo",
       path: "../repos/typeRobotRepo"
-    }
+    },
+    user: {
+      name: "UserRepo",
+      path: "../repos/userRepo"
+    },
+    role: {
+      name: "RoleRepo",
+      path: "../repos/roleRepo"
+    },
   },
 
   services: {
@@ -141,6 +157,14 @@ export default {
     typerobot: {
       name: "TypeRobotService",
       path: "../services/typeRobotService"
-    }
+    },
+    user: {
+      name: "UserService",
+      path: "../services/userService"
+    },
+    role: {
+      name: "RoleService",
+      path: "../services/roleService"
+    },
   },
 };

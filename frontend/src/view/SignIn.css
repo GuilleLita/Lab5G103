@@ -1,0 +1,46 @@
+input{
+    width: 67%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.formItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.buttonSub{
+    width: 20%;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #1877f2;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    outline: 0;
+}
+
+.singform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}

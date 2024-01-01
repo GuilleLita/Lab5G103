@@ -10,6 +10,7 @@ import { flatMap, floor } from 'lodash';
 import e from 'express';
 import { type } from 'os';
 
+
 export default async ({ expressApp }) => {
   const mongoConnection = await mongooseLoader();
   Logger.info('✌️ DB loaded and connected!');
@@ -52,6 +53,16 @@ export default async ({ expressApp }) => {
   const elevatorSchema = {
     name: 'elevatorSchema',
     schema: '../persistence/schemas/elevatorSchema',
+  };
+
+  const userSchema = {
+    name: 'userSchema',
+    schema: '../persistence/schemas/userSchema',
+  };
+
+  const roleSchema = {
+    name: 'roleSchema',
+    schema: '../persistence/schemas/roleSchema',
   };
 
   const hallwayService = {
@@ -166,6 +177,36 @@ export default async ({ expressApp }) => {
     path: config.controllers.floor.path
   }
 
+  const userRepo = {
+    name: config.repos.user.name,
+    path: config.repos.user.path
+  }
+
+  const userService = {
+    name: config.services.user.name,
+    path: config.services.user.path
+  }
+
+  const userController = {
+    name: config.controllers.user.name,
+    path: config.controllers.user.path
+  }
+
+  const roleRepo = {
+    name: config.repos.role.name,
+    path: config.repos.role.path
+  }
+
+  const roleService = {
+    name: config.services.role.name,
+    path: config.services.role.path
+  }
+
+  const roleController = {
+    name: config.controllers.role.name,
+    path: config.controllers.role.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -176,7 +217,9 @@ export default async ({ expressApp }) => {
       elevatorSchema,
       robotSchema,
       typerobotSchema,
-      taskSchema
+      taskSchema,
+      userSchema,
+      roleSchema
     ],
     controllers: [
       buildingController,
@@ -185,7 +228,9 @@ export default async ({ expressApp }) => {
       typeRobotController,
       elevatorController,
       hallwayController,
-      taskController
+      taskController,
+
+      roleController
     ],
     repos: [
       buildingRepo,
@@ -195,7 +240,10 @@ export default async ({ expressApp }) => {
       elevatorRepo,
       robotRepo,
       typerobotRepo,
-      taskRepo
+      taskRepo,
+      userRepo,
+      roleRepo
+
     ],
     services: [
       buildingService,
@@ -205,7 +253,9 @@ export default async ({ expressApp }) => {
       elevatorService,
       robotService,
       typerobotService,
-      taskService
+      taskService,
+      userService,
+      roleService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

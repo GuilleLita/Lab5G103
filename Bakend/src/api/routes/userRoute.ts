@@ -58,6 +58,7 @@ export default (app: Router) => {
       }),
     }),
     async (req: Request, res: Response, next: NextFunction) => {
+      console.log("signin")
       const logger = Container.get('logger') as winston.Logger;
       logger.debug('Calling Sign-In endpoint with body: %o', req.body)
       try {

@@ -7,18 +7,34 @@ import ListElevators from './ListElevators';
 import AddTask from './AddTask';
 import UpdateTask from './UpdateTask';
 import ListTask from './ListTask';
+import SignIn from './SignIn';
 const store = createStore();
 store.setState("body", "home");
 
 
 function App() {
   const [body, updateBody] = store.useState("body");
+  
   const home = () => {
     window.location.href = '/';
   }
   const ChangeBody = (str: String) => {
    updateBody(str) ;
   }
+
+  if(localStorage.getItem("token") == null){
+    return (
+      <div className="App">
+        <div className="App-header">
+          <div className="Header-Title" onClick ={home}>RobDroneGo</div>
+        </div>
+        <div className="App-body">
+            <SignIn />
+        </div>
+      </div>
+    );
+  }
+  else
 
   return (
     <div className="App">

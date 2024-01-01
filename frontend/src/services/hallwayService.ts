@@ -3,8 +3,9 @@ import config from "../config";
 import { IHallwayDTO } from "../dto/IHallwayDTO";
 import { Result } from "../core/logic/Result";
 import { Hallway } from "../domain/hallway";
+import { Service } from "typedi";
 
-
+@Service()
 export class hallwayService implements IHallwayService{
     private static _instance : hallwayService;
 
