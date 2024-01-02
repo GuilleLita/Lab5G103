@@ -70,7 +70,7 @@ export default class UserRepo implements IUserRepo {
   }
 
   public async findById (userId: UserId | string): Promise<User> {
-
+    console.log(userId);
     const idX = userId instanceof UserId ? (<UserId>userId).id.toValue() : userId;
 
     const query = { domainId: idX }; 

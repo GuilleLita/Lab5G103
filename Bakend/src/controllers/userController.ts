@@ -16,13 +16,13 @@ exports.getMe = async function(req, res: Response) {
 
     const userRepo = Container.get(config.repos.user.name) as IUserRepo
 
-    if( !req.token || req.token == undefined )
+    if( !req.auth || req.auth == undefined )
         return res.json( new Error("Token inexistente ou inválido")).status(401);
 
-    const user = await userRepo.findById( req.token.id );
+    const user = await userRepo.findById( req.auth.id );
     if (!user)
         return res.json( new Error("Utilizador não registado")).status(401);
-
+    console.log( user );
     const userDTO = UserMap.toDTO( user ) as IUserDTO;
     return res.json( userDTO ).status(200);
 }

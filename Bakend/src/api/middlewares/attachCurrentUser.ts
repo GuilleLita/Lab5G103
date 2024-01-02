@@ -15,13 +15,10 @@ import IUserRepo from '../../services/IRepos/IUserRepo';
 const attachCurrentUser = async (req, res, next) => {
   const Logger = Container.get('logger') as winston.Logger;
   try {
-    
     const userRepo = Container.get(config.repos.user.name) as IUserRepo
-
-    if( !req.token || req.token == undefined )
+    if( !req.auth || req.auth == undefined )
       next( new Error("Token inexistente ou inválido ") );
-
-    const id = req.token.id;
+    const id = req.auth.id;
 
     const isFound = await userRepo.exists( id );
 

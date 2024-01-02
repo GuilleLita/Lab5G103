@@ -14,6 +14,27 @@ export default class userService implements IUserService {
         return this._instance ?? (this._instance = new userService())
     }
 
+    public async getMe(token: string): Promise<Result<{userDTO: IUserDTO}>> {
+        try {
+            const res = await fetch(config.ServerURL + '/api/auth/me', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+token
+                }
+            });
+            if(res.status === 200){
+                const data = await res.json();
+                return Result.ok<{userDTO: IUserDTO}>(data);
+            }
+            else{
+                return Result.fail<{userDTO: IUserDTO}>(await res.text());
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
     public async signIn(email: string, password: string): Promise<Result<{userDTO: IUserDTO, token: any}>> {
         
         try {

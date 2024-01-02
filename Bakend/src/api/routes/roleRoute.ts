@@ -30,5 +30,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.updateRole(req, res, next) );
 
+    route.get('', (req, res, next) => ctrl.getRole(req, res, next) );
+
     route.get('/all', (req, res, next) => ctrl.getAllRoles(req, res, next) );
 };

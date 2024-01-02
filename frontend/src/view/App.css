@@ -15,20 +15,31 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 13vh;
+  min-height: 8vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 0px 0px;
   justify-content: space-between;
+  padding: 0px 10px;
   font-size: calc(10px + 1vmin);
   color: white;
+
 }
 
 .Header-Title{
   font-family: 'Montserrat', sans-serif;
   font-size: 40px;
   cursor: pointer;
+  margin-left: 18px;
+  justify-self: center;
+}
+
+.Header-ChangeUser{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  justify-self: right;
+  margin-left: 18px;
 }
 
 .App-body{

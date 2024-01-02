@@ -61,6 +61,7 @@ export default class SignInViewModel {
         if(data.isSuccess) {
             let token = data.getValue().token;
             let userDTO = data.getValue().userDTO;
+            
             localStorage.setItem('role', userDTO.role);
             localStorage.setItem('token', token);
 

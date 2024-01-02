@@ -34,4 +34,24 @@ export default class roleService implements IRoleService {
           }
     }
 
+    public async getRole (id: string) : Promise<Result<{ roleDTO: IRoleDTO; }>>{
+            
+            try {
+                const res = await fetch(config.ServerURL + '/api/roles/?id='+id);
+                const Role = await res.json().then((data) => {
+                    console.log(data);
+                    return data;
+                });
+                
+                if (Role === null) {
+                return Result.fail<{roleDTO: any}>("Role not found");
+                }
+                else {
+                return Result.ok<{roleDTO: any}>( {roleDTO: Role.name} )
+                }
+            } catch (e) {
+                throw e;
+            }
+        }
+
 }
