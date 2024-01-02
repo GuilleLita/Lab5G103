@@ -3,7 +3,9 @@ describe('login page test',() =>{
   cy.visit('http://localhost:3000/')
   });
   it('List Task', () => {
-  
+    cy.get('[id="email"]').type('gestor@email.com');
+      cy.get('[id="password"]').type('pass');
+      cy.get('[id="login"]').click();
     cy.contains('List Task').click();
 
     // Hacer clic en el dropdown y seleccionar "Aceptada"

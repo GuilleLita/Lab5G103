@@ -101,11 +101,11 @@ const handleInputChange =async (option: any) => {
                 </div>
                 <div className='formItem'>
                     <label htmlFor="LastName"> Last Name: </label>
-                    <input type="text" id="LastName" required onChange={(e) => setLastName(e.target.value)}/>
+                    <input type="text" id="lastName" required onChange={(e) => setLastName(e.target.value)}/>
                 </div>
                 <div className='formItem'>
                     <label htmlFor="Email"> Email: </label>
-                    <input type="text" id="Email" required onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="text" id="email" required onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className='formItem'>
                     <label htmlFor="password"> Contraseña: </label>
@@ -113,9 +113,9 @@ const handleInputChange =async (option: any) => {
                 </div>
                 <div className='formItem'>
                     <label htmlFor="role"> Role: </label>
-                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
+                    <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} id='roleSelect'/>
                 </div>
-                <button className="buttonSub" type="submit" > Create User </button>
+                <button className="buttonSub" type="submit" id='subButton'> Create User </button>
             </form>
             
             </div>
