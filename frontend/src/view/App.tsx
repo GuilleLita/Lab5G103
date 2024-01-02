@@ -59,6 +59,7 @@ function  App() {
 
 function Body() {
 
+  const [llamado, setLlamado] = React.useState(false);
   let viewmodel = new AppViewModel(userService.instance, roleService.instance);
 
   const [headers, updateHeaders] = React.useState(<div className="HeaderButtons"></div>);
@@ -95,7 +96,8 @@ function Body() {
   useEffect(() => {
     
     const fetchData = async () => {
-      if(user == "logged"){
+      if(user == "logged" && !llamado){
+        setLlamado(true);
         const headers = await role();
         updateHeaders(headers);
       }

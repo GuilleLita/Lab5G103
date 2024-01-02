@@ -13,6 +13,7 @@ test('display RobDroneGo correctly', () =>{
 
 test('display Edit Floor correctly', () =>{
     const { getByText } = render(<App/>);
+    getByText
     const element = getByText('Edit Floor'); 
     expect(element).toBeInTheDocument();
 });

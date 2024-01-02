@@ -108,13 +108,13 @@ function SignIn()  {
             <form className='singform' onSubmit={submit} id='signForm'>
                 <div className='formItem'>
                     <label htmlFor="user"> Email: </label>
-                    <input type="text" id="user" required onChange={(e) => setUser(e.target.value)}/>
+                    <input type="text" id="email" required onChange={(e) => setUser(e.target.value)}/>
                 </div>
                 <div className='formItem'>
                     <label htmlFor="password"> Contraseña: </label>
                     <input type="password" id="password" required onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="buttonSub" type="submit" > Login </button>
+                <button id="login" className="buttonSub" type="submit" > Login </button>
                 <button className="button-sign-up" onClick={handleSignUpButton} > Sign Up </button>
             </form>
             
