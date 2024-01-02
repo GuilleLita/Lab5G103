@@ -1,18 +1,16 @@
 import React from 'react';
-import { createStore } from 'state-pool';
-import './SignIn.css';
 import SignInViewModel from '../viewmodel/SignInViewModel';
 import userService from '../services/userService';
 import roleService from '../services/roleService';
-import { Sign } from 'crypto';
+
 import AsyncSelect from 'react-select/async';
+import { createStore } from 'state-pool';
+import { useState } from 'react';
+import { useRef } from 'react';
+import config from '../config';
 
-const store = createStore();
-store.setState("form", "sign-in");
 
-function SignIn()  {
-
-
+function CreateUser() {
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
@@ -55,7 +53,6 @@ function SignIn()  {
 
     let viewModel = new SignInViewModel(userService.instance, roleService.instance);
 
-    const [form, updateForm] = store.useState("form");
 
     const [user, setUser] = React.useState<string>(null);
     const [password, setPassword] = React.useState<string>(null);
@@ -66,69 +63,38 @@ function SignIn()  {
     
     const [role, setRole] = React.useState<string>(null);
 
-    const submit = async (data:any) => {
-        data.preventDefault();
-        console.log("submit");
-        let succOrFail = await viewModel.login(user,password);
-
-        if(succOrFail == "success") window.location.href = '/';
-        else alert(succOrFail);
-    };
-
-
-    const submitSignUp = async (data:any) => {
+    const handleSubmit = async (data:any) => {
         data.preventDefault();
         console.log("submit");
         let succOrFail = await viewModel.signUp(firstName,lastName,email,password,role);
-        if(succOrFail == "success") window.location.href = '/';
+        if(succOrFail == "success"){
+            alert("User created");  
+            setEmail(null);
+            setPassword(null);
+            setFirstName(null);
+            setLastName(null);
+            setRole(null);
+            data.target.reset();
+        } 
         else alert(succOrFail);
     };
 
-    const handleSignUpButton = (e) => {
-        e.preventDefault();
-        
-        if(form == "sign-up") updateForm("sign-in");
-        else updateForm("sign-up");
-    }
-
     const promiseOptions = () =>
-        new Promise<any[]>((resolve) => {  
-            
-            resolve(viewModel.getRoles());
-        }
-    );
-
-    const handleInputChange =async (option: any) => {
-        if (option) {
-            setRole(option.value)
-          }
+    new Promise<any[]>((resolve) => {  
+        
+        resolve(viewModel.getRoles());
     }
+);
 
+const handleInputChange =async (option: any) => {
+    if (option) {
+        setRole(option.value)
+      }
+}
 
-    if(form == "sign-in"){
-        return (
-            <div className='sign-page'>
-            <form className='singform' onSubmit={submit} id='signForm'>
-                <div className='formItem'>
-                    <label htmlFor="user"> Email: </label>
-                    <input type="text" id="email" required onChange={(e) => setUser(e.target.value)}/>
-                </div>
-                <div className='formItem'>
-                    <label htmlFor="password"> Contraseña: </label>
-                    <input type="password" id="password" required onChange={(e) => setPassword(e.target.value)}/>
-                </div>
-                <button id="login" className="buttonSub" type="submit" > Login </button>
-                <button className="button-sign-up" onClick={handleSignUpButton} > Sign Up </button>
-            </form>
-            
-            </div>
-            )
-    }
-
-    if(form == "sign-up"){
-        return (
-            <div className='sign-page'>
-            <form className='singform' onSubmit={submitSignUp}>
+    return (
+        <div className='sign-page'>
+            <form className='singform' onSubmit={handleSubmit} id='form'>
                 <div className='formItem'>
                     <label htmlFor="firstName"> First Name: </label>
                     <input type="text" id="firstName" required onChange={(e) => setFirstName(e.target.value)}/>
@@ -150,12 +116,10 @@ function SignIn()  {
                     <AsyncSelect styles={customStyles} isSearchable={false} cacheOptions defaultOptions loadOptions={promiseOptions} onChange={handleInputChange} />
                 </div>
                 <button className="buttonSub" type="submit" > Create User </button>
-                <button className="button-sign-up" onClick={handleSignUpButton} > Sign in </button>
             </form>
             
             </div>
-            )
+    );
     }
-        
-}
-export default SignIn;
+
+export default CreateUser;

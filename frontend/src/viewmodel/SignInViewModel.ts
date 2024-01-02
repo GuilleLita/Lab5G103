@@ -26,10 +26,10 @@ export default class SignInViewModel {
             let userDTO = data.getValue().userDTO;
             localStorage.setItem('role', userDTO.role);
             localStorage.setItem('token', token);
-
-        }
+            return "success";
+        }   
         else {
-            alert(data.error);
+            return data.error;
         }
     } catch (e) {
         throw e;
@@ -61,13 +61,13 @@ export default class SignInViewModel {
         if(data.isSuccess) {
             let token = data.getValue().token;
             let userDTO = data.getValue().userDTO;
-            
+
             localStorage.setItem('role', userDTO.role);
             localStorage.setItem('token', token);
-
+            return "success";
         }
         else {
-            console.log(data.error);
+            return data.error;
         }
     }
 }

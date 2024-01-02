@@ -12,6 +12,7 @@ import AppViewModel from '../viewmodel/AppViewModel';
 import userService from '../services/userService';
 import roleService from '../services/roleService';
 import { is } from 'shallow-equal-object';
+import CreateUser from './CreateUser';
 const store = createStore();
 store.setState("body", "default");
 
@@ -175,7 +176,7 @@ function Body() {
         return (
           <div>
           {headers}
-          <div>Crear Usuario</div>
+          <CreateUser />
           </div>
               )
       case "AcceptNewUser":
