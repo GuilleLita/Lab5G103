@@ -1114,42 +1114,900 @@ export default class ThumbRaiser {
         this.updateViewsPanel();
     }
 
-    finalSequence() {
-        // Enable ambient light
-        this.ambientLight.visible = true;
-        // Enable directional light
-        this.directionalLight.visible = true;
-        // Enable spotlight
-        this.spotLight.visible = true;
-        // Disable flashlight
-        this.flashLight.visible = false;
-        // Disable fog
-        this.fog.enabled = false;
-        // Make camera viewports invisible
-        this.fixedViewCamera.checkBox.checked = false;
-        this.firstPersonViewCamera.checkBox.checked = false;
-        this.topViewCamera.checkBox.checked = false;
-        this.miniMapCamera.checkBox.checked = false;
-        // Reconfigure the third-person view camera and maximize its viewport
-        this.thirdPersonViewCamera.setOrientation(new Orientation(-180.0, this.thirdPersonViewCamera.initialOrientation.v));
-        this.thirdPersonViewCamera.setDistance(this.thirdPersonViewCamera.initialDistance);
-        this.thirdPersonViewCamera.setZoom(2.0);
-        this.thirdPersonViewCamera.setViewport(new THREE.Vector4(0.0, 0.0, 1.0, 1.0));
-        // Make the viewport visible and set it as the topmost viewport
-        this.thirdPersonViewCamera.checkBox.checked = true;
-        this.setActiveViewCamera(this.thirdPersonViewCamera);
-        // Make bounding volumes invisible
-        if (this.collisionDetectionParameters.boundingVolumes.visible) {
-            this.collisionDetectionParameters.boundingVolumes.visible = false;
-            this.setBoundingVolumesVisibility(false);
-        }
-        // Set the final action
-        this.animations.fadeToAction("Dance", 0.2);
-        // Stop the introduction clip and play dance and end clips
-        this.audio.stop(this.audio.introductionClips);
-        this.audio.play(this.audio.danceClips, false);
-        this.audio.play(this.audio.endClips, false);
+    finalSequence1() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC3.html';
+    }, 3000);
+       }
+
+       finalSequence1exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorA2.html';
+    }, 3000);
+       }
+
+       finalSequence2exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC3.html';
+    }, 3000);
+       }
+
+       finalSequence3exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayC3.html';
+    }, 3000);
+       }
+       finalSequence4exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence5exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC3hallwayB2.html';
+    }, 3000);
+       }
+
+       finalSequence4exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence6exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorA2.html';
+    }, 3000);
+       }
+
+       finalSequence7exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC3hallwayB2.html';
+    }, 3000);
+       }
+       finalSequence8exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC3hallwayD3.html';
+    }, 3000);
+       }
+       finalSequence9exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayB2.html';
+    }, 3000);
+       }
+    elevator1(){
+        window.location.href = 'elevatorA.html';
     }
+    elevator2(){
+        window.location.href = 'elevatorB.html';
+    }
+    elevator3(){
+        window.location.href = 'elevatorC.html';
+    }
+    elevator4(){
+        window.location.href = 'elevatorD.html';
+    }
+       finalSequence2exit3() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayB2.html';
+    }, 3000);
+       }
+
+       finalSequence1exit3() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayB2.html';
+    }, 3000);
+       }
+
+
+       finalSequence6exit2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorA2.html';
+    }, 3000);
+       }
+
+       finalSequence7() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorA2.html';
+    }, 3000);
+       }
+
+       finalSequence8() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence9() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence10() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC2.html';
+    }, 3000);
+       }
+
+
+       finalSequence2() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayC3.html';
+    }, 3000);
+       }
+       finalSequence11() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD2.html';
+    }, 3000);
+       }
+
+       finalSequence13() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB3.html';
+    }, 3000);
+       }
+
+
+       finalSequence12() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorC4.html';
+    }, 3000);
+       }
+
+
+       finalSequence3() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayA2.html';
+    }, 3000);
+       }
+
+       finalSequence4() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence5() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorD3hallwayC3.html';
+    }, 3000);
+       }
+
+       finalSequence6() {
+        const mensajeDiv = document.createElement('div');
+    mensajeDiv.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(194, 204, 112, 0.8); /* Amarillo pistacho con 80% de opacidad */
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        ">
+            <p style="
+                font-size: 36px;
+                font-weight: bold;
+                color: white;
+            ">CROSSING TO ANOTHER BUILDING</p>
+        </div>
+    `;
+
+    // Agregar el elemento a la ventana actual
+    document.body.appendChild(mensajeDiv);
+
+    // Esperar 3 segundos antes de cambiar a floorC2.html
+    setTimeout(() => {
+        // Ocultar el mensaje
+        mensajeDiv.style.display = 'none';
+
+        // Cambiar la ubicación de la ventana actual a floorC3.html
+        window.location.href = 'floorB2hallwayC3.html';
+    }, 3000);
+       }
 
     update() {
         if (!this.gameRunning) {
@@ -1173,11 +2031,11 @@ export default class ThumbRaiser {
                                 position = this.maze.cellToCartesian(position);
                                 clip.source.position.set(position.x, position.y, position.z);
                             }
-                        }
+                        }/*
                         else if (clip.position == "exit") { // Positional audio object (maze exit location)
                             this.scene.add(clip.source);
-                            clip.source.position.set(this.maze.exitLocation.x, this.maze.exitLocation.y, this.maze.exitLocation.z);
-                        }
+                            clip.source.position.set(this.maze.exitLocation1.x, this.maze.exitLocation1.y, this.maze.exitLocation1.z);
+                        }*/
                         else if (clip.position == "initial") { // Positional audio object (player initial position)
                             this.scene.add(clip.source);
                             clip.source.position.set(this.maze.initialPosition.x, this.maze.initialPosition.y, this.maze.initialPosition.z);
@@ -1282,12 +2140,107 @@ export default class ThumbRaiser {
             // Update the model animations
             const deltaT = this.clock.getDelta();
             this.animations.update(deltaT);
-
+            
             // Update the player
             if (!this.animations.actionInProgress) {
                 // Check if the player found the exit
-                if (this.maze.foundExit(this.player.position)) {
-                    this.finalSequence();
+                if (this.maze.foundExit(this.maze.identification, this.player.position)) {
+                    if(this.maze.identification=="B2"){
+                        this.finalSequence1();
+                    }
+                    else if(this.maze.identification=="C3"){
+                        this.finalSequence2();
+                    }
+                    else if(this.maze.identification=="A2"){
+                        this.finalSequence3();
+                    }
+                    else if(this.maze.identification=="D3"){
+                        this.finalSequence4();
+                    }
+                    else if(this.maze.identification=="C3D3"){
+                        this.finalSequence5();
+                    }
+                    if(this.maze.identification=="B2C3D3"){
+                        this.finalSequence5exit2();
+                    }
+                    else if(this.maze.identification=="C3B2"){
+                        this.finalSequence6();
+                    }
+                    else if(this.maze.identification=="B2A2"){
+                        this.finalSequence7();
+                    }
+                    else if(this.maze.identification=="D3B2"){
+                        this.finalSequence8();
+                    }
+                    else if(this.maze.identification=="D3C3"){
+                        this.finalSequence9();
+                    }
+                    else if(this.maze.identification=="D2"){
+                        this.finalSequence10();
+                    }
+                    else if(this.maze.identification=="C2"){
+                        this.finalSequence11();
+                    }
+                    else if(this.maze.identification=="B3"){
+                        this.finalSequence12();
+                    }
+                    else if(this.maze.identification=="C4"){
+                        this.finalSequence13();
+                    }
+                }
+                else if (this.maze.foundExit2(this.maze.identification, this.player.position)) {
+                    if(this.maze.identification=="B2"){
+                        this.finalSequence1exit2();
+                    }
+                    if(this.maze.identification=="D3"){
+                        this.finalSequence2exit2();
+                    }
+                    if(this.maze.identification=="D3"){
+                        this.finalSequence2exit2();
+                    }
+                    if(this.maze.identification=="C3D3"){
+                        this.finalSequence3exit2();
+                    }
+                    if(this.maze.identification=="C3B2"){
+                        this.finalSequence4exit2();
+                    }
+                    if(this.maze.identification=="B2C3D3"){
+                        this.finalSequence6exit2();
+                    }
+                    if(this.maze.identification=="B2A2"){
+                        this.finalSequence7exit2();
+                    }
+                    if(this.maze.identification=="D3B2"){
+                        this.finalSequence8exit2();
+                    }
+                    if(this.maze.identification=="D3C3"){
+                        this.finalSequence9exit2();
+                    }
+                    
+                }
+                else if (this.maze.foundExit3(this.maze.identification, this.player.position)) {
+                    if(this.maze.identification=="B2C3D3"){
+                        this.finalSequence1exit3();
+                    }
+                    if(this.maze.identification=="B2A2"){
+                        this.finalSequence2exit3();
+                    }
+                    
+                }
+                else if (this.maze.foundElevator(this.maze.identification, this.player.position)) {
+                    if(this.maze.identification=="A1"||this.maze.identification=="A2"){
+                        this.elevator1();
+                    }
+                    if(this.maze.identification=="B1"||this.maze.identification=="B2C3D3"||this.maze.identification=="B2A2"||this.maze.identification=="B3"){
+                        this.elevator2();
+                    }
+                    if(this.maze.identification=="B1"||this.maze.identification=="B2C3D3"||this.maze.identification=="B2A2"||this.maze.identification=="B3"){
+                        this.elevator3();
+                    }
+                    if(this.maze.identification=="D1"||this.maze.identification=="D2"||this.maze.identification=="D3B2"||this.maze.identification=="D3C3"){
+                        this.elevator4();
+                    }
+                    
                 }
                 else {
                     let coveredDistance = this.player.walkingSpeed * deltaT;

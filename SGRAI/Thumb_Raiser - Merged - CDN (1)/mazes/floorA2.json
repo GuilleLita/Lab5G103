@@ -3,7 +3,7 @@
         "size": { "width": 11, "depth": 5 },
     "map": [
         [3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 3, 2, 2, 1],
+        [1, 0, 1, 0, 1, 0, 1, 0, 3, 2, 0, 1],
         [1, 0, 3, 2, 2, 2, 2, 2, 0, 0, 0, 0],
         [3, 2, 2, 2, 3, 2, 3, 2, 1, 0, 0, 1],
         [1, 0, 0, 0, 1, 0, 1, 0, 3, 2, 2, 1],
@@ -19,7 +19,12 @@
     ],
     "initialPosition": [5, 6],
     "initialDirection": 0.0,
-    "exitLocation": [-0.5, 6],
+    
+    "identification": "A2",
+    "elevator": [0, 10],
+    "exitLocation1": [2, 10],
+    "exitLocation2": [-1, -1],
+    "exitLocation3": [-1, -1],
     "doorC301": [3, 1]
     },
     "ground": {
@@ -135,7 +140,7 @@
         "secondaryColor": "0x6b554b"
     },
     "player": {
-        "initialPosition": [0.0, 0.0],
-        "initialDirection": 0.0
+        "initialPosition": [2.0, 9.4],
+        "initialDirection":270.0
     }
 }

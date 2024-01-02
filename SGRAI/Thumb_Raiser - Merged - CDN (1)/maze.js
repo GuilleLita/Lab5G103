@@ -32,7 +32,11 @@ export default class Maze extends THREE.Group {
             this.halfSize = { width: this.size.width / 2.0, depth: this.size.depth / 2.0 };
             this.map = description.maze.map;
             this.mapdoor = description.maze.mapdoor;
-            this.exitLocation = this.cellToCartesian(description.maze.exitLocation);
+            this.elevator = this.cellToCartesian(description.maze.elevator);
+            this.exitLocation1 = this.cellToCartesian(description.maze.exitLocation1);
+            this.exitLocation2 = this.cellToCartesian(description.maze.exitLocation2);
+            this.exitLocation3 = this.cellToCartesian(description.maze.exitLocation3);
+            this.identification = description.maze.identification;
 
             // Create the helpers
             this.helper = new THREE.Group();
@@ -371,8 +375,16 @@ const door = new Door({
             return false;
         }
     }
-
-    foundExit(position) {
-        return Math.abs(position.x - this.exitLocation.x) < 0.5 * this.scale.x && Math.abs(position.z - this.exitLocation.z) < 0.5 * this.scale.z
+    foundElevator(identification, position) {
+        return (this.identification, Math.abs(position.x - this.elevator.x) < 0.5 * this.scale.x && Math.abs(position.z - this.elevator.z) < 0.5 * this.scale.z);
+    };
+    foundExit(identification, position) {
+        return (this.identification, Math.abs(position.x - this.exitLocation1.x) < 0.5 * this.scale.x && Math.abs(position.z - this.exitLocation1.z) < 0.5 * this.scale.z);
+    };
+    foundExit2(identification, position) {
+        return (this.identification, Math.abs(position.x - this.exitLocation2.x) < 0.5 * this.scale.x && Math.abs(position.z - this.exitLocation2.z) < 0.5 * this.scale.z);
+    };
+    foundExit3(identification, position) {
+        return (this.identification, Math.abs(position.x - this.exitLocation3.x) < 0.5 * this.scale.x && Math.abs(position.z - this.exitLocation3.z) < 0.5 * this.scale.z);
     };
 }
